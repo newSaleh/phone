@@ -1,0 +1,1049 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="build" content="20261121083211">
+<meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="icon" type="image/png" href="../icon-192.png">
+<title>خصومات يدوية</title>
+<style>
+:root{--onpri:#fff;--bg:#f4f6fa;--card:#fff;--ink:#1f2937;--mut:#6b7280;--pri:#1e3a5f;--line:#e2e8f2;--dn:#b91c1c;--ok:#15803d;--warnbg:#fef3c7;--warn:#92400e}
+:root[data-theme=dark]{--onpri:#10151d;--bg:#10151d;--card:#18202c;--ink:#e5e9f0;--mut:#9aa6b8;--pri:#7fb0ff;--line:#2a3547;--dn:#f08585;--ok:#86efac;--warnbg:#3a2f12;--warn:#fcd34d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:12px 16px 40px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+h1{font-size:1.2rem;margin:0;color:var(--pri)}
+.theme{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer}
+.tabs{display:flex;gap:8px;margin-bottom:12px}.tabs button{flex:1;padding:11px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.tabs button.on{background:var(--pri);color:var(--bg);border-color:var(--pri)}
+label{display:block;color:var(--mut);font-size:.85rem;margin:0 0 4px}
+input,select{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.f{margin-bottom:10px}
+.go{display:block;width:100%;padding:13px;border:0;border-radius:12px;background:var(--pri);color:var(--bg);font:inherit;font-size:1.05rem;font-weight:700;cursor:pointer}
+.go:disabled{opacity:.5}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:10px}
+.mut{color:var(--mut);font-size:.82rem;line-height:1.6}
+.card{display:flex;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:10px;cursor:pointer}
+.card .th{width:74px;height:100px;flex:none;border-radius:8px;background:var(--line);object-fit:cover}
+.card .tx{flex:1;min-width:0;line-height:1.6}.card b{color:var(--pri)}
+.mods{font-weight:700;direction:ltr;text-align:right;word-break:break-all}
+.pend{border-style:dashed}
+.mrow{display:flex;gap:6px;margin-bottom:6px}.mrow input{flex:1}.mrow button{flex:none;width:44px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--dn);font:inherit;cursor:pointer}
+.note{color:var(--mut);font-size:.82rem;line-height:1.6}.scanrow{margin-bottom:8px}
+.mbal{font-size:.85rem;line-height:1.7;margin-top:4px}.mbal b{color:var(--pri)}.mbal .ok{color:var(--ok);font-weight:700}.mbal .no{color:var(--mut)}.mbal .bad{color:var(--dn);font-weight:700}
+.dsc{font-size:.88rem;font-weight:700}
+.lnk{text-decoration:underline;cursor:pointer}.lnk::after{content:" 🔎";font-size:.8rem}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}.chip{padding:3px 8px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font:inherit;font-size:.78rem;cursor:pointer}
+.mods{font-size:1.05rem;color:var(--pri)}
+.addbox{background:var(--warnbg);color:var(--warn);border-radius:10px;padding:8px 10px;font-size:.88rem;line-height:1.6;margin-top:6px}
+.addbox label{display:flex;gap:6px;align-items:flex-start;color:inherit;font-size:.88rem;margin-top:6px}.addbox input{width:auto;margin-top:4px}
+.bal{font-size:.82rem;font-weight:700;color:var(--ok);margin-top:2px}
+.dupw{color:var(--dn);font-size:.85rem;font-weight:700;margin:4px 0}
+.del{margin-top:6px;padding:4px 10px;border:1px solid var(--line);border-radius:8px;background:none;color:var(--dn);font:inherit;font-size:.8rem;cursor:pointer}
+#pv{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+#cwrap{position:relative;touch-action:none;user-select:none;-webkit-user-select:none}#cc{width:100%;display:block}
+#cbox{position:absolute;border:2px solid #f59e0b;box-shadow:0 0 0 9999px rgba(0,0,0,.45);pointer-events:none}
+#cbox i{position:absolute;width:36px;height:36px;margin:-18px;border-radius:50%;background:#f59e0b;border:3px solid #fff;pointer-events:auto;touch-action:none}
+#cbox i[data-h="0"]{left:0;top:0}#cbox i[data-h="1"]{left:100%;top:0}#cbox i[data-h="2"]{left:100%;top:100%}#cbox i[data-h="3"]{left:0;top:100%}
+#couter{overflow:hidden;padding:20px;border-radius:10px;background:#111}
+.row2{display:flex;gap:8px;margin:8px 0}.row2 button{flex:1}
+.sm{padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer}
+.msg{padding:10px;border-radius:10px;margin-top:10px;font-size:.92rem;line-height:1.6}.msg.ok{background:#dcfce7;color:#166534}.msg.er{background:#fee2e2;color:#991b1b}
+:root[data-theme=dark] .msg.ok{background:#14361f;color:#86efac}:root[data-theme=dark] .msg.er{background:#3b1414;color:#fca5a5}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:10px;padding:8px 12px;font-size:.85rem;margin-bottom:10px}
+#vw{position:fixed;inset:0;background:#000;z-index:9;display:flex;flex-direction:column}
+#vw .bar{display:flex;flex-wrap:wrap;gap:8px;padding:8px;justify-content:space-between;align-items:center;color:#fff;font-size:.85rem}
+#vw .bar button{padding:8px 14px;border:0;border-radius:8px;background:#333;color:#fff;font:inherit;cursor:pointer}
+#vw .sc{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
+#vw img{display:block;margin:0 auto;width:100%;height:auto}
+.err{color:var(--dn);text-align:center;padding:12px;font-size:.92rem}
+[hidden]{display:none!important}
+</style></head><body><style>.brand{display:block;margin:10px auto 2px;height:40px;width:auto}@media (display-mode:standalone){.brand{margin-top:calc(env(safe-area-inset-top) + 30px)}}</style><img class="brand" src="../logo-s.png?v=2" alt="الهرم" width="110" height="40" decoding="async" onerror="this.remove()"><script>if(window.parent!==window)document.querySelector(".brand").remove()</script><div class="wrap">
+<div class="top"><h1>خصومات يدوية</h1><button class="theme" id="theme" type="button"></button></div>
+<div id="lock" hidden><input id="pw" type="password" placeholder="كلمة السر" autocomplete="off"><button class="go" id="enter" style="margin-top:10px">فتح</button></div>
+<div id="view" hidden>
+<div class="tabs"><button id="tq" class="on" type="button">🔎 استعلام</button><button id="tu" type="button">➕ رفع إشعار</button></div>
+<div id="pq">
+  <div class="f"><label for="qs">المورد</label><input id="qs" type="search" placeholder="🔎 اسم المورد أو رقمه" autocomplete="off" list="supl"></div>
+  <div class="f"><label for="qm">رقم الموديل</label><input id="qm" type="search" placeholder="اختياري" autocomplete="off" dir="ltr" style="text-align:right"><div id="scanQ"></div></div>
+  <div class="mut" id="qn" style="margin-bottom:8px"></div>
+  <div id="res"></div>
+  <button class="sm" id="gbtn" type="button" style="width:100%;margin-top:6px" hidden></button>
+  <div id="gres" hidden></div>
+</div>
+<div id="pu" hidden>
+  <div class="warn" id="tnote" hidden>رابط تجريبي: اختر الفرع الذي ترفع باسمه.</div>
+  <div class="f" id="fb"><label for="ub">الفرع</label><select id="ub"></select></div>
+  <div class="f"><label for="us">المورد</label><input id="us" type="search" placeholder="🔎 اكتب اسم المورد أو رقمه واختر" autocomplete="off" list="supl"><div class="mut" id="usn"></div></div>
+  <div class="f"><label>رقم الموديل</label><div id="scanU"></div><div id="ums"></div><button class="sm" id="addm" type="button" style="width:100%;margin-top:2px">➕ موديل آخر</button><div class="mbal" id="mbal"></div><div class="dupw" id="mdup"></div></div>
+  <div class="f"><label>صورة الإشعار</label>
+    <input id="uf" type="file" accept="image/*" hidden>
+    <button class="sm" id="pick" type="button" style="width:100%;padding:13px">📷 التقط / اختر الصورة</button>
+    <div id="pvw" hidden style="margin-top:8px"><img id="pv" alt=""><div class="row2"><button class="sm" id="rot" type="button">↻ تدوير</button><button class="sm" id="crop" type="button">✂️ تعديل القص</button></div><div class="mut" id="pinfo"></div></div>
+    <div id="ced" hidden style="margin-top:8px"><div class="mut" style="margin-bottom:6px">اسحب الزوايا لتحديد الورقة فقط، ثم اضغط «✓ تم»</div>
+      <div id="couter"><div id="cwrap"><canvas id="cc"></canvas><div id="cbox"><i data-h="0"></i><i data-h="1"></i><i data-h="2"></i><i data-h="3"></i></div></div></div>
+      <div class="row2"><button class="sm" id="cok" type="button">✓ تم</button><button class="sm" id="cfull" type="button">الصورة كاملة</button></div></div>
+  </div>
+  <button class="go" id="send" type="button">رفع</button>
+  <div id="umsg"></div>
+</div>
+</div>
+<datalist id="supl"></datalist>
+<div class="err" id="err"></div></div>
+<div id="vw" hidden><div class="bar"><span id="vt"></span><span><button id="vs" type="button" hidden>📤 مشاركة</button> <button id="ve" type="button" hidden>✏️ تعديل الموديل</button> <button id="vd" type="button" hidden>🗑️ حذف</button> <button id="vx" type="button">✕ إغلاق</button></span></div><div class="sc" id="vsc"><img id="vi" alt=""></div></div>
+<script>/* مسح باركود الصنف بالكاميرا (طلب صريح 2026-10-11): الباركود على بطاقات القطع من نوع CODE93 ويحمل رمز الصنف (15 رقمًا).
+   فكّ الباركود يتم هنا داخل هاتف المستخدم بلا أي مكتبة خارجية ولا طلب شبكة؛ لا يصل الوكيل إلا رمز الصنف نفسه مشفّرًا.
+   Safari على الآيفون بلا BarcodeDetector فنفكّه بأنفسنا: خطوط مسح على عدة زوايا ← أطوال الأشرطة ← مطابقة الأنماط ← فحص C وK. */
+(function(){
+'use strict';
+const SYMS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd';  // a-d = رموز التحويل (لا ندعمها)
+const BITS = ['100010100','101001000','101000100','101000010','100101000','100100100','100100010','101010000','100010010','100001010',
+  '110101000','110100100','110100010','110010100','110010010','110001010','101101000','101100100','101100010','100110100',
+  '100011010','101011000','101001100','101000110','100101100','100010110','110110100','110110010','110101100','110100110',
+  '110010110','110011010','101101100','101100110','100110110','100111010','100101110','111010100','111010010','111001010',
+  '101101110','101110110','110101110','100100110','111011010','111010110','100110010'];
+const START = BITS.length;  // الفهرس 47 = نمط البداية/النهاية (*)
+BITS.push('101011110');
+const PATS = BITS.map(b => { const r = []; let c = b[0], n = 0; for(const x of b){ if(x === c) n++; else { r.push(n); c = x; n = 1; } } r.push(n); return r; });
+
+function match(lens, pos){
+  let t = 0; for(let k = 0; k < 6; k++) t += lens[pos + k];
+  if(t < 9) return -1;
+  const u = 9 / t; let best = 1e9, second = 1e9, bi = -1;
+  for(let p = 0; p <= START; p++){
+    const P = PATS[p]; let e = 0;
+    for(let k = 0; k < 6; k++) e += Math.abs(lens[pos + k] * u - P[k]);
+    if(e < best){ second = best; best = e; bi = p; } else if(e < second) second = e;
+  }
+  return (best / 6 <= 0.34 && second - best >= 0.45) ? bi : -1;
+}
+function checked(vals){
+  if(vals.length < 3) return null;
+  const data = vals.slice(0, -2), c = vals[vals.length - 2], k = vals[vals.length - 1];
+  let s = 0; for(let j = 0; j < data.length; j++) s += data[data.length - 1 - j] * ((j % 20) + 1);
+  if(s % 47 !== c) return null;
+  const withC = data.concat([c]); s = 0; for(let j = 0; j < withC.length; j++) s += withC[withC.length - 1 - j] * ((j % 15) + 1);
+  if(s % 47 !== k) return null;
+  let out = ''; for(const v of data){ if(v >= 43) return null; out += SYMS[v]; }
+  return out;
+}
+function decodeLens(lens, firstBar){
+  for(let i = firstBar ? 0 : 1; i + 6 <= lens.length; i += 2){
+    // معايرة الانحياز من حرف البداية (أشرطته 6 وحدات وفراغاته 3): الضبابية/العتبة تُسمِّن الأشرطة وتُنحِّف الفراغات بمقدار b
+    let T = 0, B = 0; for(let k = 0; k < 6; k++){ T += lens[i + k]; if(k % 2 === 0) B += lens[i + k]; }
+    const m = T / 9; if(m < 1) continue;
+    const b = (B - 6 * m) / 3; if(Math.abs(b) > 0.45 * m) continue;
+    let e = 0; for(let k = 0; k < 6; k++) e += Math.abs((lens[i + k] - (k % 2 === 0 ? b : -b)) / m - PATS[START][k]);
+    if(e / 6 > 0.3) continue;
+    const cl = lens.map((x, k) => k < i ? x : Math.max(0.1, x - ((k - i) % 2 === 0 ? b : -b)));
+    const vals = []; let pos = i + 6, ok = false;
+    while(pos + 6 <= cl.length && vals.length < 48){
+      const mt = match(cl, pos); if(mt < 0) break;
+      if(mt === START){ ok = pos + 6 < cl.length; break; }  // بعد النهاية شريط إنهاء بعرض وحدة
+      vals.push(mt); pos += 6;
+    }
+    if(!ok) continue;
+    const r = checked(vals); if(r !== null) return r;
+  }
+  return null;
+}
+// خط بكسلات رمادية ← أطوال أشرطة/فراغات بدقة أقل من بكسل (حدود الانتقال تُحسب بالاستيفاء الخطي حول متوسط محلي متحرك،
+// مع تخلّف ±5 لمنع وميض الضجيج). lens[k] = الفرق بين حدّين متتاليين؛ firstBar = لون أول مجرى كامل.
+function lensOf(v){
+  const n = v.length, pre = new Float64Array(n + 1);
+  for(let i = 0; i < n; i++) pre[i + 1] = pre[i] + v[i];
+  const half = Math.max(20, n >> 3), edges = []; let state = -1, firstBar = false, prevD = 0, lastDown = 0, lastUp = 0;
+  for(let i = 0; i < n; i++){
+    const a = Math.max(0, i - half), b = Math.min(n, i + half), d = v[i] - (pre[b] - pre[a]) / (b - a);
+    if(i > 0){
+      if(prevD >= 0 && d < 0) lastDown = (i - 1) + prevD / (prevD - d);
+      else if(prevD < 0 && d >= 0) lastUp = (i - 1) + (-prevD) / (d - prevD);
+    }
+    prevD = d;
+    let s = state; if(d < -5) s = 1; else if(d > 5) s = 0;
+    if(s < 0 || s === state) continue;
+    if(state >= 0){
+      let e = s === 1 ? lastDown : lastUp;
+      if(edges.length && e <= edges[edges.length - 1]) e = edges[edges.length - 1] + 0.01;
+      edges.push(e);
+      if(edges.length === 1) firstBar = s === 1;
+    }
+    state = s;
+  }
+  const lens = []; for(let k = 0; k + 1 < edges.length; k++) lens.push(edges[k + 1] - edges[k]);
+  return {lens, firstBar};
+}
+// ---------- فكّ "ناعم" للصور المأخوذة من الاستوديو (طلب 2026-10-16): الصورة قد لا تكون واضحة 100% ----------
+// الفكّ الصارم يرفض أي حرف غامض. هنا نحتفظ لكل حرف بأفضل 3 أنماط (وأفضل 3 أرقام) مع خطأ المطابقة، نجمع أصوات خطوط كثيرة من الصورة،
+// ثم نبحث عن أرقام تُحقِّق فحصَي C وK المقروءين (أرقام فقط، ومورد معروف) — فحصان = حماية قوية من القراءة الخاطئة.
+function rankAt(lens, pos){
+  let t = 0; for(let k = 0; k < 6; k++) t += lens[pos + k];
+  if(t < 9) return null;
+  const u = 9 / t, all = [], dig = [];
+  for(let p = 0; p <= START; p++){
+    const P = PATS[p]; let e = 0;
+    for(let k = 0; k < 6; k++) e += Math.abs(lens[pos + k] * u - P[k]);
+    all.push([p, e]);
+  }
+  all.sort((a, b) => a[1] - b[1]);
+  // الرقم لا يُرشَّح إلا إن كان بين أفضل 4 أنماط من الـ47 (لا نفرض رقمًا على حرف يشبه رمزًا آخر): هذا ما يُبقي القراءات الخاطئة نادرة جدًا
+  return {all: all.slice(0, 3), dig: all.slice(0, 4).filter(x => x[0] < 10)};
+}
+function softParse(lens, firstBar){
+  for(let i = firstBar ? 0 : 1; i + 6 <= lens.length; i += 2){
+    let T = 0, B = 0; for(let k = 0; k < 6; k++){ T += lens[i + k]; if(k % 2 === 0) B += lens[i + k]; }
+    const m = T / 9; if(m < 1) continue;
+    const b = (B - 6 * m) / 3; if(Math.abs(b) > 0.5 * m) continue;
+    let e = 0; for(let k = 0; k < 6; k++) e += Math.abs((lens[i + k] - (k % 2 === 0 ? b : -b)) / m - PATS[START][k]);
+    if(e / 6 > 0.4) continue;
+    const cl = lens.map((x, k) => k < i ? x : Math.max(0.1, x - ((k - i) % 2 === 0 ? b : -b)));
+    const cols = []; let pos = i + 6, ok = false;
+    while(pos + 6 <= cl.length && cols.length < 20){
+      const r = rankAt(cl, pos); if(!r || r.all[0][1] / 6 > 0.55) break;
+      if(r.all[0][0] === START){ ok = pos + 6 < cl.length; break; }
+      cols.push(r); pos += 6;
+    }
+    if(ok && cols.length >= 14 && cols.length <= 18) return cols;
+  }
+  return null;
+}
+function ckOf(d){  // d = قيم الأرقام (0-9) ← [C, K]
+  let s = 0; for(let j = 0; j < d.length; j++) s += d[d.length - 1 - j] * ((j % 20) + 1);
+  const c = s % 47, w = d.concat([c]); s = 0; for(let j = 0; j < w.length; j++) s += w[w.length - 1 - j] * ((j % 15) + 1);
+  return [c, s % 47];
+}
+// parts = قراءات ناعمة (أعمدة لكل خط)؛ known(كود4أرقام) اختياري: يقبل أول 4 أرقام (المورد) إن كانت لمورد موجود
+function softResolve(parts, known){
+  const groups = {}; parts.forEach(c => { (groups[c.length] || (groups[c.length] = [])).push(c); });
+  let best = null;
+  Object.keys(groups).forEach(len => {
+    const L = +len, n = L - 2, grp = groups[len]; if(grp.length < 2 && n < 12) return;
+    const sd = [], sa = [];
+    for(let j = 0; j < L; j++){ sd.push(new Float64Array(10)); sa.push(new Float64Array(48)); }
+    grp.forEach(cols => cols.forEach((r, j) => {
+      r.dig.forEach(([p, e]) => { sd[j][p] += Math.exp(-2.5 * e); });
+      r.all.forEach(([p, e]) => { sa[j][p] += Math.exp(-2.5 * e); }); }));
+    const order = (arr, k) => Array.from(arr, (v, i) => [i, v]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, k);
+    const dc = [], unc = [];
+    for(let j = 0; j < n; j++){
+      const o = order(sd[j], 3); if(!o.length) return;
+      dc.push(o); const margin = o.length > 1 ? (o[0][1] - o[1][1]) / o[0][1] : 1;
+      if(margin < 0.6) unc.push([margin, j]);
+    }
+    const cc = order(sa[n].subarray(0, 47), 2), kc = order(sa[n + 1].subarray(0, 47), 2);
+    if(!cc.length || !kc.length) return;
+    unc.sort((a, b) => a[0] - b[0]);
+    const U = unc.slice(0, 3).map(x => x[1]), base = dc.map(o => o[0][0]);
+    for(let mask = 0; mask < (1 << U.length); mask++){
+      const d = base.slice(); let score = 0, bad = false;
+      for(let j = 0; j < n; j++) score += Math.log(dc[j][0][1] + 1e-9);
+      U.forEach((j, bit) => { if(mask >> bit & 1){ if(dc[j].length < 2){ bad = true; return; } d[j] = dc[j][1][0]; score += Math.log((dc[j][1][1] + 1e-9) / (dc[j][0][1] + 1e-9)); } });
+      if(bad) continue;
+      const [c, k] = ckOf(d);
+      const ci = cc.findIndex(x => x[0] === c), ki = kc.findIndex(x => x[0] === k);
+      if(ci < 0 || ki < 0) continue;
+      if(ci > 0 && (cc[0][1] - cc[1][1]) / cc[0][1] > 0.35) continue;  // الفحص الثاني خيار حقيقي فقط إن كان الأول غير واثق
+      if(ki > 0 && (kc[0][1] - kc[1][1]) / kc[0][1] > 0.35) continue;
+      const code = d.join('');
+      if(known && !known(code.slice(0, 4))) continue;
+      score -= 2 * (ci + ki) + 1.5 * mask.toString(2).replace(/0/g, '').length;
+      if(!best || score > best.score) best = {code, score};
+    }
+  });
+  return best ? best.code : null;
+}
+function decodeLine(v, soft, minRange){
+  const {lens, firstBar} = lensOf(v);
+  if(lens.length < 20) return null;
+  const r = decodeLens(lens, firstBar); if(r !== null) return r;
+  const lastBar = (lens.length % 2 === 1) ? firstBar : !firstBar;  // لون آخر مجرى = أول مجرى في القائمة المعكوسة
+  const rev = lens.slice().reverse(), r2 = decodeLens(rev, lastBar); if(r2 !== null) return r2;
+  if(soft && soft.length < 600){
+    const s = softParse(lens, firstBar) || softParse(rev, lastBar); if(s) soft.push(s);
+  }
+  return null;
+}
+const ANGLES = [0, -6, 6, -12, 12, -20, 20, -30, 30, 90, 84, 96, 78, 102, 70, 110];
+function scanFrame(g, w, h, opt){
+  opt = opt || {};
+  const band = opt.band == null ? 0.7 : opt.band, step = opt.step || 8, angles = opt.angles || ANGLES, want = opt.want, minRange = opt.minRange || 35;
+  const cx = Math.floor(w / 2), cy = Math.floor(h / 2), R = Math.hypot(w, h) / 2, buf = new Float32Array(Math.ceil(R * 2) + 2);
+  for(const deg of angles){
+    const a = deg * Math.PI / 180, dx = Math.cos(a), dy = Math.sin(a), px = -dy, py = dx;
+    const half = Math.abs(dx) > Math.abs(dy) ? h * band / 2 : w * band / 2;  // نطاق الخطوط المتعامدة حول المركز
+    for(let t = -half; t <= half; t += step){
+      let n = 0;
+      for(let s = -R; s <= R; s++){
+        const fx = cx + px * t + dx * s, fy = cy + py * t + dy * s, x0 = Math.floor(fx), y0 = Math.floor(fy);
+        if(x0 < 0 || y0 < 0 || x0 >= w - 1 || y0 >= h - 1) continue;
+        const ax = fx - x0, ay = fy - y0, i0 = y0 * w + x0;
+        buf[n++] = g[i0] * (1 - ax) * (1 - ay) + g[i0 + 1] * ax * (1 - ay) + g[i0 + w] * (1 - ax) * ay + g[i0 + w + 1] * ax * ay;
+      }
+      if(n < 80) continue;
+      let lo = 255, hi = 0; for(let i = 0; i < n; i += 3){ const q = buf[i]; if(q < lo) lo = q; if(q > hi) hi = q; }
+      if(hi - lo < minRange) continue;
+      const r = decodeLine(buf.subarray(0, n), opt.soft);
+      if(r !== null && (!want || want.test(r))) return r;
+    }
+  }
+  return null;
+}
+function toGray(rgba, n){
+  const g = new Uint8Array(n);
+  for(let i = 0, j = 0; i < n; i++, j += 4) g[i] = (rgba[j] * 77 + rgba[j + 1] * 150 + rgba[j + 2] * 29) >> 8;
+  return g;
+}
+// ---------- قراءة صورة ثابتة (التقاط أو استوديو): تحديد موضع الباركود ثم تقويمه ثم الفك ----------
+// 1) خريطة طاقة التدرّج على نسخة مصغّرة: الباركود = تدرّج قوي باتجاه واحد (عبر الأشرطة) وشبه معدوم عمودًا عليه، بخلاف النص والقماش.
+// 2) لأقوى المواضع نقصّ مستطيلًا مدوَّرًا (الأشرطة عمودية) بدقة الصورة الأصلية، ونمسحه بخطوط كثيرة (مع نسخ مشحوذة)، ثم نجمع أصوات الخطوط.
+function findBarcodes(g, w, h){
+  const f = Math.max(1, Math.max(w, h) / 640), dw = Math.floor(w / f), dh = Math.floor(h / f), d = new Float32Array(dw * dh);
+  for(let y = 0; y < dh; y++) for(let x = 0; x < dw; x++){  // متوسط صندوقي عند التصغير (لا نأخذ عيّنة وحيدة)
+    let s = 0, n = 0; const x0 = Math.floor(x * f), y0 = Math.floor(y * f), x1 = Math.min(w, Math.floor((x + 1) * f) + 1), y1 = Math.min(h, Math.floor((y + 1) * f) + 1);
+    for(let yy = y0; yy < y1; yy++) for(let xx = x0; xx < x1; xx++){ s += g[yy * w + xx]; n++; }
+    d[y * dw + x] = s / n; }
+  const C = 8, cw = Math.ceil(dw / C), chh = Math.ceil(dh / C), NA = 24, maps = [];
+  const gx = new Float32Array(dw * dh), gy = new Float32Array(dw * dh);
+  for(let y = 1; y < dh - 1; y++) for(let x = 1; x < dw - 1; x++){ const i = y * dw + x; gx[i] = d[i + 1] - d[i - 1]; gy[i] = d[i + dw] - d[i - dw]; }
+  for(let a = 0; a < NA; a++){
+    const th = a * Math.PI / NA, c = Math.cos(th), s = Math.sin(th), E = new Float32Array(cw * chh), P = new Float32Array(cw * chh);
+    for(let y = 1; y < dh - 1; y++) for(let x = 1; x < dw - 1; x++){ const i = y * dw + x, k = ((y / C) | 0) * cw + ((x / C) | 0);
+      E[k] += Math.abs(gx[i] * c + gy[i] * s); P[k] += Math.abs(-gx[i] * s + gy[i] * c); }
+    const S = new Float32Array(cw * chh);
+    for(let y = 0; y < chh; y++) for(let x = 0; x < cw; x++){ let e = 0, p = 0;
+      for(let yy = Math.max(0, y - 1); yy <= Math.min(chh - 1, y + 1); yy++) for(let xx = Math.max(0, x - 1); xx <= Math.min(cw - 1, x + 1); xx++){ e += E[yy * cw + xx]; p += P[yy * cw + xx]; }
+      S[y * cw + x] = e / (9 * C * C) < 10 ? 0 : Math.max(0, e - 1.4 * p); }
+    maps.push(S);
+  }
+  const cand = [];
+  for(let a = 0; a < NA; a++){ const S = maps[a];
+    for(let y = 0; y < chh; y++) for(let x = 0; x < cw; x++){ const v = S[y * cw + x]; if(v <= 0) continue;
+      let top = true; for(let yy = Math.max(0, y - 2); yy <= Math.min(chh - 1, y + 2) && top; yy++) for(let xx = Math.max(0, x - 2); xx <= Math.min(cw - 1, x + 2); xx++) if(S[yy * cw + xx] > v){ top = false; break; }
+      if(top) cand.push({v, a, x, y}); } }
+  cand.sort((p, q) => q.v - p.v);
+  const picked = [];
+  for(const c of cand){ if(picked.length >= 8) break;
+    if(picked.some(p => Math.hypot(p.x - c.x, p.y - c.y) < 6 && Math.min(Math.abs(p.a - c.a), NA - Math.abs(p.a - c.a)) <= 2)) continue;
+    // امتداد الباركود: تعبئة الخلايا المجاورة القوية على نفس خريطة الاتجاه، ثم حدود المستطيل في إحداثيات (u عبر الأشرطة، v على طولها)
+    const S = maps[c.a], seen = new Set([c.y * cw + c.x]), q = [[c.x, c.y]], cl = [];
+    while(q.length && seen.size < 2500){ const [x, y] = q.pop(); cl.push([x, y]);
+      for(let dy = -1; dy <= 1; dy++) for(let dx = -1; dx <= 1; dx++){ const nx = x + dx, ny = y + dy, k = ny * cw + nx;
+        if(nx >= 0 && ny >= 0 && nx < cw && ny < chh && !seen.has(k) && S[k] > 0.35 * c.v){ seen.add(k); q.push([nx, ny]); } } }
+    const th = c.a * Math.PI / NA, ux = Math.cos(th), uy = Math.sin(th);  // دقة الاتجاه ±3.75°؛ يُدقَّق لاحقًا من ميل الأشرطة (leanOf)
+    let umin = 1e9, umax = -1e9, vmin = 1e9, vmax = -1e9;
+    for(const [x, y] of cl){ const px = (x + 0.5) * C, py = (y + 0.5) * C, u = px * ux + py * uy, v = -px * uy + py * ux;
+      umin = Math.min(umin, u); umax = Math.max(umax, u); vmin = Math.min(vmin, v); vmax = Math.max(vmax, v); }
+    const um = (umin + umax) / 2, vm = (vmin + vmax) / 2;
+    picked.push({v: c.v, a: c.a, x: c.x, y: c.y, ux, uy, cx: (um * ux - vm * uy) * f, cy: (um * uy + vm * ux) * f,
+                 halfU: ((umax - umin) / 2 + C) * f, halfV: ((vmax - vmin) / 2 + C) * f});
+  }
+  return picked;
+}
+function cropGray(g, w, h, p, scale, padU, padV){
+  const hu = p.halfU * padU, hv = p.halfV * padV, cw = Math.min(2600, Math.max(60, Math.round(2 * hu * scale))), ch = Math.min(1400, Math.max(30, Math.round(2 * hv * scale)));
+  const a = new Uint8Array(cw * ch);
+  for(let y = 0; y < ch; y++){ const vv = (y - ch / 2) / scale;
+    for(let x = 0; x < cw; x++){ const uu = (x - cw / 2) / scale;
+      let fx = p.cx + p.ux * uu - p.uy * vv, fy = p.cy + p.uy * uu + p.ux * vv;
+      fx = Math.min(w - 1.001, Math.max(0, fx)); fy = Math.min(h - 1.001, Math.max(0, fy));
+      const x0 = fx | 0, y0 = fy | 0, ax = fx - x0, ay = fy - y0, i0 = y0 * w + x0;
+      a[y * cw + x] = g[i0] * (1 - ax) * (1 - ay) + g[i0 + 1] * ax * (1 - ay) + g[i0 + w] * (1 - ax) * ay + g[i0 + w + 1] * ax * ay; } }
+  return {a, cw, ch};
+}
+function sharpenX(a, cw, ch, r){  // شحذ أفقي (اتجاه المسح): g + 1.3·(g − متوسط 2r+1)
+  const o = new Uint8Array(a.length);
+  for(let y = 0; y < ch; y++){ const row = y * cw; let s = 0, n = 0;
+    for(let x = 0; x < Math.min(cw, r); x++){ s += a[row + x]; n++; }
+    for(let x = 0; x < cw; x++){ if(x + r < cw){ s += a[row + x + r]; n++; } if(x - r - 1 >= 0){ s -= a[row + x - r - 1]; n--; }
+      const v = a[row + x] + 1.3 * (a[row + x] - s / n); o[row + x] = v < 0 ? 0 : v > 255 ? 255 : v; } }
+  return o;
+}
+function profileOf(a, cw, y0, y1, phi){
+  const yc = (y0 + y1) / 2, p = new Float32Array(cw), n = Math.max(1, y1 - y0);
+  for(let y = y0; y < y1; y++){ const sh = (y - yc) * phi, base = y * cw;
+    for(let x = 0; x < cw; x++){ const fx = x + sh;
+      if(fx < 0 || fx >= cw - 1){ p[x] += a[base + x]; continue; }
+      const i = fx | 0, f = fx - i; p[x] += a[base + i] * (1 - f) + a[base + i + 1] * f; } }
+  for(let x = 0; x < cw; x++) p[x] /= n;
+  return p;
+}
+// ميل الأشرطة داخل القصّ (s: انحراف x لكل صف): نبحث عن الميل الذي يجعل متوسط الصفوف أحدّ ما يكون. يُستعمل لتدقيق زاوية القصّ.
+function leanOf(a, cw, ch){
+  const E = new Float32Array(ch);
+  for(let y = 0; y < ch; y++){ let s = 0; const r = y * cw; for(let x = 1; x < cw - 1; x++) s += Math.abs(a[r + x + 1] - a[r + x - 1]); E[y] = s; }
+  let mx = 0; for(const e of E) if(e > mx) mx = e; if(mx <= 0) return 0;
+  const rows = []; for(let y = 0; y < ch; y++) if(E[y] > 0.45 * mx) rows.push(y);
+  if(rows.length < 12) return 0;
+  const y0 = rows[Math.floor(rows.length * 0.15)], y1 = rows[Math.floor(rows.length * 0.85)] + 1; let best = 0, bs = -1;
+  for(let k = -24; k <= 24; k++){ const p = profileOf(a, cw, y0, y1, k * 0.02); let s = 0; for(let x = 0; x + 2 < cw; x++){ const d = p[x + 2] - p[x]; s += d * d; } if(s > bs){ bs = s; best = k * 0.02; } }
+  return best;
+}
+// known(كود4أرقام) إلزامي عمليًا: القراءات غير الصارمة لا تُقبل إلا لمورد موجود (وبتأكيد مصدرين مستقلين في الفكّ بالشبكة)؛ opt.info.method يسجّل الطريقة
+function scanPhotoGray(g, w, h, opt){
+  opt = opt || {};
+  const want = opt.want, known = opt.known, soft = [], regions = findBarcodes(g, w, h), info = opt.info || {}, t0 = Date.now(), budget = opt.budgetMs || 7000;
+  if(opt.debug){ opt.debug.regions = regions; opt.debug.soft = soft; }
+  const run = (a, cw, ch, fine) => scanFrame(a, cw, ch, {band: 1, step: Math.max(fine ? 2 : 3, Math.round(ch / (fine ? 70 : 45))), angles: [0, -2, 2, -4, 4, -7, 7, -11, 11], want, soft, minRange: 22});
+  const strict = r => { if(r !== null) info.method = 'strict'; return r; };
+  const softly = () => { if(!known) return null; const r = softResolve(soft, known); if(r !== null && (!want || want.test(r))){ info.method = 'soft'; return r; } return null; };
+  for(const p of regions){
+    if(Date.now() - t0 > budget) break;
+    for(let it = 0; it < 2; it++){  // تدقيق زاوية القصّ من ميل الأشرطة (الزاوية الخشنة ±3.75°، والباركود المائل قد يحتاج أكثر)
+      const sc0 = Math.min(3, Math.max(1, 1400 / (2 * p.halfU * 1.15))), c0 = cropGray(g, w, h, p, sc0, 1.15, 1.6), s = leanOf(c0.a, c0.cw, c0.ch);
+      if(Math.abs(s) < 0.03) break;
+      const nx = p.ux + s * p.uy, ny = p.uy - s * p.ux, nn = Math.hypot(nx, ny); p.ux = nx / nn; p.uy = ny / nn;
+    }
+    for(const [padU, padV] of [[1.15, 1.6], [1.4, 2.4]]){
+      if(Date.now() - t0 > budget) break;
+      const len = 2 * p.halfU * padU, scale = Math.min(3, Math.max(1, 1400 / len));
+      const {a, cw, ch} = cropGray(g, w, h, p, scale, padU, padV);
+      let r = strict(run(a, cw, ch, false)); if(r !== null) return r;
+      for(const rad of [Math.round(scale * 1.5) + 1, Math.round(scale * 3) + 2]){ r = strict(run(sharpenX(a, cw, ch, rad), cw, ch, true)); if(r !== null) return r; }
+      r = strict(run(a, cw, ch, true)); if(r !== null) return r;
+    }
+    const r2 = softly(); if(r2 !== null) return r2;
+  }
+  return softly();
+}
+window.Code93 = {PATS, SYMS, scanFrame, decodeLine, decodeLens, lensOf, toGray, checked, scanPhotoGray, findBarcodes, softResolve, softParse, cropGray, sharpenX, profileOf, leanOf};
+
+// ---------- واجهة الكاميرا ----------
+const STOCK_RE = /^[0-9]{12,16}$/;
+// ---------- قراءة ملف صورة (التقاط أو استوديو) ----------
+async function readPhoto(file, known){
+  let bmp = null;
+  try{ bmp = await createImageBitmap(file); } catch(_){}
+  if(!bmp){  // Safari قديم: عبر عنصر صورة (يطبّق اتجاه EXIF وحده)
+    const url = URL.createObjectURL(file), im = new Image(); im.src = url;
+    try{ await im.decode(); } catch(_){ URL.revokeObjectURL(url); throw new Error('تعذّر فتح الصورة (صيغة غير مدعومة)'); }
+    bmp = im; setTimeout(() => URL.revokeObjectURL(url), 5000);
+  }
+  const W = bmp.width || bmp.naturalWidth, H = bmp.height || bmp.naturalHeight, k = Math.min(1, 3000 / Math.max(W, H)), w = Math.round(W * k), h = Math.round(H * k);
+  if(!w || !h) throw new Error('تعذّر فتح الصورة');
+  try{  // المتصفحات التي تدعم BarcodeDetector (أندرويد) أسرع وأدقّ أحيانًا
+    if(window.BarcodeDetector && (await BarcodeDetector.getSupportedFormats()).includes('code_93')){
+      const det = new BarcodeDetector({formats: ['code_93']}), hit = (await det.detect(bmp)).find(x => STOCK_RE.test(x.rawValue));
+      if(hit) return {code: hit.rawValue, method: 'native'};
+    }
+  } catch(_){}
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const g = cv.getContext('2d', {willReadFrequently: true}); g.imageSmoothingQuality = 'high'; g.drawImage(bmp, 0, 0, w, h);
+  if(bmp.close) bmp.close();
+  const info = {}, code = scanPhotoGray(toGray(g.getImageData(0, 0, w, h).data, w * h), w, h, {want: STOCK_RE, known, info});
+  return {code, method: info.method || ''};
+}
+window.setupScan = function(ctx){
+  const imod = document.getElementById('imod'), err = document.getElementById('ierr');
+  const st = document.createElement('style');
+  st.textContent = '.scanrow{display:flex;gap:8px;margin-top:8px}.scanrow .scanbtn{flex:1}'
+    + '.scanbtn{margin-top:0;padding:11px 4px;font-size:.95rem;white-space:nowrap;border:1px solid var(--pri);border-radius:10px;background:transparent;color:var(--pri)}'
+    + '.scanbtn:active{background:var(--pri);color:var(--onpri)}'
+    + '#scanov{position:fixed;inset:0;background:#000;z-index:30;display:flex;flex-direction:column}'
+    + '#scanov video{flex:1;min-height:0;width:100%;object-fit:cover}'
+    + '#scanov .aim{position:absolute;left:8%;right:8%;top:45%;height:22%;border:2px solid rgba(255,255,255,.85);border-radius:10px;box-shadow:0 0 0 100vmax rgba(0,0,0,.35)}'
+    + '#scanov .aim::after{content:"";position:absolute;left:4%;right:4%;top:50%;border-top:2px solid #ef4444}'
+    + '#scanov .bar{position:absolute;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:rgba(0,0,0,.6);color:#fff;text-align:center}'
+    + '#scanov .bar button{margin-top:10px;padding:10px 22px;border:1px solid #fff;border-radius:10px;background:transparent;color:#fff;font-size:1rem}';
+  document.head.appendChild(st);
+  // زرّان (طلب 2026-10-16): "مسح بالكاميرا" = المسح المباشر بالمستطيل (يتعرّف وحده بلا التقاط)، و"صورة من الاستديو" = ملف صورة:
+  // الضغط عليه يفتح قائمة النظام مباشرة (مكتبة الصور / التقاط صورة / اختيار ملف) وتُقرأ الصورة بتحليل يتحمّل عدم الوضوح (readPhoto).
+  const btn = document.createElement('button');
+  btn.type = 'button'; btn.className = 'scanbtn'; btn.textContent = '📷 مسح بالكاميرا';
+  const pbtn = document.createElement('button');
+  pbtn.type = 'button'; pbtn.className = 'scanbtn'; pbtn.textContent = '🖼 صورة من الاستديو';
+  const finp = document.createElement('input'); finp.type = 'file'; finp.accept = 'image/*'; finp.hidden = true;
+  const pnote = document.createElement('div'); pnote.className = 'note'; pnote.style.marginTop = '6px';
+  const row = document.createElement('div'); row.className = 'scanrow'; row.append(btn, pbtn, finp);
+  imod.insertAdjacentElement('afterend', row); row.insertAdjacentElement('afterend', pnote);
+  let busy = false;
+  btn.onclick = async () => {
+    if(busy || document.getElementById('iask').disabled) return; busy = true; err.textContent = ''; pnote.textContent = '';
+    try{ const code = await scan(); if(code) ctx.run(null, null, code); }
+    catch(e){ err.textContent = e.message || 'تعذّر تشغيل الكاميرا'; }
+    busy = false;
+  };
+  ctx.setScanBusy = on => { btn.disabled = on; pbtn.disabled = on; };
+  pbtn.onclick = () => { if(busy || document.getElementById('iask').disabled) return; finp.value = ''; finp.click(); };
+  finp.onchange = async () => {
+    const f = finp.files && finp.files[0]; if(!f || busy) return;
+    busy = true; err.textContent = ''; pnote.textContent = ''; pbtn.disabled = true; btn.disabled = true; pbtn.textContent = '⏳ جارٍ قراءة الصورة…';
+    try{
+      await new Promise(r => setTimeout(r, 60));  // لتظهر الرسالة قبل بدء التحليل الثقيل
+      const r = await readPhoto(f, ctx.known);
+      if(r.code){
+        if(r.method === 'soft') pnote.textContent = 'قُرئ الباركود من صورة غير واضحة تمامًا: ' + r.code + ' — تأكد أنه يطابق الرقم المطبوع تحت الباركود';
+        ctx.run(null, null, r.code);
+      } else err.textContent = 'لم يُقرأ الباركود من الصورة. التقط الباركود كاملًا وأقرب وأوضح (بلا لمعان أو اهتزاز)، أو اكتب المورد والموديل يدويًا';
+    } catch(e){ err.textContent = (e && e.message) || 'تعذّر فتح الصورة'; }
+    pbtn.disabled = false; btn.disabled = false; pbtn.textContent = '🖼 صورة من الاستديو'; busy = false;
+  };
+  async function scan(){
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('الكاميرا غير متاحة في هذا المتصفح');
+    const ov = document.createElement('div'); ov.id = 'scanov';
+    const video = document.createElement('video'); video.setAttribute('playsinline', ''); video.muted = true;
+    const aim = document.createElement('div'); aim.className = 'aim';
+    const bar = document.createElement('div'); bar.className = 'bar';
+    const hint = document.createElement('div'); hint.textContent = 'ضع الباركود الطويل داخل الإطار، أفقيًا، وقرّب الهاتف حتى يظهر واضحًا';
+    const cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = 'إلغاء';
+    bar.append(hint, cancel); ov.append(video, aim, bar); document.body.appendChild(ov);
+    let stream = null, closed = false, result = null, timer = 0, resolveFn;
+    const finish = v => { if(closed) return; closed = true; clearTimeout(timer); clearTimeout(limit);
+      if(stream) stream.getTracks().forEach(t => t.stop()); ov.remove(); resolveFn(v); };
+    const done = new Promise(r => { resolveFn = r; });
+    cancel.onclick = () => finish(null);
+    const limit = setTimeout(() => { if(!closed){ err.textContent = 'لم يُقرأ الباركود. قرّب الهاتف وحسّن الإضاءة، أو اكتب المورد والموديل يدويًا'; finish(null); } }, 45000);
+    try{
+      stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: {ideal: 'environment'}, width: {ideal: 1920}, height: {ideal: 1080}}, audio: false});
+    } catch(e){
+      finish(null);
+      throw new Error(e && e.name === 'NotAllowedError' ? 'اسمح باستخدام الكاميرا لهذا الموقع من إعدادات الهاتف' : 'تعذّر تشغيل الكاميرا');
+    }
+    if(closed){ stream.getTracks().forEach(t => t.stop()); return done; }
+    video.srcObject = stream;
+    try{ await video.play(); } catch(_){}
+    try{ await stream.getVideoTracks()[0].applyConstraints({advanced: [{focusMode: 'continuous'}]}); } catch(_){}
+    let native = null;
+    try{ if(window.BarcodeDetector && (await BarcodeDetector.getSupportedFormats()).includes('code_93')) native = new BarcodeDetector({formats: ['code_93']}); } catch(_){}
+    const canvas = document.createElement('canvas'), c2 = canvas.getContext('2d', {willReadFrequently: true});
+    const tick = async () => {
+      if(closed) return;
+      const w = video.videoWidth, h = video.videoHeight;
+      if(w && h && video.readyState >= 2){
+        canvas.width = w; canvas.height = h; c2.drawImage(video, 0, 0, w, h);
+        let code = null;
+        try{
+          if(native){ const r = await native.detect(canvas); const hit = r.find(x => STOCK_RE.test(x.rawValue)); code = hit ? hit.rawValue : null; }
+          else code = scanFrame(toGray(c2.getImageData(0, 0, w, h).data, w * h), w, h, {want: STOCK_RE});
+        } catch(_){}
+        if(code){ try{ navigator.vibrate && navigator.vibrate(60); } catch(_){} return finish(code); }
+      }
+      if(!closed) timer = setTimeout(tick, 120);
+    };
+    tick();
+    return done;
+  }
+};
+})();
+</script>
+<script>
+const P = {"salt": "Gdhfi1tugPo0lcifI3/xPg==", "iter": 600000, "data": "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"};
+const $ = id => document.getElementById(id), b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const b64e = u => { let s = ''; for(let i = 0; i < u.length; i += 8192) s += String.fromCharCode.apply(null, u.subarray(i, i + 8192)); return btoa(s); };
+function setTheme(m){ document.documentElement.dataset.theme = m; try{ localStorage.setItem('theme', m); }catch(_){} $('theme').textContent = m === 'dark' ? '☀️ نهاري' : '🌙 ليلي'; }
+let th = 'light'; try { if(localStorage.getItem('theme') === 'dark') th = 'dark'; } catch(_){}
+setTheme(th); $('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+let D = null, K = null;
+const SK = 'ivk:' + location.pathname, PK = 'ivp:' + location.pathname;
+async function open_(pw){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(P.salt), iterations: P.iter, hash: 'SHA-256'}, km, {name: 'AES-GCM', length: 256}, false, ['encrypt', 'decrypt']);
+  const all = b64(P.data), plain = await crypto.subtle.decrypt({name: 'AES-GCM', iv: all.slice(0, 12)}, key, all.slice(12));
+  const txt = await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+  K = key; return JSON.parse(txt);
+}
+const norm = t => [...String(t || '')].map(ch => { const c = ch.charCodeAt(0); return (c === 0x623 || c === 0x625 || c === 0x622) ? 'ا' : c === 0x629 ? 'ه' : c === 0x649 ? 'ي'
+  : (c >= 0x660 && c <= 0x669) ? String(c - 0x660) : (c >= 0x6F0 && c <= 0x6F9) ? String(c - 0x6F0) : ch.toUpperCase(); }).join('').replace(/\s+/g, '');
+const supLabel = s => s[0] + ' — ' + s[1];
+const fmtP = n => (Math.round(n * 100) / 100).toLocaleString('en-US');
+function supOf(v){  // من نص الحقل: «0238 — الاسم» أو الرقم وحده أو اسم مطابق وحيد
+  const q = norm(v); if(!q) return null;
+  const m = q.match(/^(\d{3,4})/); if(m){ const c = m[1].padStart(4, '0'); return D.sups.find(s => s[0] === c) || null; }
+  const hits = D.sups.filter(s => norm(s[1]).includes(q)); return hits.length === 1 ? hits[0] : null;
+}
+const dmy = at => { const [d, t] = at.split(' '); const [y, m, dd] = d.split('-'); return +dd + '/' + +m + '/' + y + (t ? ' ' + t : ''); };
+// ---- الصور: مشفّرة على الموقع، تُفك في الجوال وتُحفظ مؤقتًا في الذاكرة ----
+const IMG = {}, IMGB = {};
+async function imgUrl(id){
+  if(IMG[id]) return IMG[id];
+  const r = await fetch('i/' + id + '.bin'); if(!r.ok) throw new Error('img');
+  const u = new Uint8Array(await r.arrayBuffer());
+  const pt = await crypto.subtle.decrypt({name: 'AES-GCM', iv: u.slice(0, 12), additionalData: new TextEncoder().encode(id + 'f')}, K, u.slice(12));
+  const u8 = new Uint8Array(pt), type = u8[0] === 0x89 ? 'image/png' : u8[0] === 0xFF ? 'image/jpeg' : 'image/webp';
+  IMGB[id] = new Blob([pt], {type});  // للمشاركة (2026-11-20)
+  return IMG[id] = URL.createObjectURL(IMGB[id]);
+}
+let VX = null, VM = '';
+function viewer(src, title, x, m){
+  VX = x || null; VM = m || ''; $('vs').hidden = !VX; $('vs').textContent = '📤 مشاركة'; $('vd').hidden = $('ve').hidden = !(VX && canEdit(VX)); $('vd').disabled = $('ve').disabled = false; $('vd').textContent = '🗑️ حذف'; $('ve').textContent = '✏️ تعديل الموديل';
+  $('vt').textContent = title; $('vi').src = src; ZW = 100; $('vi').style.width = '100%'; $('vw').hidden = false; $('vsc').scrollTop = 0;
+  history.pushState({v: 1}, '');
+}
+// التكبير بإصبعين (أو نقرتين) بدل زر التكبير (طلب 2026-11-20)
+let ZW = 100, pinch = null, lastTap = 0;
+const sc = $('vsc'), dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+function zoomTo(w, cx, cy){
+  w = Math.max(100, Math.min(400, w)); const r = sc.getBoundingClientRect(), f = w / ZW;
+  const px = sc.scrollLeft + (cx - r.left), py = sc.scrollTop + (cy - r.top);
+  ZW = w; $('vi').style.width = w + '%';
+  sc.scrollLeft = px * f - (cx - r.left); sc.scrollTop = py * f - (cy - r.top);
+}
+sc.addEventListener('touchstart', e => {
+  if(e.touches.length === 2){ pinch = {d: dist(e.touches), w: ZW}; e.preventDefault(); }
+  else if(e.touches.length === 1){ const now = Date.now(); if(now - lastTap < 300){ zoomTo(ZW > 100 ? 100 : 250, e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); } lastTap = now; }
+}, {passive: false});
+sc.addEventListener('touchmove', e => { if(pinch && e.touches.length === 2){ e.preventDefault();
+  zoomTo(pinch.w * dist(e.touches) / pinch.d, (e.touches[0].clientX + e.touches[1].clientX) / 2, (e.touches[0].clientY + e.touches[1].clientY) / 2); } }, {passive: false});
+sc.addEventListener('touchend', e => { if(e.touches.length < 2) pinch = null; });
+sc.addEventListener('dblclick', e => zoomTo(ZW > 100 ? 100 : 250, e.clientX, e.clientY));
+$('vx').onclick = () => history.back();
+window.addEventListener('popstate', () => { $('vw').hidden = true; });
+// ---- قائمة الإشعارات ----
+function pending(){ try { return JSON.parse(localStorage.getItem(PK) || '[]'); } catch(_){ return []; } }
+function setPending(a){ try { localStorage.setItem(PK, JSON.stringify(a)); } catch(_){} }
+// بطاقة واحدة لكل مورد وموديل، فيها كل إشعاراته (طلب 2026-11-20): تكرار التنزيل أو فرع آخر يضيف لنفس البطاقة
+function cardsOf(items){
+  const M = new Map();
+  items.forEach(x => x.m.forEach(m => { const k = x.s + '|' + m; if(!M.has(k)) M.set(k, {k, s: x.s, sn: x.sn, m, n: []}); M.get(k).n.push(x); }));
+  M.forEach(c => c.n.sort((a, b) => (a.at || '').localeCompare(b.at || '')));
+  return [...M.values()].sort((a, b) => (b.n[b.n.length - 1].at || '').localeCompare(a.n[a.n.length - 1].at || ''));
+}
+const nTitle = x => (D.branches[x.b] || x.b) + ' ' + dmy(x.at || '').split(' ')[0];
+function openNote(x, c){
+  if(x._pend){ if(x.th) viewer(x.th, nTitle(x), null); return; }
+  imgUrl(x.id).then(u => viewer(u, c.m + ' — ' + nTitle(x), x, c.m)).catch(() => alert('تعذّر فتح الصورة'));
+}
+function card(c){
+  const el = document.createElement('div'), last = c.n[c.n.length - 1], pend = c.n.some(x => x._pend);
+  el.className = 'card' + (pend ? ' pend' : '');
+  const im = document.createElement('img'); im.className = 'th'; im.alt = '';
+  const tx = document.createElement('div'); tx.className = 'tx';
+  const sn = c.sn || (D.sups.find(s => s[0] === c.s) || [, ''])[1];
+  tx.innerHTML = '<div class="mods"></div><div class="dsc"></div><div></div><div class="mut"></div><div class="chips"></div><div class="bal"></div>';
+  tx.children[0].textContent = c.m;
+  if(EMB && ROLE.inq){ const mm = tx.children[0]; mm.classList.add('lnk'); mm.title = 'استعلام عن هذا الموديل';  // الضغط على الموديل ← «استعلام» (2026-11-20)
+    mm.onclick = ev => { ev.stopPropagation(); try { window.parent.postMessage({invInq: {sup: c.s, model: c.m}}, '*'); } catch(_){} }; }
+  const IB = D.bal && D.bal[c.k];  // البيان والسعر من البرنامج نفسه (2026-11-20)
+  tx.children[1].textContent = IB ? [IB._d || '', IB._p ? 'سعر البيع ' + fmtP(IB._p) + ' ريال' : ''].filter(Boolean).join(' — ') : '';
+  tx.children[2].textContent = c.s + ' ' + sn;
+  tx.children[3].textContent = c.n.length === 1 ? 'إشعار واحد' : c.n.length + ' إشعارات';
+  c.n.forEach(x => { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = (x._pend ? '⏳ ' : '📄 ') + nTitle(x);
+    b.onclick = ev => { ev.stopPropagation(); openNote(x, c); }; tx.children[4].appendChild(b); });
+  const B = D.bal && D.bal[c.k];  // رصيد الموديل في الفروع (آخر حركة مسجلة في الجهاز، بلا ERP)
+  const parts = B ? Object.keys(D.branches).filter(k => B[k]).map(k => D.branches[k] + ' ' + B[k][0]) : [];
+  tx.children[5].textContent = parts.length ? 'الرصيد: ' + parts.join(' · ') : '';
+  el.append(im, tx);
+  if(last._pend) im.src = last.th || ''; else imgUrl(last.id).then(u => im.src = u).catch(() => {});
+  el.onclick = () => openNote(last, c);
+  return el;
+}
+function search(){
+  const res = $('res'); res.textContent = '';
+  const qs = $('qs').value.trim(), sup = supOf(qs), qm = norm($('qm').value);
+  applyLocal(); goneList();
+  const pend = pending().filter(p => !D.items.some(x => x.id === p.id));
+  if(pend.length !== pending().length) setPending(pend);
+  let list = cardsOf(D.items.concat(pend.map(p => Object.assign({_pend: true}, p))));
+  if(qs) list = sup ? list.filter(c => c.s === sup[0]) : list.filter(c => norm(c.s + (c.sn || '')).includes(norm(qs)));
+  if(qm) list = list.filter(c => norm(c.m).includes(qm));
+  $('qn').textContent = !qs && !qm ? (list.length ? 'آخر الموديلات (' + list.length + ') — اضغط على البطاقة لعرض آخر إشعار، أو على التاريخ لعرض إشعار معيّن' : 'لا توجد إشعارات مرفوعة بعد') :
+    (list.length ? list.length + ' موديل مطابق' : 'لا يوجد موديل مطابق' + (sup ? ' لـ ' + supLabel(sup) : ''));
+  list.slice(0, qs || qm ? 200 : 40).forEach(c => res.appendChild(card(c)));
+}
+// ---- طلب مشفّر عبر ntfy ----
+const rid = () => [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+async function encMsg(o){
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = new Uint8Array(await crypto.subtle.encrypt({name: 'AES-GCM', iv}, K, new TextEncoder().encode(JSON.stringify(o))));
+  return JSON.stringify({i: b64e(iv), c: b64e(ct)});
+}
+function waitReply(id, ms){  // يستمع للرد قبل الإرسال
+  let es, timer; const p = new Promise(resolve => {
+    es = new EventSource(D.base + '/' + D.topic + 'r/sse?since=' + (Math.floor(Date.now() / 1000) - 10));
+    timer = setTimeout(() => { es.close(); resolve(null); }, ms);
+    es.onmessage = async ev => {
+      let m, o; try { m = JSON.parse(ev.data); o = JSON.parse(m.message || '{}'); } catch(_){ return; }
+      if(o.id !== id) return;
+      try { const r = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name: 'AES-GCM', iv: b64(o.i), additionalData: new TextEncoder().encode(id)}, K, b64(o.c))));
+        clearTimeout(timer); es.close(); resolve(r); } catch(_){}
+    };
+  });
+  return p;
+}
+// «📤 مشاركة» (2026-11-20): الصورة + المعلومات مباشرة (واتساب وغيره) عبر قائمة المشاركة في الجوال
+function shareText(x, m){
+  const sn = x.sn || (D.sups.find(s => s[0] === x.s) || [, ''])[1], IB = D.bal && D.bal[x.s + '|' + m];
+  return ['🧾 خصم يدوي', '*' + m + '*', IB && IB._d ? IB._d : '', IB && IB._p ? 'سعر البيع ' + fmtP(IB._p) + ' ريال' : '', x.s + ' ' + sn,
+    'الإشعار: ' + nTitle(x)].filter(Boolean).join(String.fromCharCode(10));
+}
+$('vs').onclick = async () => {
+  if(!VX) return; const x = VX, m = VM || x.m[0], t = shareText(x, m), b = IMGB[x.id], btn = $('vs');
+  const f = b ? new File([b], m + (b.type === 'image/png' ? '.png' : b.type === 'image/jpeg' ? '.jpg' : '.webp'), {type: b.type}) : null;
+  try {
+    if(f && navigator.canShare && navigator.canShare({files: [f]})){ await navigator.share({files: [f], text: t}); return; }
+    if(navigator.share){ await navigator.share({text: t}); return; }
+  } catch(e){ if(e && e.name === 'AbortError') return; }
+  try { await navigator.clipboard.writeText(t); btn.textContent = '✓ نُسخ النص'; setTimeout(() => btn.textContent = '📤 مشاركة', 2000); } catch(_){ alert(t); }
+};
+$('ve').onclick = async () => {  // تعديل موديل كُتب خطأً (2026-11-20)
+  if(!VX) return; const x = VX;
+  const v = prompt('عدّل رقم الموديل (أكثر من موديل: افصل بينها بمسافة)', x.m.join(' ')); if(v === null) return;
+  const models = [...new Set(v.split(/[\s,،؛;]+/).map(m => m.trim().toUpperCase()).filter(Boolean))];
+  if(!models.length){ alert('اكتب رقم الموديل'); return; }
+  const btn = $('ve'); btn.disabled = true; btn.textContent = '⏳';
+  const id = rid(), w = waitReply(id, 120000);
+  await new Promise(r => setTimeout(r, 700));
+  try { const r0 = await fetch(D.base + '/' + D.topic + 'q', {method: 'POST', body: await encMsg({id, ts: Math.floor(Date.now() / 1000), k: 'iedit', d: x.id, m: models, b: ROLE.role === 'branch' ? ROLE.branch : ''})}); if(!r0.ok) throw 0; }
+  catch(_){ btn.disabled = false; btn.textContent = '✏️ تعديل الموديل'; alert('تعذّر الإرسال'); return; }
+  const r = await w;
+  if(r && r.ok){ x.m = r.m || models; history.back(); search(); alert('✓ عُدّل الموديل إلى: ' + x.m.join(' ')); }
+  else { btn.disabled = false; btn.textContent = '✏️ تعديل الموديل'; alert(r ? (r.error || 'تعذّر') : 'لم يصل رد. الجهاز قد يكون مغلقًا'); }
+};
+$('vd').onclick = () => {  // حذف الموديل من هذا الإشعار فقط (2026-11-20)؛ موديلاته الأخرى تبقى
+  if(!VX) return; const others = VX.m.filter(m => m !== VM);
+  const t = others.length ? 'حذف الموديل ' + VM + ' من هذا الإشعار؟' + String.fromCharCode(10) + 'الموديلات الأخرى في الإشعار تبقى كما هي: ' + others.join('، ')
+    : 'حذف الموديل ' + VM + ' وإشعاره؟';
+  if(confirm(t + String.fromCharCode(10) + 'يمكنك استرجاعه من «🗑️ المحذوفات».')) delItem(VX, $('vd'), VM);
+};
+// ما حُذف/استُرجع من هذا الجوال يظهر فورًا حتى تصل النسخة المنشورة (دقيقة تقريبًا)
+const DK = 'ivd:' + location.pathname;
+function delLocal(){ try { return JSON.parse(localStorage.getItem(DK) || '[]'); } catch(_){ return []; } }
+function setDelLocal(a){ try { localStorage.setItem(DK, JSON.stringify(a.slice(-30))); } catch(_){} }
+function applyLocal(){
+  const keep = [];
+  delLocal().forEach(o => {
+    const x = D.items.find(y => y.id === o.id);
+    if(o.k === 'del'){ if(x && x.m.includes(o.m)){ keep.push(o); x.m = x.m.filter(m => m !== o.m); if(!x.m.length) D.items = D.items.filter(y => y !== x);
+        if(!D.gone.some(g => g.id === o.id && g.m.includes(o.m))) D.gone.push({id: o.id, at: o.at, b: o.b, s: o.s, sn: o.sn, m: [o.m], d: o.t, all: x.m.length ? 0 : 1}); } }
+    else if(o.k === 'res'){ if(D.gone.some(g => g.id === o.id && g.m.includes(o.m))){ keep.push(o); D.gone = D.gone.filter(g => !(g.id === o.id && g.m.includes(o.m))); } }
+  });
+  setDelLocal(keep);
+}
+function goneList(){
+  const box = $('gres'), btn = $('gbtn'); btn.hidden = !D.gone.length || !isOwner(); btn.textContent = '🗑️ المحذوفات (' + D.gone.reduce((t, g) => t + g.m.length, 0) + ')' + (box.hidden ? '' : ' — إخفاء');
+  box.textContent = ''; if(box.hidden) return;
+  D.gone.slice().sort((a, b) => b.d.localeCompare(a.d)).forEach(g => g.m.forEach(m => {
+    const el = document.createElement('div'); el.className = 'card pend';
+    const tx = document.createElement('div'); tx.className = 'tx'; tx.innerHTML = '<div class="mods"></div><div></div><div class="mut"></div>';
+    tx.children[0].textContent = m; tx.children[1].textContent = g.s + ' ' + (g.sn || ''); tx.children[2].textContent = 'إشعار ' + nTitle(g) + ' — حُذف ' + dmy(g.d);
+    const v = document.createElement('button'); v.type = 'button'; v.className = 'chip'; v.textContent = '📄 عرض الإشعار';
+    v.onclick = ev => { ev.stopPropagation(); imgUrl(g.id).then(u => viewer(u, m + ' (محذوف) — ' + nTitle(g), null)).catch(() => alert('تعذّر فتح الصورة')); };
+    const r = document.createElement('button'); r.type = 'button'; r.className = 'chip'; r.textContent = '↩️ استرجاع';
+    r.onclick = ev => { ev.stopPropagation(); if(confirm('استرجاع الموديل ' + m + '؟')) restoreItem(g, m, r); };
+    const ch = document.createElement('div'); ch.className = 'chips'; ch.append(v, r); tx.appendChild(ch);
+    el.appendChild(tx); box.appendChild(el); }));
+}
+$('gbtn').onclick = () => { $('gres').hidden = !$('gres').hidden; goneList(); };
+async function sendCmd(o){
+  const id = rid(), w = waitReply(id, 120000);
+  await new Promise(r => setTimeout(r, 700));
+  const r0 = await fetch(D.base + '/' + D.topic + 'q', {method: 'POST', body: await encMsg(Object.assign({id, ts: Math.floor(Date.now() / 1000)}, o))});
+  if(!r0.ok) throw new Error('send');
+  return await w;
+}
+async function restoreItem(g, m, btn){
+  btn.disabled = true; btn.textContent = '⏳';
+  let r = null; try { r = await sendCmd({k: 'irest', d: g.id, x: g.all ? '' : m}); } catch(_){ btn.disabled = false; btn.textContent = '↩️ استرجاع'; alert('تعذّر الإرسال'); return; }
+  if(r && r.ok){
+    const pl = delLocal(); pl.push({k: 'res', id: g.id, m}); setDelLocal(pl);
+    D.gone = D.gone.filter(y => !(y.id === g.id && y.m.includes(m)));
+    const x = D.items.find(y => y.id === g.id); if(x){ if(!x.m.includes(m)) x.m.push(m); } else D.items.push({id: g.id, at: g.at, b: g.b, s: g.s, sn: g.sn, m: g.m.slice()});
+    search(); alert('✓ استُرجع ' + m + '. يظهر للجميع خلال دقيقة.');
+  } else { btn.disabled = false; btn.textContent = '↩️ استرجاع'; alert(r ? (r.error || 'تعذّر') : 'لم يصل رد. الجهاز قد يكون مغلقًا'); }
+}
+async function delItem(x, btn, model){
+  btn.disabled = true; btn.textContent = '⏳';
+  const id = rid(), w = waitReply(id, 120000);
+  await new Promise(r => setTimeout(r, 700));
+  try { const r0 = await fetch(D.base + '/' + D.topic + 'q', {method: 'POST', body: await encMsg({id, ts: Math.floor(Date.now() / 1000), k: 'idel', d: x.id, x: model || '', b: ROLE.role === 'branch' ? ROLE.branch : ''})}); if(!r0.ok) throw 0; }
+  catch(_){ btn.disabled = false; btn.textContent = '🗑️ حذف'; alert('تعذّر الإرسال'); return; }
+  const r = await w;
+  if(r && r.ok){
+    const m = model || x.m[0], pl = delLocal(); pl.push({k: 'del', id: x.id, m, at: x.at, b: x.b, s: x.s, sn: x.sn, t: new Date().toISOString().slice(0, 16).replace('T', ' ')}); setDelLocal(pl);
+    applyLocal(); if(!$('vw').hidden) history.back(); search(); setTimeout(() => alert('✓ حُذف ' + m + ' (والموديلات الأخرى في الإشعار باقية). يختفي عند الجميع خلال دقيقة.'), 300);
+  }
+  else { btn.disabled = false; btn.textContent = '🗑️ حذف'; alert(r ? (r.error || 'تعذّر') : 'لم يصل رد. الجهاز قد يكون مغلقًا'); }
+}
+// ---- تصغير الصورة في الجوال: قص الورقة + رمادي + تباين + WebP/JPEG ----
+// ---- تصغير الصورة في الجوال (2026-11-21): قص الورقة (تلقائي + تعديل يدوي) ← «مسح ضوئي» 16 درجة رمادي ← PNG صغير ----
+let SRC = null, ROT = 0, CB = null, LASTB = null, OUT = null, WORK = null;  // CB: قص يدوي [x0,y0,x1,y1] نِسَب من الصورة بعد التدوير
+$('pick').onclick = () => $('uf').click();
+$('uf').onchange = async () => {
+  const f = $('uf').files[0]; if(!f) return;
+  try { SRC = await createImageBitmap(f, {imageOrientation: 'from-image'}); } catch(_){ try { SRC = await createImageBitmap(f); } catch(e){ alert('تعذّر قراءة الصورة'); return; } }
+  ROT = 0; CB = null; $('ced').hidden = true; await render();
+};
+$('rot').onclick = async () => { ROT = (ROT + 90) % 360; CB = null; await render(); };
+function otsu(g){
+  const hist = new Array(256).fill(0); for(let i = 0; i < g.length; i++) hist[g[i]]++;
+  let sum = 0; for(let i = 0; i < 256; i++) sum += i * hist[i];
+  let sB = 0, wB = 0, best = 0, th = 128;
+  for(let t = 0; t < 256; t++){ wB += hist[t]; if(!wB) continue; const wF = g.length - wB; if(!wF) break; sB += t * hist[t];
+    const mB = sB / wB, mF = (sum - sB) / wF, v = wB * wF * (mB - mF) * (mB - mF); if(v > best){ best = v; th = t; } }
+  return th;
+}
+function autoBox(g, w, h){  // قص محافظ: يُزال من الأطراف ما هو داكن بوضوح فقط (لا يقص من الورقة نفسها)
+  const th = otsu(g) * 0.7, rows = new Float32Array(h), cols = new Float32Array(w);
+  for(let y = 0; y < h; y++) for(let x = 0; x < w; x++) if(g[y * w + x] > th){ rows[y]++; cols[x]++; }
+  let y0 = 0, y1 = h - 1, x0 = 0, x1 = w - 1;
+  while(y0 < y1 && rows[y0] / w < 0.3) y0++; while(y1 > y0 && rows[y1] / w < 0.3) y1--;
+  while(x0 < x1 && cols[x0] / h < 0.3) x0++; while(x1 > x0 && cols[x1] / h < 0.3) x1--;
+  if((x1 - x0) * (y1 - y0) < w * h * 0.2) return [0, 0, 1, 1];
+  return [x0 / w, y0 / h, (x1 + 1) / w, (y1 + 1) / h];
+}
+const CRC = (() => { const t = new Uint32Array(256); for(let n = 0; n < 256; n++){ let c = n; for(let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u){ let c = 0xFFFFFFFF; for(let i = 0; i < u.length; i++) c = CRC[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function pchunk(type, data){ const out = new Uint8Array(12 + data.length), dv = new DataView(out.buffer); dv.setUint32(0, data.length);
+  for(let i = 0; i < 4; i++) out[4 + i] = type.charCodeAt(i); out.set(data, 8); dv.setUint32(8 + data.length, crc32(out.subarray(4, 8 + data.length))); return out; }
+async function png4(Q, w, h){  // PNG رمادي 4 بت (16 درجة)
+  const stride = Math.ceil(w / 2), raw = new Uint8Array((stride + 1) * h);
+  for(let y = 0; y < h; y++){ const o = y * (stride + 1); for(let x = 0; x < w; x++) raw[o + 1 + (x >> 1)] |= Q[y * w + x] << (x & 1 ? 0 : 4); }
+  const z = new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate'))).arrayBuffer());
+  const ih = new Uint8Array(13), dv = new DataView(ih.buffer); dv.setUint32(0, w); dv.setUint32(4, h); ih[8] = 4;
+  return new Blob([new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]), pchunk('IHDR', ih), pchunk('IDAT', z), pchunk('IEND', new Uint8Array(0))], {type: 'image/png'});
+}
+async function render(){
+  // 1) تدوير + تصغير أولي للعمل (الضلع الأطول 1800)
+  const s0 = Math.min(1, 1800 / Math.max(SRC.width, SRC.height)), sw = Math.round(SRC.width * s0), sh = Math.round(SRC.height * s0);
+  const rw = ROT % 180 ? sh : sw, rh = ROT % 180 ? sw : sh;
+  const c1 = document.createElement('canvas'); c1.width = rw; c1.height = rh; const x1 = c1.getContext('2d');
+  x1.translate(rw / 2, rh / 2); x1.rotate(ROT * Math.PI / 180); x1.drawImage(SRC, -sw / 2, -sh / 2, sw, sh);
+  WORK = c1;
+  // 2) «أغمق قناة» لكل نقطة: الحبر الأزرق/الملوّن يظهر كالأسود (ورق أزرق وقلم أزرق فاتح — 2026-11-21)
+  const px = x1.getImageData(0, 0, rw, rh).data, g = new Uint8Array(rw * rh);
+  for(let i = 0, j = 0; j < g.length; i += 4, j++) g[j] = Math.min(px[i], px[i + 1], px[i + 2]);
+  // 3) القص
+  const fb = CB || autoBox(g, rw, rh); LASTB = fb;
+  const bx = Math.round(fb[0] * rw), by = Math.round(fb[1] * rh), cw = Math.max(1, Math.round(fb[2] * rw) - bx), ch = Math.max(1, Math.round(fb[3] * rh) - by);
+  // 4) الحجم النهائي: الضلع الأطول 1400
+  const s1 = Math.min(1, 1600 / Math.max(cw, ch)), ow = Math.max(1, Math.round(cw * s1)), oh = Math.max(1, Math.round(ch * s1));
+  const c2 = document.createElement('canvas'); c2.width = cw; c2.height = ch; const x2 = c2.getContext('2d'), id2 = x2.createImageData(cw, ch), q2 = id2.data;
+  for(let y = 0; y < ch; y++) for(let x = 0; x < cw; x++){ const v = g[(y + by) * rw + x + bx], k = (y * cw + x) * 4; q2[k] = q2[k + 1] = q2[k + 2] = v; q2[k + 3] = 255; }
+  x2.putImageData(id2, 0, 0);
+  const c3 = document.createElement('canvas'); c3.width = ow; c3.height = oh; const x3 = c3.getContext('2d'); x3.imageSmoothingQuality = 'high'; x3.drawImage(c2, 0, 0, ow, oh);
+  const d3 = x3.getImageData(0, 0, ow, oh).data, G = new Uint8Array(ow * oh); for(let j = 0, i = 0; j < G.length; j++, i += 4) G[j] = d3[i];
+  // 5) خلفية الورقة (تصغير ×16 + أقصى قيمة 5×5) والقسمة عليها: تزيل الظل وتوحّد الورق
+  const bw = Math.max(1, Math.round(ow / 16)), bh = Math.max(1, Math.round(oh / 16));
+  const c4 = document.createElement('canvas'); c4.width = bw; c4.height = bh; const x4 = c4.getContext('2d'); x4.imageSmoothingQuality = 'high'; x4.drawImage(c3, 0, 0, bw, bh);
+  const d4 = x4.getImageData(0, 0, bw, bh).data, S = new Float32Array(bw * bh), Bg = new Float32Array(bw * bh);
+  for(let j = 0; j < S.length; j++) S[j] = d4[j * 4];
+  for(let y = 0; y < bh; y++) for(let x = 0; x < bw; x++){ let m = 0; for(let dy = -2; dy <= 2; dy++) for(let dx = -2; dx <= 2; dx++){ const yy = y + dy, xx = x + dx; if(yy >= 0 && yy < bh && xx >= 0 && xx < bw && S[yy * bw + xx] > m) m = S[yy * bw + xx]; } Bg[y * bw + x] = m; }
+  const R = new Float32Array(ow * oh), RH = new Uint32Array(256);
+  for(let y = 0; y < oh; y++){ const fy = Math.min(bh - 1, Math.max(0, (y + 0.5) * bh / oh - 0.5)), y0 = Math.floor(fy), y1 = Math.min(bh - 1, y0 + 1), ty = fy - y0;
+    for(let x = 0; x < ow; x++){ const fx = Math.min(bw - 1, Math.max(0, (x + 0.5) * bw / ow - 0.5)), x0 = Math.floor(fx), x1b = Math.min(bw - 1, x0 + 1), tx = fx - x0;
+      const bg = (Bg[y0 * bw + x0] * (1 - tx) + Bg[y0 * bw + x1b] * tx) * (1 - ty) + (Bg[y1 * bw + x0] * (1 - tx) + Bg[y1 * bw + x1b] * tx) * ty;
+      const r = Math.min(1.2, G[y * ow + x] / Math.max(bg, 1)); R[y * ow + x] = r;
+      if(x > ow * 0.15 && x < ow * 0.85 && y > oh * 0.15 && y < oh * 0.85) RH[Math.min(255, Math.round(r * 200))]++; } }  // الإحصاء من وسط الصورة (الورقة) لا من الحواف
+  // 6) تباين متكيّف: أغمق 0.7% = أسود، والورق (60%) = أبيض؛ الحبر الباهت يُقوّى
+  const n = ow * oh, nc = RH.reduce((t, v) => t + v, 0) || 1, pct = p => { let a = 0; for(let i = 0; i < 256; i++){ a += RH[i]; if(a >= nc * p) return i / 200; } return 1; };
+  const lo = pct(0.007), hi = Math.max(lo + 0.08, Math.min(0.94, pct(0.5))), Q = new Uint8Array(n);
+  for(let j = 0; j < n; j++){ let o = (R[j] - lo) / (hi - lo); o = o < 0 ? 0 : o > 1 ? 1 : Math.pow(o, 0.6); Q[j] = Math.round(o * 15); }
+  // 7) PNG 16 درجة؛ وإلا JPEG
+  let b = null;
+  if(typeof CompressionStream !== 'undefined'){ try { b = await png4(Q, ow, oh); } catch(_){ b = null; } }
+  if(!b){ const id5 = x3.createImageData(ow, oh), q5 = id5.data; for(let j = 0; j < n; j++){ const v = Q[j] * 17; q5[j * 4] = q5[j * 4 + 1] = q5[j * 4 + 2] = v; q5[j * 4 + 3] = 255; }
+    x3.putImageData(id5, 0, 0); b = await new Promise(r => c3.toBlob(r, 'image/jpeg', 0.55)); }
+  OUT = {blob: b, w: ow, h: oh, type: b.type};
+  if($('pv').src.startsWith('blob:')) URL.revokeObjectURL($('pv').src);
+  $('pv').src = URL.createObjectURL(b); $('pvw').hidden = false;
+  $('pinfo').textContent = 'الحجم بعد التصغير: ' + Math.round(b.size / 1024) + ' ك.ب (' + ow + '×' + oh + ') — إن كان القص خطأً اضغط «✂️ تعديل القص»';
+}
+// ---- محرر القص اليدوي: أربع زوايا تُسحب بالإصبع ----
+let CED = null;
+$('crop').onclick = () => {
+  if(!WORK) return; const cc = $('cc'), sc = Math.min(1, 900 / Math.max(WORK.width, WORK.height));
+  cc.width = Math.round(WORK.width * sc); cc.height = Math.round(WORK.height * sc); cc.getContext('2d').drawImage(WORK, 0, 0, cc.width, cc.height);
+  CED = (LASTB || [0, 0, 1, 1]).slice(); cboxDraw(); $('ced').hidden = false; $('pvw').hidden = true;
+  setTimeout(() => $('ced').scrollIntoView({block: 'start', behavior: 'smooth'}), 50);
+};
+function cboxDraw(){ const b = $('cbox'); b.style.left = CED[0] * 100 + '%'; b.style.top = CED[1] * 100 + '%'; b.style.width = (CED[2] - CED[0]) * 100 + '%'; b.style.height = (CED[3] - CED[1]) * 100 + '%'; }
+document.querySelectorAll('#cbox i').forEach(hd => {
+  hd.addEventListener('pointerdown', e => { e.preventDefault(); hd.setPointerCapture(e.pointerId); hd._drag = true; });
+  hd.addEventListener('pointermove', e => { if(!hd._drag) return; e.preventDefault();
+    const r = $('cc').getBoundingClientRect(), fx = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), fy = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height)), k = +hd.dataset.h;
+    if(k === 0 || k === 3) CED[0] = Math.min(fx, CED[2] - 0.08); else CED[2] = Math.max(fx, CED[0] + 0.08);
+    if(k === 0 || k === 1) CED[1] = Math.min(fy, CED[3] - 0.08); else CED[3] = Math.max(fy, CED[1] + 0.08);
+    cboxDraw(); });
+  ['pointerup', 'pointercancel'].forEach(t => hd.addEventListener(t, () => { hd._drag = false; }));
+});
+$('cok').onclick = async () => { CB = CED.slice(); $('ced').hidden = true; await render(); };
+$('cfull').onclick = async () => { CB = [0, 0, 1, 1]; $('ced').hidden = true; await render(); };
+// الموديلات: سطر لكل موديل، «➕ موديل آخر» يضيف سطرًا جديدًا (طلب 2026-11-20)
+function addModel(focus){
+  const box = $('ums'), row = document.createElement('div'); row.className = 'mrow';
+  const inp = document.createElement('input'); inp.className = 'mi'; inp.autocomplete = 'off'; inp.dir = 'ltr'; inp.style.textAlign = 'right'; inp.setAttribute('autocapitalize', 'characters');
+  inp.placeholder = box.children.length ? 'موديل آخر' : 'رقم الموديل';
+  inp.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); addModel(true); } });
+  row.appendChild(inp);
+  if(box.children.length){ const x = document.createElement('button'); x.type = 'button'; x.textContent = '✕'; x.title = 'حذف هذا السطر'; x.onclick = () => { row.remove(); dupCheck(); balShow(); }; row.appendChild(x); }
+  box.appendChild(row); if(focus) inp.focus();
+}
+const curModels = () => [...new Set([...document.querySelectorAll('#ums .mi')].flatMap(i => i.value.split(/[\s,،؛;]+/)).map(m => m.trim().toUpperCase()).filter(Boolean))];
+function dupCards(sup, models){  // البطاقات الموجودة لهذه الموديلات (نفس المورد)
+  if(!sup) return [];
+  const all = cardsOf(D.items.concat(pending().map(p => Object.assign({_pend: true}, p))));
+  return all.filter(c => c.s === sup[0] && models.includes(c.m));
+}
+// رصيد الموديل في الفروع أثناء الكتابة (2026-11-20): ملف مشفّر لكل مورد (آخر حركة مسجلة في الجهاز، بلا ERP)
+const BALF = {};
+async function supBal(sup){
+  if(sup in BALF) return BALF[sup];
+  const h = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode('alharam-invb|' + sup)))].map(x => x.toString(16).padStart(2, '0')).join('').slice(0, 14);
+  try { const r = await fetch('b/' + h + '.bin'); if(!r.ok) return BALF[sup] = {};
+    const u = new Uint8Array(await r.arrayBuffer());
+    const pt = await crypto.subtle.decrypt({name: 'AES-GCM', iv: u.slice(0, 12), additionalData: new TextEncoder().encode('b' + sup)}, K, u.slice(12));
+    return BALF[sup] = JSON.parse(await new Response(new Blob([pt]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+  } catch(_){ return BALF[sup] = {}; }
+}
+let balT = 0;
+function balShow(){ clearTimeout(balT); balT = setTimeout(balNow, 250); }
+async function balNow(){
+  const box = $('mbal'), sup = supOf($('us').value), models = curModels(); box.textContent = '';
+  if(!sup || !models.length) return;
+  const M = await supBal(sup[0]);
+  if(supOf($('us').value) !== sup) return;
+  models.forEach(m => { const d = document.createElement('div'), B = M[m];
+    const parts = B ? Object.keys(D.branches).filter(c => B[c]).map(c => D.branches[c] + ' ' + B[c][0]) : [];
+    d.innerHTML = '<b></b> <span></span>'; d.children[0].textContent = m + ':';
+    d.children[1].className = parts.length ? 'ok' : B ? 'no' : 'bad';
+    const inf = B ? [B._d || '', B._p ? 'سعر البيع ' + fmtP(B._p) + ' ريال' : ''].filter(Boolean).join(' — ') : '';
+    d.children[1].textContent = (inf ? inf + ' | ' : '') + (parts.length ? 'الرصيد: ' + parts.join(' · ') : B ? 'لا رصيد في الفروع' : '⚠️ هذا الموديل غير موجود في بياناتنا لهذا المورد — تأكد من الرقم');
+    box.appendChild(d); });
+}
+document.addEventListener('input', e => { if(e.target.classList && (e.target.classList.contains('mi') || e.target.id === 'us')) balShow(); });
+let ADDSIG = '';
+function dupCheck(){
+  const box = $('mdup'), cs = dupCards(supOf($('us').value), curModels()), sig = cs.map(c => c.k + c.n.length).join(',');
+  if(sig === ADDSIG) return; ADDSIG = sig; box.textContent = '';
+  if(!cs.length) return;
+  const d = document.createElement('div'); d.className = 'addbox';
+  const t = document.createElement('div'); t.textContent = '📎 ' + cs.map(c => c.m + ' له بطاقة فيها ' + (c.n.length === 1 ? 'إشعار واحد' : c.n.length + ' إشعارات')).join('، ') + '. افتح السابق وتأكد أن إشعارك جديد وليس نفسه:';
+  d.appendChild(t);
+  const ch = document.createElement('div'); ch.className = 'chips';
+  cs.forEach(c => c.n.forEach(x => { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = '📄 ' + c.m + ' — ' + nTitle(x); b.onclick = () => openNote(x, c); ch.appendChild(b); }));
+  d.appendChild(ch);
+  const l = document.createElement('label'); l.innerHTML = '<input type="checkbox" id="addok"><span>تأكدتُ أنه إشعار جديد — أضفه لنفس البطاقة</span>'; d.appendChild(l);
+  box.appendChild(d);
+}
+document.addEventListener('input', e => { if(e.target.classList && (e.target.classList.contains('mi') || e.target.id === 'us')) dupCheck(); });
+function resetModels(){ $('ums').textContent = ''; addModel(false); ADDSIG = ''; if($('mdup')) $('mdup').textContent = ''; if($('mbal')) $('mbal').textContent = ''; }
+$('addm').onclick = () => addModel(true);
+function msg(t, ok){ $('umsg').innerHTML = ''; const d = document.createElement('div'); d.className = 'msg ' + (ok ? 'ok' : 'er'); d.textContent = t; $('umsg').appendChild(d); }
+$('send').onclick = async () => {
+  const br = $('ub').value, sup = supOf($('us').value), models = curModels();
+  if(!sup){ msg('اختر المورد من القائمة (اكتب الاسم أو الرقم ثم اختر).', false); return; }
+  if(!models.length){ msg('اكتب رقم الموديل.', false); return; }
+  const dc = dupCards(sup, models), add = dc.length > 0;
+  if(add && !($('addok') && $('addok').checked)){ msg('هذا الموديل له بطاقة: افتح الإشعار السابق وتأكد أن إشعارك جديد، ثم ضع علامة ✓ «تأكدتُ أنه إشعار جديد».', false); return; }
+  if(!OUT){ msg('التقط صورة الإشعار.', false); return; }
+  {  // موديل غير موجود في بياناتنا لهذا المورد: تنبيه وتأكيد قبل الرفع (2026-11-20)
+    const M = await supBal(sup[0]), unk = models.filter(m => !M[m]);
+    if(unk.length && !confirm('⚠️ الموديل ' + unk.join('، ') + ' غير موجود في بياناتنا عند هذا المورد.' + String.fromCharCode(10) + 'تأكد من الرقم. هل تريد الرفع رغم ذلك؟')){ msg('⚠️ تأكد من رقم الموديل: ' + unk.join('، '), false); return; }
+  }
+  const btn = $('send'); btn.disabled = true; btn.textContent = '⏳ جارٍ الرفع…'; $('umsg').innerHTML = '';
+  try {
+    const id = rid(), iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = new Uint8Array(await crypto.subtle.encrypt({name: 'AES-GCM', iv, additionalData: new TextEncoder().encode(id + 'f')}, K, new Uint8Array(await OUT.blob.arrayBuffer())));
+    const file = new Uint8Array(12 + ct.length); file.set(iv); file.set(ct, 12);
+    const head = await encMsg({id, ts: Math.floor(Date.now() / 1000), k: 'iup', b: br, s: sup[0], m: models, w: OUT.w, h: OUT.h, t: OUT.type, a: add ? 1 : 0});
+    const w = waitReply(id, 180000);
+    await new Promise(r => setTimeout(r, 700));
+    const r0 = await fetch(D.base + '/' + D.topic + 'q', {method: 'PUT', body: file, headers: {'Filename': 'i.bin', 'Message': head}});
+    if(!r0.ok) throw new Error('send');
+    btn.textContent = '⏳ بانتظار تأكيد الجهاز…';
+    // نسخة مؤقتة في الجوال حتى تظهر في الصفحة المنشورة
+    const th = await new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.readAsDataURL(OUT.blob); });
+    const r = await w;
+    if(r && r.ok){
+      const pl = pending(); pl.push({id, at: r.at, b: br, s: sup[0], sn: sup[1], m: r.m || models, th: OUT.blob.size < 150000 ? th : ''}); setPending(pl.slice(-10));
+      msg((add ? '✓ أُضيف الإشعار لنفس البطاقة.' : '✓ تم الرفع.') + ' سيظهر لكل الفروع خلال دقيقة أو دقيقتين.', true);
+      resetModels(); $('mdup').textContent = ''; ADDSIG = ''; $('uf').value = ''; $('pvw').hidden = true; OUT = null; SRC = null;
+    } else msg(r ? 'تعذّر: ' + (r.error || 'خطأ') : 'أُرسلت الصورة لكن لم يصل تأكيد من الجهاز (قد يكون مغلقًا). أعد المحاولة لاحقًا.', false);
+  } catch(_){ msg('تعذّر الإرسال، تأكد من الاتصال وحاول مرة أخرى.', false); }
+  btn.disabled = false; btn.textContent = 'رفع';
+};
+$('us').addEventListener('input', () => { const s = supOf($('us').value); $('usn').textContent = s ? '✓ ' + supLabel(s) : ''; });
+function tab(u){ $('tq').classList.toggle('on', !u); $('tu').classList.toggle('on', u); $('pq').hidden = u; $('pu').hidden = !u; if(!u) search(); }
+$('tq').onclick = () => tab(false); $('tu').onclick = () => tab(true);
+// مسح باركود الستيكر (2026-11-21): نفس قارئ صفحة الاستعلام، والتحويل رمز الصنف ← الموديل من ملف المورد المحفوظ (بلا ERP)
+function setupScans(){
+  if(!window.setupScan) return;
+  if(EMB){  // داخل رابط المسؤول: نافذة الكاميرا (#scanov) تملأ شاشة الجوال كاملة أثناء المسح فقط
+    let on = false;
+    new MutationObserver(() => { const now = !!document.getElementById('scanov'); if(now === on) return; on = now;
+      try { window.parent.postMessage({invFull: now}, '*'); } catch(_){} }).observe(document.body, {childList: true}); }
+  const hid = document.createElement('button'); hid.id = 'iask'; hid.type = 'button'; hid.hidden = true; document.body.appendChild(hid);
+  const mk = (anchor, onCode) => {
+    const a = $(anchor), e = document.createElement('div'); e.className = 'dupw'; a.insertAdjacentElement('afterend', e);
+    a.id = 'imod'; e.id = 'ierr';
+    try { window.setupScan({run: (_, __, code) => onCode(String(code || ''), e), known: c4 => D.sups.some(s => s[0] === c4)}); } catch(_){}
+    a.id = anchor; e.id = '';  // تحرير المعرّفات للاستدعاء التالي
+  };
+  mk('scanU', (code, e) => scanFill(code, true, e)); mk('scanQ', (code, e) => scanFill(code, false, e));
+}
+async function scanFill(code, up, e){
+  e.textContent = ''; e.style.color = '';  // الأحمر للتحذير فقط؛ النجاح أخضر والمعلومة رمادية (2026-11-21)
+  const c4 = code.slice(0, 4), sup = D.sups.find(s => s[0] === c4);
+  if(!sup){ e.textContent = 'قُرئ الرمز ' + code + ' لكن المورد ' + c4 + ' غير موجود في القائمة'; return; }
+  const M = await supBal(c4), model = M._c && M._c[code];
+  if(up){
+    const cur = supOf($('us').value);
+    if(cur && cur[0] !== sup[0] && curModels().length){  // الإشعار لمورد واحد
+      e.textContent = '⚠️ هذا الستيكر لمورد آخر (' + supLabel(sup) + ')، والإشعار الحالي للمورد ' + cur[0] + '. امسح ستيكر نفس المورد.'; return; }
+    $('us').value = supLabel(sup); $('usn').textContent = '✓ ' + supLabel(sup);
+    if(model && curModels().includes(model)){ e.textContent = 'ℹ️ الموديل ' + model + ' مضاف مسبقًا في القائمة (الستيكر ' + code + ')'; e.style.color = 'var(--mut)'; }
+    else if(model){  // السطر الفارغ الذي ضُغط عليه أخيرًا، وإلا أول سطر فارغ، وإلا سطر جديد (2026-11-21)
+      const all = [...document.querySelectorAll('#ums .mi')];
+      let inp = (LASTMI && all.includes(LASTMI) && !LASTMI.value.trim()) ? LASTMI : all.find(i => !i.value.trim());
+      if(!inp){ addModel(false); inp = [...document.querySelectorAll('#ums .mi')].pop(); }
+      inp.value = model; e.textContent = '✓ أُضيف الموديل ' + model + ' من الباركود'; e.style.color = 'var(--ok)';
+      inp.style.outline = '2px solid var(--ok)'; setTimeout(() => { inp.style.outline = ''; }, 2500); }
+    dupCheck(); balShow();
+  } else { $('qs').value = supLabel(sup); $('qm').value = model || ''; search(); }
+  if(!model) e.textContent = 'عُبّئ المورد، لكن موديل هذا الصنف (' + code + ') غير موجود في بياناتنا — اكتب الموديل يدويًا';
+}
+let LASTMI = null;
+document.addEventListener('focusin', ev => { if(ev.target.classList && ev.target.classList.contains('mi')) LASTMI = ev.target; });
+function init(){
+  const dl = $('supl'); D.sups.forEach(s => { const o = document.createElement('option'); o.value = supLabel(s); dl.appendChild(o); });
+  const ub = $('ub'); Object.entries(D.branches).forEach(([c, n]) => { const o = document.createElement('option'); o.value = c; o.textContent = n; ub.appendChild(o); });
+  applyRole();
+  ['qs', 'qm'].forEach(i => $(i).addEventListener('input', search)); resetModels();
+  setupScans();
+  search();
+}
+async function tryKey(pw, silent){
+  try { D = await open_(pw); } catch(_){ if(silent){ try{ localStorage.removeItem(SK); }catch(_){} } else $('err').textContent = 'كلمة السر غير صحيحة'; $('lock').hidden = false; return false; }
+  try { localStorage.setItem(SK, pw); } catch(_){}
+  $('lock').hidden = true; $('view').hidden = false; $('err').textContent = ''; init(); return true;
+}
+// مضمّنة كتبويب في رابط المسؤول: الوضع والدور من الصفحة الأم، و«افتح بطاقة موديل» من تنبيه متابعة التنزيل
+const EMB = (() => { try { return window.self !== window.top; } catch(_){ return true; } })();
+let ROLE = EMB ? {role: 'none', branch: '', inq: false} : {role: 'owner', branch: '', inq: false};  // الرابط المباشر = المالك (تجريبي)
+const isOwner = () => ROLE.role === 'owner';
+const canEdit = x => isOwner() || (ROLE.role === 'branch' && x.b === ROLE.branch);
+function applyRole(){
+  if(!D) return;
+  const ub = $('ub');
+  if(ROLE.role === 'branch'){ ub.value = ROLE.branch; $('fb').hidden = true; $('tnote').hidden = true; }
+  else { $('fb').hidden = false; $('tnote').hidden = EMB; }
+  $('tu').hidden = !(isOwner() || ROLE.role === 'branch' || ROLE.role === 'buyer');  // المشتريات: رفع باختيار الفرع، بلا حذف ولا محذوفات (2026-11-20)
+  if($('tu').hidden && !$('pu').hidden) tab(false);
+  if(!isOwner()) $('gres').hidden = true;
+  search();
+}
+if(EMB){ document.querySelector('.top').style.display = 'none';
+  window.addEventListener('message', e => {
+    if(e.source !== window.parent || !e.data) return;
+    if(e.data.theme === 'dark' || e.data.theme === 'light') setTheme(e.data.theme);
+    if(e.data.invRole){ ROLE = {role: String(e.data.invRole.role || 'none'), branch: String(e.data.invRole.branch || ''), inq: !!e.data.invRole.inq}; applyRole(); }
+    if(e.data.invReset && D){ $('qs').value = ''; $('qm').value = ''; if(!$('pq').hidden) search(); }  // عاد من تبويب آخر: يُمسح المورد والموديل من البحث
+    const q = e.data.invQuery; if(q && D){ tab(false); $('qs').value = String(q.sup || ''); $('qm').value = String(q.model || ''); search(); }
+  }); }
+$('enter').onclick = () => tryKey($('pw').value.trim(), false);
+$('pw').addEventListener('keydown', e => { if(e.key === 'Enter') tryKey(e.target.value.trim(), false); });
+(async () => {
+  let pw = ''; try { pw = decodeURIComponent(location.hash.slice(1)); } catch(_){}
+  if(!pw){ try { pw = localStorage.getItem(SK) || ''; } catch(_){} }
+  if(pw && await tryKey(pw, true)) return;
+  $('lock').hidden = false;
+})();
+const BUILD = +document.querySelector('meta[name=build]').content; let lastCheck = 0;
+async function checkUpdate(){
+  if(Date.now() - lastCheck < 30000 || !$('vw').hidden || ($('pu') && !$('pu').hidden && OUT)) return; lastCheck = Date.now();
+  try { const r = await fetch(location.pathname + '?v=' + Date.now(), {cache: 'no-store'});
+    const m = (await r.text()).match(/name="build" content="([0-9]+)"/);
+    if(m && +m[1] > BUILD) location.replace(location.pathname + '?v=' + m[1] + location.hash); } catch(_){}
+}
+document.addEventListener('visibilitychange', () => { if(!document.hidden) checkUpdate(); });
+setInterval(() => { if(!document.hidden && pending().length) checkUpdate(); }, 30000);
+checkUpdate();
+</script></body></html>

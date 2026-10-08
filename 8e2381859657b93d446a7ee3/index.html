@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="build" content="20261121084733">
+<meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="icon" type="image/png" href="../icon-192.png">
+<title>موديلات بأكثر من رمز</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1f2937;--mut:#6b7280;--pri:#1e3a5f;--line:#e2e8f2;--dn:#b91c1c;--up:#2f7d5c;--dnbg:#fdecec;--upbg:#e8f5ee}
+:root[data-theme=dark]{--bg:#10151d;--card:#18202c;--ink:#e5e9f0;--mut:#9aa6b8;--pri:#7fb0ff;--line:#2a3547;--dn:#f08585;--up:#52b58c;--dnbg:#3a1c1c;--upbg:#173326}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:12px 16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+h1{font-size:1.15rem;margin:0;color:var(--pri)}
+.theme{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer}
+.note{color:var(--mut);font-size:.88rem;margin:4px 0 10px;line-height:1.6}
+input{width:100%;font:inherit;font-size:1rem;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);margin-bottom:10px}
+.it{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.hd{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.hd b{font-size:1.15rem;direction:ltr;unicode-bidi:isolate}
+.hd span{color:var(--mut);font-size:.9rem}
+.ds{color:var(--mut);font-size:.85rem;margin:2px 0 8px}
+.cd{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px;border-radius:9px;margin-top:5px}
+.cd.n{background:var(--dnbg)}.cd.p{background:var(--upbg)}
+.cd code{font-size:.98rem;direction:ltr;unicode-bidi:isolate}
+.cd small{display:block;color:var(--mut);font-size:.75rem}
+.cd code mark{background:#ffe14d;color:#111;border-radius:3px;padding:0 1px}
+.pr{color:var(--ink);font-weight:600}
+.qty{text-align:center;min-width:52px}.qty small{display:block;color:var(--mut);font-size:.72rem;margin-bottom:1px}
+.cd b{font-size:1.15rem;direction:ltr;unicode-bidi:isolate}.cd.n b{color:var(--dn)}.cd.p b{color:var(--up)}
+.cnt{color:var(--mut);font-size:.9rem;margin-bottom:8px}
+.it.dn{opacity:.8;border-style:dashed}
+.sec{font-size:1rem;color:var(--up);margin:22px 0 4px;padding-top:12px;border-top:2px solid var(--line)}
+.ft{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}
+.ft small{color:var(--mut);font-size:.78rem}
+.chk{padding:8px 16px;border:1px solid var(--pri);border-radius:9px;background:var(--card);color:var(--pri);font:inherit;font-size:.92rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.chk:disabled{opacity:.6;cursor:default}
+.res{margin-top:8px;padding:8px 10px;border-radius:9px;font-size:.85rem;line-height:1.6;background:var(--bg);color:var(--mut)}
+.res b{color:var(--ink)}
+.demo{background:#fff6d6;color:#6b5200;border:1px solid #f0d77a;border-radius:10px;padding:8px 10px;font-size:.84rem;margin-bottom:10px;line-height:1.6}
+:root[data-theme=dark] .demo{background:#3a3214;color:#f0d77a;border-color:#6b5a1e}
+#gate{max-width:360px;margin:60px auto;text-align:center}#gate input{text-align:center}
+#err{color:var(--dn)}
+</style></head><body><style>.brand{display:block;margin:10px auto 2px;height:40px;width:auto}@media (display-mode:standalone){.brand{margin-top:calc(env(safe-area-inset-top) + 30px)}}</style><img class="brand" src="../logo-s.png?v=2" alt="الهرم" width="110" height="40" decoding="async" onerror="this.remove()"><script>if(window.parent!==window)document.querySelector(".brand").remove()</script><div class="wrap">
+<div class="top"><h1>موديلات بأكثر من رمز</h1><span><button class="theme" id="back" hidden>→ رجوع</button> <button class="theme" id="theme"></button></span></div>
+<div id="gate" hidden><p>أدخل كلمة السر</p><input id="pw" type="password" autocomplete="off"><div id="err"></div></div>
+<div id="view" hidden>
+<div class="note" id="info"></div>
+<input id="q" type="search" placeholder="بحث: موديل أو مورد أو رمز">
+<div class="cnt" id="cnt"></div>
+<div id="list"></div>
+<h2 class="sec">✓ تم تعديله</h2>
+<div class="note">بعد «تحقق» ينزل الموديل المعدَّل هنا ويبقى أسبوعًا ثم يُزال، ويعود إلى أعلى القائمة إن تحرّك رمزه القديم مجددًا.</div>
+<div id="done"></div>
+</div></div>
+<script>
+const P = {"salt": "lTEBbaqlOeLFHZkasb3b5A==", "iter": 600000, "index": "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"};
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const $ = id => document.getElementById(id);
+const fmt = n => (n < 0 ? '−' : '') + Math.abs(Math.round(n)).toLocaleString('en-US');
+function setTheme(m){ document.documentElement.dataset.theme = m; try{ localStorage.setItem('theme', m); }catch(_){} $('theme').textContent = m === 'dark' ? '☀️ نهاري' : '🌙 ليلي'; }
+let th = 'light'; try { if(localStorage.getItem('theme') === 'dark') th = 'dark'; } catch(_){}
+// زر «رجوع» حين تُفتح الصفحة من تبويب صفحة المسؤول (مهم في تطبيق الشاشة الرئيسية بلا زر رجوع)
+if(history.length > 1 && document.referrer){ $('back').hidden = false; $('back').onclick = () => history.back(); }
+setTheme(th); $('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+const norm = s => String(s).replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').toLowerCase();
+let D = null;
+const dd = iso => { const [y, m, d] = iso.split('-'); return d + '/' + m + '/' + y; };
+function draw(){
+  const q = norm($('q').value.trim()), box = $('list'); box.textContent = '';
+  const match = g => !q || norm(g.model + ' ' + g.sup + ' ' + g.sup_name + ' ' + (g.short || '') + ' ' + g.codes.map(c => c.code).join(' ')).includes(q);
+  const hit = D.items.filter(match);
+  $('cnt').textContent = hit.length + ' موديل' + (D.chk ? ' · التحققات المتبقية اليوم: ' + D.chk.left : '');
+  hit.forEach(g => box.appendChild(card(g, false)));
+  if(!hit.length) box.innerHTML = '<div class="note">لا نتائج</div>';
+  const dn = $('done'); dn.textContent = '';
+  (D.done || []).filter(match).forEach(g => dn.appendChild(card(g, true)));
+  if(!dn.children.length) dn.innerHTML = '<div class="note">لا يوجد بعد.</div>';
+}
+function card(g, isDone){
+    const it = document.createElement('div'); it.className = 'it' + (isDone ? ' dn' : '');
+    const hd = document.createElement('div'); hd.className = 'hd';
+    const b = document.createElement('b'); b.textContent = g.model; const s = document.createElement('span'); s.textContent = (g.short || g.sup_name) + ' (' + g.sup + ')';
+    hd.append(b, s); it.appendChild(hd);
+    const ds = document.createElement('div'); ds.className = 'ds'; ds.textContent = g.desc || ''; it.appendChild(ds);
+    g.codes.forEach(c => {
+      const r = document.createElement('div'); r.className = 'cd ' + (c.bal < 0 ? 'n' : 'p');
+      const l = document.createElement('div'); const code = document.createElement('code');
+      // الخانات التي تختلف عن الرمز الآخر (ذي الإشارة المعاكسة) تُظلَّل بالأصفر
+      const other = (g.codes.find(o => o.code !== c.code && (o.bal < 0) !== (c.bal < 0)) || g.codes.find(o => o.code !== c.code) || {code: c.code}).code;
+      [...c.code].forEach((ch, i) => { if(ch === other[i]) code.append(ch); else { const m = document.createElement('mark'); m.textContent = ch; code.append(m); } });
+      const sm = document.createElement('small');
+      // مختصر (طلب 2026-11-09): مصدر الكمية فقط؛ «sold» في تقرير المبيعات صافٍ (بيع − مرتجع زبون) فالبيع الفعلي = الصافي + المرتجع
+      const parts = [];
+      if(c.src === 'dl') parts.push('تنزيل ' + dd(c.date).slice(0, 5));
+      // حُذف «بيع/مرتجع» من العبارة (طلب 2026-11-09)؛ الكميات (sold/cr/rq) باقية في البيانات
+      sm.textContent = parts.join(' · ');
+      if(c.price){ const pr = document.createElement('span'); pr.className = 'pr'; pr.textContent = (parts.length ? ' · ' : '') + 'السعر ' + (+(+c.price).toFixed(2)); sm.append(pr); }
+      l.append(code, sm);
+      const q = document.createElement('div'); q.className = 'qty';
+      const ql = document.createElement('small'); ql.textContent = 'الكمية';
+      const v = document.createElement('b'); v.textContent = fmt(c.bal); q.append(ql, v); r.append(l, q); it.appendChild(r);
+    });
+    const ft = document.createElement('div'); ft.className = 'ft';
+    const since = document.createElement('small');
+    since.textContent = isDone ? '✓ عُدّل ' + dd(g.fixed_at) : (g.reopened ? '↩ عاد بعد تعديله ' + dd(g.reopened) : '');
+    ft.appendChild(since);
+    if(!isDone && D.chk){
+      const btn = document.createElement('button'); btn.className = 'chk'; btn.textContent = 'تحقق';
+      btn.title = 'اضغط بعد تعديل الرموز في الفرع';
+      btn.onclick = () => check(g, btn, it);
+      ft.appendChild(btn);
+    }
+    it.appendChild(ft);
+    if(g._msg){ const res = document.createElement('div'); res.className = 'res'; res.textContent = g._msg; it.appendChild(res); }
+    return it;
+}
+// ---- «تحقق»: طلب مشفّر عبر ntfy إلى الجهاز الرئيسي ← استعلام واحد خفيف لأرصدة رموز هذا الموديل في الفرع ----
+let PW = '', CK = null;
+async function chKey(){
+  if(CK) return CK;
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(PW), 'PBKDF2', false, ['deriveKey']);
+  CK = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(D.chk.salt), iterations: D.chk.iter, hash: 'SHA-256'}, km, {name: 'AES-GCM', length: 256}, false, ['encrypt', 'decrypt']);
+  return CK;
+}
+const b64e = u => { let s = ''; u.forEach(x => s += String.fromCharCode(x)); return btoa(s); };
+async function check(g, btn, it){
+  let res = it.querySelector('.res');
+  if(!res){ res = document.createElement('div'); res.className = 'res'; it.appendChild(res); }
+  btn.disabled = true; btn.textContent = '⏳ جارٍ الإرسال…'; res.textContent = 'جارٍ إرسال الطلب…';
+  const fail = m => { btn.disabled = false; btn.textContent = 'تحقق'; res.textContent = m; };
+  try {
+    const key = await chKey(), C = D.chk;
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    let done = false;
+    const es = new EventSource(C.base + '/' + C.topic + 'r/sse?since=' + (Math.floor(Date.now() / 1000) - 10));
+    const timer = setTimeout(() => { if(done) return; done = true; es.close(); fail('لم يصل رد. الجهاز الرئيسي قد يكون مغلقًا، حاول لاحقًا.'); }, 600000);
+    es.onmessage = async ev => {
+      let m, o; try { m = JSON.parse(ev.data); o = JSON.parse(m.message || '{}'); } catch(_){ return; }
+      if(done || o.id !== id) return;
+      let r; try { r = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name: 'AES-GCM', iv: b64(o.i), additionalData: new TextEncoder().encode(id)}, key, b64(o.c)))); } catch(_){ return; }
+      if(r.ok && 'wait' in r){ btn.textContent = '⏳ جارٍ التحقق…'; res.textContent = r.wait > 0 ? 'في الطابور: قبلك ' + r.wait + '.' : 'جارٍ قراءة أرصدة رموز هذا الموديل في الفرع…'; return; }
+      done = true; clearTimeout(timer); es.close();
+      if(!r.ok){ fail('تعذّر: ' + (r.error || 'خطأ')); return; }
+      if(typeof r.left === 'number') D.chk.left = r.left;
+      if(r.status === 'fixed'){
+        g.codes = r.codes; g.fixed_at = new Date().toISOString().slice(0, 10); g._msg = '✓ تم التعديل (تحقق ' + r.at + '). بقي رمز واحد برصيد.';
+        D.items = D.items.filter(x => x !== g); (D.done = D.done || []).unshift(g);
+      } else {
+        g.codes = r.codes.filter(c => c.bal !== 0).map(c => Object.assign({}, g.codes.find(x => x.code === c.code) || {}, c));
+        g._msg = '✗ لم يُعدَّل بعد (تحقق ' + r.at + '): الأرصدة أعلاه هي الحالية الآن.';
+      }
+      draw();
+    };
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const body = new TextEncoder().encode(JSON.stringify({id, ts: Math.floor(Date.now() / 1000), k: 'chk', m: g.key}));
+    const ct = new Uint8Array(await crypto.subtle.encrypt({name: 'AES-GCM', iv}, key, body));
+    await new Promise(r => setTimeout(r, 700));  // ليتصل الاستماع قبل الإرسال
+    const resp = await fetch(C.base + '/' + C.topic + 'q', {method: 'POST', body: JSON.stringify({i: b64e(iv), c: b64e(ct)})});
+    if(!resp.ok) throw new Error('send');
+    btn.textContent = '⏳ أُرسل…'; res.textContent = 'أُرسل الطلب، بانتظار الرد…';
+  } catch(_){ fail('تعذّر الإرسال، تأكد من الاتصال وحاول مرة أخرى.'); }
+}
+async function enter(pw){
+  PW = pw;
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(P.salt), iterations: P.iter, hash: 'SHA-256'}, km, {name: 'AES-GCM', length: 256}, false, ['decrypt']);
+  const data = b64(P.index);
+  D = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name: 'AES-GCM', iv: data.slice(0, 12)}, key, data.slice(12))));
+  $('gate').hidden = true; $('view').hidden = false;
+  $('info').textContent = 'فرع ' + D.branch + ': موديل له أكثر من رمز برصيد (سالبًا أو موجبًا؛ الرمز برصيد صفر لا يُحسب). الخانات المختلفة بين الرمزين بالأصفر. المتابعة من ' + dd(D.from) + ' إلى ' + dd(D.to) + '، آخر تحديث ' + D.at + '. بعد تعديل الرموز في الفرع اضغط «تحقق».';
+  draw();
+}
+$('q').oninput = draw;
+(async () => {
+  let pw = ''; try { pw = decodeURIComponent(location.hash.slice(1)); } catch(_){}
+  if(pw){ try { await enter(pw); return; } catch(_){} }
+  $('gate').hidden = false;
+  $('pw').onkeydown = async e => { if(e.key !== 'Enter') return; try { await enter($('pw').value); } catch(_){ $('err').textContent = 'كلمة السر غير صحيحة'; } };
+})();
+</script></body></html>
