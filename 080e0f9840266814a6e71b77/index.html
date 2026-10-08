@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="build" content="20261101000242">
+<meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="icon" type="image/png" href="../icon-192.png">
+<title>متابعة التنزيل</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1f2937;--mut:#6b7280;--pri:#1e3a5f;--line:#e2e8f2;--up:#2f7d5c;--dn:#b91c1c;--warn:#fff1e6;}
+:root[data-theme=dark]{--bg:#10151d;--card:#18202c;--ink:#e5e9f0;--mut:#9aa6b8;--pri:#7fb0ff;--line:#2a3547;--up:#52b58c;--dn:#f08585;--warn:#2b2018;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif;}
+.wrap{max-width:640px;margin:0 auto;padding:12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+h1{font-size:1.2rem;margin:0;color:var(--pri)}
+.theme{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer}
+input,select{width:100%;font:inherit;font-size:1rem;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.ctl{display:flex;gap:8px;margin-bottom:10px}.ctl select{flex:0 0 46%}
+@media(max-width:420px){.ctl{flex-direction:column}.ctl select{flex:none}}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;line-height:1.8;font-size:.92rem;color:var(--mut)}.how b{color:var(--pri)}
+.thr{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap;font-size:.85rem;color:var(--mut)}.thr button{border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;padding:6px 14px;border-radius:999px;cursor:pointer}.thr button.on{background:var(--pri);color:var(--bg);border-color:var(--pri)}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sum b{font-size:1.5rem;color:var(--pri)}.sum small{color:var(--mut)}
+.list{display:flex;flex-direction:column;gap:6px}
+.it{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.r1{display:flex;align-items:center;gap:10px}
+.rk{color:var(--mut);font-size:.8rem;min-width:1.7em;text-align:center}
+.nm{flex:1;font-weight:600;line-height:1.35}.nm small{display:block;color:var(--mut);font-weight:400;font-size:.78rem}
+.pc{font-weight:700;white-space:nowrap;color:var(--dn)}
+.st{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}.st div{background:var(--bg);border-radius:8px;padding:5px 8px}.st small{display:block;color:var(--mut);font-size:.72rem}.st b{font-size:1.3rem}
+.st div:first-child{background:#fff1d6;border:2px solid #f0a42b}.st div:first-child small{color:#8a5a00;font-weight:700}.st div:first-child b{font-size:1.6rem;color:#b45309}:root[data-theme=dark] .st div:first-child{background:#3a2a10;border-color:#c98a1d}:root[data-theme=dark] .st div:first-child small{color:#f3c36b}:root[data-theme=dark] .st div:first-child b{color:#ffb84d}
+.ft{margin-top:6px;font-size:.82rem;color:var(--mut)}
+.ck{width:24px;height:24px;flex:0 0 auto;accent-color:var(--up);cursor:pointer;margin:0}.it.done{background:#e3f4ea;border-color:#9fd3b5;opacity:.75}:root[data-theme=dark] .it.done{background:#16301f;border-color:#2f6b47}.it.done .nm{text-decoration:line-through;text-decoration-thickness:1px}
+.note,.err{color:var(--mut);text-align:center;padding:14px;font-size:.92rem}.err{color:var(--dn)}
+.rp{margin-top:4px;font-size:.82rem;font-weight:700;color:var(--dn)}
+.lv{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:10px;flex-wrap:wrap}
+.lvgo{flex:0 0 auto;border:0;border-radius:10px;background:var(--up);color:#fff;font:inherit;font-weight:700;padding:10px 18px;cursor:pointer}.lvgo:disabled{opacity:.55;cursor:default}
+.lvm{flex:1;min-width:150px;font-size:.85rem;color:var(--mut);line-height:1.6}.lvm .e{color:var(--dn)}
+[hidden]{display:none!important}
+</style></head><body><div class="wrap">
+<div class="top"><h1>متابعة التنزيل</h1><button class="theme" id="theme" type="button"></button></div>
+<div id="lock" hidden><input id="pw" type="password" placeholder="كلمة السر" autocomplete="off"><button class="theme" id="enter" style="width:100%;margin-top:10px;padding:12px">فتح</button></div>
+<div id="view" hidden>
+<div class="lv" id="lv" hidden><button class="lvgo" id="lvgo" type="button">تحديث الآن</button><div class="lvm" id="lvm"></div></div>
+<div class="ctl"><select id="day"></select><input id="q" type="search" placeholder="🔍 موديل أو مورد"></div>
+<div class="sum"><div><small id="dl"></small><br><b id="cnt"></b> <small>موديل</small></div><div><small>مبلغ تنزيلها</small><br><b id="amt"></b> <small id="of"></small></div></div>
+<div class="note" id="rv" style="padding:4px 0 8px"></div><div class="list" id="list"></div><div class="note" id="empty" hidden>لا يوجد في هذا اليوم ما يستدعي المساءلة ✔</div></div>
+<div class="err" id="err"></div></div>
+<script>
+const P = {"salt": "LK5IkS/FfJzVCGx0i1pIbw==", "iter": 600000, "index": "my96ZC7KChcnPwtqZIpKrlif8WvpB1eWWzA93RDRRKXB/LmIuCy7Y2mZ9vBntSdjDnvu8BGGNX1qgAKDnbHUBcU3S3PUYmY6KIYBlQ/gmGY6l1j4U6CWI6uXUGZeu3WHH6Rs/V2qO4KGhw5bn4T6ONxierbB2VZWGEdq0828JrrNnZ+De7zOUF4gkn6SQEMRbpLScabyCb5pxOlIGzx15AGk7olGl1UI3Qb/Ue/fhCge6dFEFGe57r7eV1BRTmxgpDnlrBh6IEXt1i4jiUm6+iQrmH3VnooMiUHxAlplw2f1voyE57sTCBi0JHF2/1EQZewMOLO7V6uOgBTNE+WyMQYC7Y9pK7zto05G270F+XVy57ISyEP4+bVwBR5eJaR4XSjHCTxrRGDe7AsUL05bj5P8ZZ9BSa6F8v3fxwg8WVvoMKk0EovjlZODPaqaW6+pQwPnF3UrQC2xmAuKuTYMi3EUdowEfbp0rR+8cgs0eHghHYMrTzsLMRVdBdcOGkWD1Aiap4hNHxWuoIGyHCBIIfQ2MUYpJhsxp/yIK3enfYRxh0vQuDj/dMn3+ft3nlRTGkPA24FWsZB9ncRksF2FEdxxtyszDuT4x8Xa2Dyy1/STzh1CxjNRDYCglHLoVNJ0WHzbOiJ/3t4cIq1LEWfR0eC+6dAAsyr0kpstjFtaj49pYUwh7DGl9VTgGR1UrtKQa7lEsNb+kxDzyf1gfL5dG6jCwTqoII+Y2t0ZMBv/QDma1XFmypuOtNsJKQFDTTMTf4Z4CrLh63F+lIeNz9p2eSzmjap3QuZOvov2kjG8XXQiIaeFHltyi/KY56sbaNU0XHyq+gchoBlTakNpzmmrhlN0e2R82OTfEOHj5JbjH0lw5grwJw0qACKIX5eab1XPVQKIr6cmqDlfkI3PPj4Uztwb3GwZnhsJq6tqg3qs1fk2hwKrckxwpb2Szn8W"};
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const $ = id => document.getElementById(id), pad = n => String(n).padStart(2, '0');
+const WEEK = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const norm = s => (s || '').toString().toLowerCase().replace(/[\u064B-\u0652]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').trim();
+let key = null, idx = null, rows = [], cache = {};
+const unseal = async data => crypto.subtle.decrypt({name: 'AES-GCM', iv: data.slice(0, 12)}, key, data.slice(12));
+const dayLabel = iso => { const [y, m, d] = iso.split('-').map(Number); return WEEK[new Date(y, m - 1, d).getDay()] + ' ' + pad(d) + '/' + pad(m) + '/' + y; };
+const EMBED = (() => { try { return window.self !== window.top; } catch(_){ return true; } })();  // مضمَّنة كتبويب داخل رابط التحلية
+// ---- تنزيلات اليوم المباشرة (زر التحديث): الصفحة الأم تحمل مفتاح الاستعلام فتتولى الطلب والرد وتمرّره هنا (watch: get | refresh) ----
+const todayIso = () => { const t = new Date(); return t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()); };
+let liveSnap = null, liveBusy = false, liveGate = 0, liveErr = '', liveLoaded = false;
+const isLive = () => $('day').value === 'L';
+let prevSnap = null;  // أمس المؤقت: بين منتصف الليل وتثبيت سحب 8:10 لا يكون له يوم محفوظ بعد
+const isPrev = () => $('day').value === 'P';
+const curDate = () => isLive() ? (liveSnap ? liveSnap.date : todayIso()) : isPrev() ? prevSnap.date : idx.days[+$('day').value].date;
+function setPrev(p){
+  const sel = $('day'), old = sel.querySelector('option[value="P"]');
+  if(!p || !p.rows || (idx && idx.days.some(d => d.date === p.date))){ if(old && !isPrev()) old.remove(); return; }
+  prevSnap = p;
+  const o = old || document.createElement('option'); o.value = 'P'; o.textContent = dayLabel(p.date);
+  if(!old) sel.insertBefore(o, sel.children[1] || null);
+  if(isPrev()){ rows = p.rows; draw(); }
+}
+const toParent = m => { try { window.parent.postMessage(m, '*'); } catch(_){} };
+function liveBar(){
+  $('lv').hidden = !(EMBED && isLive()); if($('lv').hidden) return;
+  const wait = Math.ceil((liveGate - Date.now()) / 1000), go = $('lvgo');
+  go.disabled = liveBusy || wait > 0;
+  go.textContent = liveBusy ? 'جارٍ التحديث…' : wait > 0 ? 'التحديث التالي بعد ' + wait + ' ث' : 'تحديث الآن';
+  const m = $('lvm'); m.textContent = liveSnap ? 'آخر تحديث: ' + liveSnap.at + ' — تنزيلات اليوم حتى هذه اللحظة' : liveLoaded ? 'لم يُجلب شيء لليوم بعد، اضغط تحديث الآن' : 'جارٍ جلب آخر نسخة…';
+  if(liveErr){ const e = document.createElement('div'); e.className = 'e'; e.textContent = liveErr; m.appendChild(e); }
+}
+setInterval(() => { if(liveGate){ liveBar(); if(liveGate <= Date.now()) liveGate = 0; } }, 1000);
+$('lvgo').onclick = () => { if(liveBusy) return; liveBusy = true; liveErr = ''; liveGate = Date.now() + 60000; toParent({watch: 'refresh', since: liveSnap ? liveSnap.taken : 0}); liveBar(); };
+if(EMBED){ document.querySelector('.top').style.display = 'none'; window.addEventListener('message', e => {
+  if(e.source !== window.parent || !e.data) return;
+  if(e.data.theme === 'dark' || e.data.theme === 'light') setTheme(e.data.theme);
+  const w = e.data.watch; if(!w) return;
+  if(w === 'snap'){ liveLoaded = true; liveBusy = false; if(e.data.snap) liveSnap = e.data.snap; if(idx) setPrev((liveSnap && liveSnap.prev) || e.data.ysnap || prevSnap); if(idx && isLive()){ rows = liveSnap ? liveSnap.rows : []; $('dl').textContent = 'تنزيل ' + dayLabel(curDate()); draw(); } }
+  else if(w === 'err'){ liveLoaded = true; liveBusy = false; liveErr = e.data.msg || 'تعذّر التحديث'; }
+  liveBar();
+}); }
+function setTheme(m){ document.documentElement.dataset.theme = m; if(!EMBED){ try{ localStorage.setItem('theme', m); }catch(_){} } $('theme').textContent = m === 'dark' ? '☀️ نهاري' : '🌙 ليلي'; }
+let th = 'light'; try { if(localStorage.getItem('theme') === 'dark') th = 'dark'; } catch(_){}
+setTheme(th); $('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+async function loadDay(i){
+  const d = idx.days[i]; if(cache[d.date]) return cache[d.date];
+  const r = await fetch('f/' + d.f + '?v=' + d.v); if(!r.ok) throw new Error('http');
+  return cache[d.date] = JSON.parse(new TextDecoder().decode(await unseal(new Uint8Array(await r.arrayBuffer()))));
+}
+const isDone = r => { try { return localStorage.getItem('rv|' + curDate() + '|' + r[0] + '|' + r[3]) === '1'; } catch(_){ return false; } };
+function cnt(){
+  const all = document.querySelectorAll('#list .it'), d = document.querySelectorAll('#list .it.done').length; $('rv').textContent = d ? 'تمت مراجعة ' + d + ' من ' + all.length : '';
+  const left = rows.filter(r => !isDone(r));  // المراجَع يُطرح من العدد والمبلغ في الأعلى (طلب 2026-10-30)
+  $('cnt').textContent = left.length; $('amt').textContent = fmt(left.reduce((s, r) => s + r[7], 0));
+}
+function draw(){
+  const q = norm($('q').value), list = $('list'); list.textContent = '';
+  // r = [رمز المورد، اسمه، المجموعة، الموديل، الرصيد الحالي، كمية التنزيل، السعر، المبلغ، مدة الكفاية بالأيام (null = لم يُبع)، المباع في 30 يومًا]
+  const shown = q ? rows.filter(r => norm(r[3]).includes(q) || norm(r[1]).includes(q) || norm(r[2]).includes(q) || r[0].includes(q)) : rows, hit = rows;
+  $('of').textContent = 'ريال';
+  $('empty').hidden = shown.length > 0;
+  shown.forEach((r, i) => {
+    const it = document.createElement('div'); it.className = 'it';
+    it.innerHTML = '<div class="r1"><input class="ck" type="checkbox" title="تمت المراجعة"><span class="rk"></span><span class="nm"></span></div><div class="st"><div><small>كمية التنزيل</small><b></b></div><div><small>الرصيد الحالي</small><b></b></div></div><div class="ft"></div>';
+    it.querySelector('.rk').textContent = i + 1;
+    const ck = it.querySelector('.ck'), kk = 'rv|' + curDate() + '|' + r[0] + '|' + r[3];
+    try { ck.checked = localStorage.getItem(kk) === '1'; } catch(_){}
+    it.classList.toggle('done', ck.checked);
+    ck.onchange = () => { it.classList.toggle('done', ck.checked); try { if(ck.checked) localStorage.setItem(kk, '1'); else localStorage.removeItem(kk); } catch(_){} cnt(); };
+    const nm = it.querySelector('.nm'); nm.textContent = r[3]; const sm = document.createElement('small'); sm.textContent = r[2] + ' — ' + r[1] + ' (' + r[0] + ')'; nm.appendChild(sm);
+    const b = it.querySelectorAll('.st b'); b[0].textContent = fmt(r[5]); b[1].textContent = fmt(r[4]);
+    const before = r[11], ft = it.querySelector('.ft');
+    ft.innerHTML = '<b></b><br><span></span>';
+    ft.querySelector('b').textContent = r[9] == null ? 'الموجود قبل التنزيل ' + fmt(before) : r[8] == null ? 'لم يُبع منه شيء خلال 30 يومًا' : 'الموجود قبل التنزيل ' + fmt(before) + ' يكفي ' + fmt(r[8]) + ' يومًا';
+    ft.querySelector('b').style.color = 'var(--dn)';
+    if(r[12] != null){ const n = document.createElement('div'), k = r[12]; n.className = 'rp';
+      n.textContent = 'تكرّر تنزيله ' + (k <= 0 ? 'ولم يُبع منه شيء' : k === 1 ? 'وبيعت منه قطعة واحدة' : k === 2 ? 'وبيعت منه قطعتان' : 'وبيع منه ' + k + ' قطع') + ' منذ أول تنزيل'; ft.appendChild(n); }
+    ft.querySelector('span').textContent = (r[9] == null ? '' : r[8] == null ? 'الموجود قبل التنزيل ' + fmt(before) + ' — ' : 'بيع منه ' + fmt(r[9]) + ' في 30 يومًا — ') + 'السعر ' + fmt(r[6]) + ' ريال';
+    list.appendChild(it);
+  });
+  cnt();
+}
+async function show(v){
+  $('err').textContent = ''; liveBar();
+  if(v === 'L'){ rows = liveSnap ? liveSnap.rows : []; $('dl').textContent = 'تنزيل ' + dayLabel(curDate()); draw(); return; }
+  if(v === 'P'){ rows = prevSnap.rows; $('dl').textContent = 'تنزيل ' + dayLabel(prevSnap.date); draw(); return; }
+  const i = +v;
+  try { rows = await loadDay(i); } catch(_){ $('err').textContent = 'تعذّر تحميل اليوم، تحقق من الاتصال'; return; }
+  $('dl').textContent = 'تنزيل ' + dayLabel(idx.days[i].date); draw();
+}
+async function enter(pw){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const k = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(P.salt), iterations: P.iter, hash: 'SHA-256'}, km, {name: 'AES-GCM', length: 256}, false, ['decrypt']);
+  const prev = key; key = k;
+  try { idx = JSON.parse(new TextDecoder().decode(await unseal(b64(P.index)))); } catch(e){ key = prev; throw e; }
+  if(!EMBED){ try { localStorage.setItem('mk', pw); } catch(_){} }
+  $('lock').hidden = true; $('view').hidden = false; $('err').textContent = '';
+  const sel = $('day'); idx.days.forEach((d, i) => { const o = document.createElement('option'); o.value = i; o.textContent = dayLabel(d.date); sel.appendChild(o); });
+  sel.onchange = () => show(sel.value); $('q').oninput = draw;
+  if(EMBED){ const o = document.createElement('option'); o.value = 'L'; o.textContent = 'اليوم (مباشر)'; sel.insertBefore(o, sel.firstChild); sel.value = 'L'; toParent({watch: 'get'}); }
+  show(EMBED ? 'L' : 0);
+}
+async function tryKey(pw, silent){
+  try { await enter(pw); return true; }
+  catch(_){ if(silent){ try{ localStorage.removeItem('mk'); }catch(_){} } else $('err').textContent = 'كلمة السر غير صحيحة'; $('lock').hidden = false; return false; }
+}
+$('enter').onclick = () => tryKey($('pw').value.trim(), false);
+$('pw').addEventListener('keydown', e => { if(e.key === 'Enter') tryKey(e.target.value.trim(), false); });
+(async () => {
+  let pw = ''; try { pw = decodeURIComponent(location.hash.slice(1)); } catch(_){}
+  if(!pw){ try { pw = localStorage.getItem('mk') || ''; } catch(_){} }
+  if(pw && await tryKey(pw, true)) return;
+  $('lock').hidden = false;
+})();
+const BUILD = +document.querySelector('meta[name=build]').content; let lastCheck = 0;
+async function checkUpdate(){
+  if(Date.now() - lastCheck < 60000) return; lastCheck = Date.now();
+  try { const r = await fetch(location.pathname + '?v=' + Date.now(), {cache: 'no-store'});
+    const m = (await r.text()).match(/name="build" content="([0-9]+)"/);
+    if(m && +m[1] > BUILD) location.replace(location.pathname + '?v=' + m[1] + location.hash); } catch(_){}
+}
+document.addEventListener('visibilitychange', () => { if(!document.hidden) checkUpdate(); });
+checkUpdate();
+</script></body></html>
