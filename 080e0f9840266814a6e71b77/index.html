@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="build" content="20261129000505">
+<meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="icon" type="image/png" href="../icon-192.png">
+<title>متابعة التنزيل</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1f2937;--mut:#6b7280;--pri:#1e3a5f;--line:#e2e8f2;--up:#2f7d5c;--dn:#b91c1c;--warn:#fff1e6;}
+:root[data-theme=dark]{--bg:#10151d;--card:#18202c;--ink:#e5e9f0;--mut:#9aa6b8;--pri:#7fb0ff;--line:#2a3547;--up:#52b58c;--dn:#f08585;--warn:#2b2018;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif;}
+.wrap{max-width:640px;margin:0 auto;padding:12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+h1{font-size:1.2rem;margin:0;color:var(--pri)}
+.theme{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer}
+input,select{width:100%;font:inherit;font-size:1rem;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.ctl{display:flex;gap:8px;margin-bottom:10px}.ctl select{flex:0 0 46%}
+@media(max-width:420px){.ctl{flex-direction:column}.ctl select{flex:none}}
+.how{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;line-height:1.8;font-size:.92rem;color:var(--mut)}.how b{color:var(--pri)}
+.thr{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap;font-size:.85rem;color:var(--mut)}.thr button{border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;padding:6px 14px;border-radius:999px;cursor:pointer}.thr button.on{background:var(--pri);color:var(--bg);border-color:var(--pri)}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sum b{font-size:1.5rem;color:var(--pri)}.sum small{color:var(--mut)}
+.list{display:flex;flex-direction:column;gap:6px}
+.it{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.r1{display:flex;align-items:center;gap:10px}
+.rk{color:var(--mut);font-size:.8rem;min-width:1.7em;text-align:center}
+.nm{flex:1;font-weight:600;line-height:1.35}.nm small{display:block;color:var(--mut);font-weight:400;font-size:.78rem}
+.pc{font-weight:700;white-space:nowrap;color:var(--dn)}
+.shb{display:block;margin-top:8px;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:inherit;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}
+.rt{margin-top:4px;font-size:.8rem;font-weight:700;color:#15803d}:root[data-theme=dark] .rt{color:#86efac}
+.iv{margin-top:4px;font-size:.8rem;font-weight:700;color:#b45309}:root[data-theme=dark] .iv{color:#fbbf24}
+.setb{display:block;margin-top:2px;font-size:.68rem;font-weight:700;color:#6d28d9}:root[data-theme=dark] .setb{color:#c4b5fd}
+.st{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:8px}.st div{background:var(--bg);border-radius:8px;padding:5px 8px}.st small{display:block;color:var(--mut);font-size:.72rem}.st b{font-size:1.3rem}
+.st div:first-child{background:#fff1d6;border:2px solid #f0a42b}.st div:first-child small{color:#8a5a00;font-weight:700}.st div:first-child b{font-size:1.6rem;color:#b45309}:root[data-theme=dark] .st div:first-child{background:#3a2a10;border-color:#c98a1d}:root[data-theme=dark] .st div:first-child small{color:#f3c36b}:root[data-theme=dark] .st div:first-child b{color:#ffb84d}
+.ft{margin-top:6px;font-size:.82rem;color:var(--mut)}
+.ck{width:24px;height:24px;flex:0 0 auto;accent-color:var(--up);cursor:pointer;margin:0}.it.done{background:#e3f4ea;border-color:#9fd3b5;opacity:.75}:root[data-theme=dark] .it.done{background:#16301f;border-color:#2f6b47}.it.done .nm{text-decoration:line-through;text-decoration-thickness:1px}
+.note,.err{color:var(--mut);text-align:center;padding:14px;font-size:.92rem}.err{color:var(--dn)}
+.rp{margin-top:4px;font-size:.82rem;font-weight:700;color:var(--dn)}
+.lv{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:10px;flex-wrap:wrap}
+.lvgo{flex:0 0 auto;border:0;border-radius:10px;background:var(--up);color:#fff;font:inherit;font-weight:700;padding:10px 18px;cursor:pointer}.lvgo:disabled{opacity:.55;cursor:default}
+.lvm{flex:1;min-width:150px;font-size:.85rem;color:var(--mut);line-height:1.6}.lvm .e{color:var(--dn)}
+.sp{margin-top:8px;padding:8px 10px;border-radius:10px;background:var(--bg);font-size:.86rem;line-height:1.7}.sp b{display:block;font-size:.92rem}.sp .d{color:var(--mut);font-size:.8rem}.sp.r b{color:var(--dn)}.sp.y b{color:#b45309}.sp.g b{color:#15803d}.sp.n b{color:var(--mut)}:root[data-theme=dark] .sp.y b{color:#fbbf24}:root[data-theme=dark] .sp.g b{color:#4ade80}
+[hidden]{display:none!important}
+</style></head><body><style>.brand{display:block;margin:10px auto 2px;height:40px;width:auto}@media (display-mode:standalone){.brand{margin-top:calc(env(safe-area-inset-top) + 30px)}}</style><img class="brand" src="../logo-s.png?v=2" alt="الهرم" width="110" height="40" decoding="async" onerror="this.remove()"><script>if(window.parent!==window)document.querySelector(".brand").remove()</script><div class="wrap">
+<div class="top"><h1>متابعة التنزيل</h1><button class="theme" id="theme" type="button"></button></div>
+<div id="lock" hidden><input id="pw" type="password" placeholder="كلمة السر" autocomplete="off"><button class="theme" id="enter" style="width:100%;margin-top:10px;padding:12px">فتح</button></div>
+<div id="view" hidden>
+<div class="lv" id="lv" hidden><button class="lvgo" id="lvgo" type="button">تحديث الآن</button><div class="lvm" id="lvm"></div></div>
+<div class="ctl"><select id="day"></select><input id="q" type="search" placeholder="🔍 موديل أو مورد"></div>
+<div class="sum"><div><small id="dl"></small><br><b id="cnt"></b> <small>موديل</small></div><div><small>مبلغ تنزيلها</small><br><b id="amt"></b> <small id="of"></small></div></div>
+<div class="note" id="rv" style="padding:4px 0 8px"></div><div class="list" id="list"></div><div class="note" id="empty" hidden>لا يوجد في هذا اليوم ما يستدعي المساءلة ✔</div></div>
+<div class="err" id="err"></div></div>
+<script>
+const P = {"salt": "LK5IkS/FfJzVCGx0i1pIbw==", "iter": 600000, "index": "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"};
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const $ = id => document.getElementById(id), pad = n => String(n).padStart(2, '0');
+const WEEK = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const norm = s => (s || '').toString().toLowerCase().replace(/[\u064B-\u0652]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').trim();
+let key = null, idx = null, rows = [], cache = {};
+const unseal = async data => crypto.subtle.decrypt({name: 'AES-GCM', iv: data.slice(0, 12)}, key, data.slice(12));
+const dayLabel = iso => { const [y, m, d] = iso.split('-').map(Number); return WEEK[new Date(y, m - 1, d).getDay()] + ' ' + pad(d) + '/' + pad(m) + '/' + y; };
+const EMBED = (() => { try { return window.self !== window.top; } catch(_){ return true; } })();  // مضمَّنة كتبويب داخل رابط التحلية
+// ---- تنزيلات اليوم المباشرة (زر التحديث): الصفحة الأم تحمل مفتاح الاستعلام فتتولى الطلب والرد وتمرّره هنا (watch: get | refresh) ----
+const todayIso = () => { const t = new Date(); return t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()); };
+let liveSnap = null, liveBusy = false, liveGate = 0, liveErr = '', liveLoaded = false;
+const isLive = () => $('day').value === 'L';
+let prevSnap = null;  // أمس المؤقت: بين منتصف الليل وتثبيت سحب 8:10 لا يكون له يوم محفوظ بعد
+const isPrev = () => $('day').value === 'P';
+const curDate = () => isLive() ? (liveSnap ? liveSnap.date : todayIso()) : isPrev() ? prevSnap.date : idx.days[+$('day').value].date;
+function setPrev(p){
+  const sel = $('day'), old = sel.querySelector('option[value="P"]');
+  if(!p || !p.rows || (idx && idx.days.some(d => d.date === p.date))){ if(old && !isPrev()) old.remove(); return; }
+  prevSnap = p;
+  const o = old || document.createElement('option'); o.value = 'P'; o.textContent = dayLabel(p.date);
+  if(!old) sel.insertBefore(o, sel.children[1] || null);
+  if(isPrev()){ rows = p.rows; draw(); }
+}
+const toParent = m => { try { window.parent.postMessage(m, '*'); } catch(_){} };
+function liveBar(){
+  $('lv').hidden = !(EMBED && isLive()); if($('lv').hidden) return;
+  const wait = Math.ceil((liveGate - Date.now()) / 1000), go = $('lvgo');
+  go.disabled = liveBusy || wait > 0;
+  go.textContent = liveBusy ? 'جارٍ التحديث…' : wait > 0 ? 'التحديث التالي بعد ' + wait + ' ث' : 'تحديث الآن';
+  const m = $('lvm'); m.textContent = liveSnap ? 'آخر تحديث: ' + liveSnap.at + ' — تنزيلات اليوم حتى هذه اللحظة' : liveLoaded ? 'لم يُجلب شيء لليوم بعد، اضغط تحديث الآن' : 'جارٍ جلب آخر نسخة…';
+  if(liveErr){ const e = document.createElement('div'); e.className = 'e'; e.textContent = liveErr; m.appendChild(e); }
+}
+setInterval(() => { if(liveGate){ liveBar(); if(liveGate <= Date.now()) liveGate = 0; } }, 1000);
+$('lvgo').onclick = () => { if(liveBusy) return; liveBusy = true; liveErr = ''; liveGate = Date.now() + 60000; toParent({watch: 'refresh', since: liveSnap ? liveSnap.taken : 0}); liveBar(); };
+if(EMBED){ document.querySelector('.top').style.display = 'none'; window.addEventListener('message', e => {
+  if(e.source !== window.parent || !e.data) return;
+  if(e.data.theme === 'dark' || e.data.theme === 'light') setTheme(e.data.theme);
+  if('inv' in e.data && INVOK !== !!e.data.inv){ INVOK = !!e.data.inv; if(idx) draw(); }
+  const w = e.data.watch; if(!w) return;
+  if(w === 'snap'){ liveLoaded = true; liveBusy = false; if(e.data.snap) liveSnap = e.data.snap; if(idx) setPrev((liveSnap && liveSnap.prev) || e.data.ysnap || prevSnap); if(idx && isLive()){ rows = liveSnap ? liveSnap.rows : []; $('dl').textContent = 'تنزيل ' + dayLabel(curDate()); draw(); } }
+  else if(w === 'err'){ liveLoaded = true; liveBusy = false; liveErr = e.data.msg || 'تعذّر التحديث'; }
+  liveBar();
+}); }
+function setTheme(m){ document.documentElement.dataset.theme = m; if(!EMBED){ try{ localStorage.setItem('theme', m); }catch(_){} } $('theme').textContent = m === 'dark' ? '☀️ نهاري' : '🌙 ليلي'; }
+let th = 'light'; try { if(localStorage.getItem('theme') === 'dark') th = 'dark'; } catch(_){}
+setTheme(th); $('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+async function loadDay(i){
+  const d = idx.days[i]; if(cache[d.date]) return cache[d.date];
+  const r = await fetch('f/' + d.f + '?v=' + d.v); if(!r.ok) throw new Error('http');
+  return cache[d.date] = JSON.parse(new TextDecoder().decode(await unseal(new Uint8Array(await r.arrayBuffer()))));
+}
+// أُرجع كامل التنزيل (أو أكثر) للمستودع = عولج تلقائيًا: أخضر، في الأسفل، ولا يُحسب في العدد والمبلغ (2026-11-19)
+async function shareRow(r, btn){
+  const d = curDate(), t = ['*' + r[3] + '*', r[2] || '—', fmt(r[6]) + ' ريال', r[0] + ' ' + r[1],  // صيغة المستخدم (2026-11-19)
+    d.slice(8, 10) + '/' + d.slice(5, 7) + '/' + d.slice(0, 4), 'التنزيل: ' + fmt(r[5]), 'الرصيد: ' + fmt(r[4])].join(String.fromCharCode(10));
+  const old = btn.textContent; let copied = false;
+  try { await navigator.clipboard.writeText(t); copied = true; } catch(_){}
+  if(navigator.share){ try { await navigator.share({text: t}); return; } catch(x){ if(x.name === 'AbortError') return; } }
+  if(copied){ btn.textContent = '✓ نُسخ النص'; setTimeout(() => btn.textContent = old, 2000); } else alert(t);
+}
+const retDone = r => (r[15] || 0) > 0 && r[15] >= r[5];
+const isDone = r => { if(retDone(r)) return true; try { return localStorage.getItem('rv|' + curDate() + '|' + r[0] + '|' + r[3]) === '1'; } catch(_){ return false; } };
+function cnt(){
+  const all = document.querySelectorAll('#list .it'), d = document.querySelectorAll('#list .it.done').length; $('rv').textContent = d ? 'تمت مراجعة ' + d + ' من ' + all.length : '';
+  const left = rows.filter(r => !isDone(r));  // المراجَع يُطرح من العدد والمبلغ في الأعلى (طلب 2026-10-30)
+  $('cnt').textContent = left.length; $('amt').textContent = fmt(left.reduce((s, r) => s + r[7], 0));
+}
+// «🧾 عليه خصم يدوي» (2026-11-20): الموديل مسجل في صفحة «خصومات يدوية» — بصمات (SHA-256) لا أسماء
+let INVH = null, INVOK = false; const INVK = new Set(), INVS = new WeakSet();  // INVOK: الرابط الأم فيه تبويب «خصومات يدوية»
+const invKey = r => String(r[0]).replace(/[^0-9]/g, '').padStart(4, '0') + '|' + String(r[3]).split(' ').join('').toUpperCase();
+async function invLoad(){ if(!idx || !idx.inv) return; try { const r = await fetch(idx.inv + '?v=' + Date.now(), {cache: 'no-store'}); if(r.ok){ INVH = new Set(await r.json()); draw(); } } catch(_){} }
+async function invScan(rs){
+  if(!INVH || !rs || INVS.has(rs)) return; INVS.add(rs); let hit = false;
+  for(const r of rs){ const k = invKey(r); if(INVK.has(k)) continue;
+    const h = [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode('alharam-inv|' + k)))].map(x => x.toString(16).padStart(2, '0')).join('').slice(0, 20);
+    if(INVH.has(h)){ INVK.add(k); hit = true; } }
+  if(hit) draw();
+}
+// «قوة البيع» (تجربة 2026-11-16): مبيعات الفرع من الفحص اليومي المحفوظ (حتى أمس) — بلا أي استعلام
+const mvKey = (s, m) => String(s).replace(/[^0-9]/g, '').padStart(4, '0') + '|' + String(m).split(' ').join('').toUpperCase();
+const ddmm = iso => iso.slice(8, 10) + '/' + iso.slice(5, 7);
+const rateTxt = x => { if(x >= 1) return (x < 10 ? String(Math.round(x * 10) / 10) : fmt(x)) + ' قطعة يوميًا';
+  const n = Math.round(1 / x); return n <= 1 ? 'قطعة يوميًا تقريبًا' : n === 2 ? 'قطعة كل يومين' : 'قطعة كل ' + n + (n <= 10 ? ' أيام' : ' يومًا'); };
+function spLine(ft, r){
+  const M = idx && idx.mv; if(!M) return; const v = M.m[mvKey(r[0], r[3])]; if(!v) return;
+  const daily = v[0], net = v[1], wd = v[2], rate = wd > 0 ? net / wd : 0, bal = r[4];
+  const box = document.createElement('div'), add = (t, c) => { const e = document.createElement(c ? 'div' : 'b'); if(c) e.className = c; e.textContent = t; box.appendChild(e); };
+  let c = 'n';
+  if(wd < 3 || (net <= 0 && wd < 7)) add('⚪ قوة البيع: جديد في الفرع (' + wd + ' يوم) — لا يكفي للحكم');
+  else if(net <= 0){ c = 'r'; add('🔴 قوة البيع: لم يُبع منه شيء في آخر ' + wd + ' يومًا'); }
+  else { const cover = bal / rate; c = cover >= 30 ? 'r' : cover >= 14 ? 'y' : 'g';
+    add((c === 'r' ? '🔴 الرصيد كثير' : c === 'y' ? '🟡 متوسط' : '🟢 جيد') + ' — يُباع منه ' + rateTxt(rate) + ' (آخر ' + wd + ' يومًا)');
+    add('الرصيد الحالي ' + fmt(bal) + ' يكفي ~' + fmt(Math.max(1, cover)) + ' يومًا بهذا البيع', 'x'); }
+  if(daily.length){ const n = daily.length, tot = daily.reduce((t, x) => t + x[1], 0);
+    const pc = k => k === 1 ? 'قطعة' : k === 2 ? 'قطعتان' : k >= 3 && k <= 10 ? fmt(k) + ' قطع' : fmt(k) + ' قطعة';
+    add('مبيعات ' + (n === 1 ? 'آخر يوم' : n === 2 ? 'آخر يومين' : 'آخر ' + n + ' أيام') + ': ' + (tot ? pc(tot) : 'لا شيء') + ' — ' + daily.map(x => { const [y, m, d] = x[0].split('-').map(Number); return WEEK[new Date(y, m - 1, d).getDay()] + ' ' + x[1]; }).join('، '), 'd'); }  // أسماء الأيام: بلا تداخل التواريخ مع الاتجاه
+  box.className = 'sp ' + c; ft.appendChild(box);
+}
+function draw(){
+  invScan(rows);
+  const q = norm($('q').value), list = $('list'); list.textContent = '';
+  // r = [رمز المورد، اسمه، المجموعة، الموديل، الرصيد الحالي، كمية التنزيل، السعر، المبلغ، مدة الكفاية بالأيام (null = لم يُبع)، المباع في 30 يومًا]
+  const shown = (q ? rows.filter(r => norm(r[3]).includes(q) || norm(r[1]).includes(q) || norm(r[2]).includes(q) || r[0].includes(q)) : rows.slice())
+    .sort((x, y) => (retDone(x) - retDone(y)) || (y[6] || 0) - (x[6] || 0)), hit = rows;  // الأعلى سعرًا أولًا (طلب 2026-11-15)؛ التساوي يبقى بالترتيب السابق
+  $('of').textContent = 'ريال';
+  $('empty').hidden = shown.length > 0;
+  shown.forEach((r, i) => {
+    const it = document.createElement('div'); it.className = 'it';
+    it.innerHTML = '<div class="r1"><input class="ck" type="checkbox" title="تمت المراجعة"><span class="rk"></span><span class="nm"></span></div><div class="st"><div><small>كمية التنزيل</small><b></b></div><div><small>الرصيد الحالي</small><b></b></div></div><div class="ft"></div>';
+    it.querySelector('.rk').textContent = i + 1;
+    const ck = it.querySelector('.ck'), kk = 'rv|' + curDate() + '|' + r[0] + '|' + r[3];
+    try { ck.checked = localStorage.getItem(kk) === '1'; } catch(_){}
+    if(retDone(r)){ ck.checked = true; ck.disabled = true; ck.title = 'عولج: أُرجع للمستودع'; }
+    it.classList.toggle('done', ck.checked);
+    ck.onchange = () => { it.classList.toggle('done', ck.checked); try { if(ck.checked) localStorage.setItem(kk, '1'); else localStorage.removeItem(kk); } catch(_){} cnt(); };
+    const nm = it.querySelector('.nm'); nm.textContent = r[3]; const sm = document.createElement('small'); sm.textContent = r[2] + ' — ' + r[1] + ' (' + r[0] + ')'; nm.appendChild(sm);
+    const b = it.querySelectorAll('.st b'); b[0].textContent = fmt(r[5]); b[1].textContent = fmt(r[4]);
+    const before = r[11], ft = it.querySelector('.ft');
+    ft.innerHTML = '<b></b><br><span></span>';
+    ft.querySelector('b').textContent = r[9] == null ? 'الموجود قبل التنزيل ' + fmt(before) : r[8] == null ? 'لم يُبع منه شيء خلال 30 يومًا' : 'الموجود قبل التنزيل ' + fmt(before) + ' يكفي ' + fmt(r[8]) + ' يومًا';
+    ft.querySelector('b').style.color = 'var(--dn)';
+    if(r[12] != null){ const n = document.createElement('div'), k = r[12]; n.className = 'rp';
+      n.textContent = 'تكرّر تنزيله ' + (r[13] ? (k <= 0 ? 'ولا يظهر أنه بيع منه شيء' : k === 1 ? 'وبيعت منه قطعة على الأقل' : k === 2 ? 'وبيعت منه قطعتان على الأقل' : 'وبيع منه ' + k + ' قطع على الأقل')
+        : (k <= 0 ? 'ولم يُبع منه شيء' : k === 1 ? 'وبيعت منه قطعة واحدة' : k === 2 ? 'وبيعت منه قطعتان' : 'وبيع منه ' + k + ' قطع')) + ' منذ أول تنزيل'; ft.appendChild(n); }  // «على الأقل» 2026-11-15
+    if(r[15] > 0){ const n = document.createElement('div'); n.className = 'rt';
+      n.textContent = (retDone(r) ? '✅ عولج: أُرجع ' + fmt(r[15]) + ' حبة للمستودع' : '↩️ أُرجع منه ' + fmt(r[15]) + ' من ' + fmt(r[5]) + ' حبة للمستودع') + (r[16] ? ' (' + r[16].slice(8, 10) + '/' + r[16].slice(5, 7) + ')' : ''); ft.appendChild(n); }
+    if(INVK.has(invKey(r))){ const n = document.createElement('div'); n.className = 'iv'; n.textContent = '🧾 عليه خصم يدوي (فرق فاتورة): حوّله لصفحة «خصومات يدوية»' + (INVOK ? ' — اضغط لفتح بطاقته' : '');
+      if(INVOK){ n.style.cursor = 'pointer'; n.style.textDecoration = 'underline'; n.onclick = ev => { ev.stopPropagation(); toParent({invOpen: {sup: invKey(r).split('|')[0], model: invKey(r).split('|')[1]}}); }; }
+      ft.appendChild(n); }
+    if(r[14]){ const n = document.createElement('div'); n.className = 'rp'; n.textContent = '🔗 للموديل أكثر من رمز في الفرع: الرصيد والموجود قبل التنزيل مجموع رموزه'; ft.appendChild(n); }  // 2026-11-19
+    if(idx && idx.sets && idx.sets.includes(String(r[0]).replace(/[^0-9]/g, '').padStart(4, '0') + '|' + String(r[3]).split(' ').join('').toUpperCase())){
+      const n = document.createElement('span'); n.className = 'setb'; n.textContent = '🧺 يُباع بالطقم · الرصيد بالحبة'; b[1].parentNode.appendChild(n); }  // داخل صندوق الرصيد (2026-11-18)
+    ft.querySelector('span').textContent = (r[9] == null ? '' : r[8] == null ? 'الموجود قبل التنزيل ' + fmt(before) + ' — ' : 'بيع منه ' + fmt(r[9]) + ' في 30 يومًا — ') + 'السعر ' + fmt(r[6]) + ' ريال';
+    const sh = document.createElement('button'); sh.type = 'button'; sh.className = 'shb'; sh.textContent = '📤 مشاركة';  // طلب 2026-11-19: المسؤول يرسله لعماله
+    sh.onclick = ev => { ev.stopPropagation(); shareRow(r, sh); }; ft.appendChild(sh);
+    spLine(ft, r);
+    list.appendChild(it);
+  });
+  cnt();
+}
+async function show(v){
+  $('err').textContent = ''; liveBar();
+  if(v === 'L'){ rows = liveSnap ? liveSnap.rows : []; $('dl').textContent = 'تنزيل ' + dayLabel(curDate()); draw(); return; }
+  if(v === 'P'){ rows = prevSnap.rows; $('dl').textContent = 'تنزيل ' + dayLabel(prevSnap.date); draw(); return; }
+  const i = +v;
+  try { rows = await loadDay(i); } catch(_){ $('err').textContent = 'تعذّر تحميل اليوم، تحقق من الاتصال'; return; }
+  $('dl').textContent = 'تنزيل ' + dayLabel(idx.days[i].date); draw();
+}
+async function enter(pw){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const k = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(P.salt), iterations: P.iter, hash: 'SHA-256'}, km, {name: 'AES-GCM', length: 256}, false, ['decrypt']);
+  const prev = key; key = k;
+  try { idx = JSON.parse(new TextDecoder().decode(await unseal(b64(P.index)))); } catch(e){ key = prev; throw e; }
+  if(!EMBED){ try { localStorage.setItem('mk', pw); } catch(_){} }
+  $('lock').hidden = true; $('view').hidden = false; $('err').textContent = '';
+  const sel = $('day'); idx.days.forEach((d, i) => { const o = document.createElement('option'); o.value = i; o.textContent = dayLabel(d.date); sel.appendChild(o); });
+  sel.onchange = () => show(sel.value); $('q').oninput = draw;
+  if(EMBED){ const o = document.createElement('option'); o.value = 'L'; o.textContent = 'اليوم (مباشر) — ' + dayLabel(todayIso()); sel.insertBefore(o, sel.firstChild); sel.value = 'L'; toParent({watch: 'get'}); }
+  show(EMBED ? 'L' : 0); invLoad();
+}
+async function tryKey(pw, silent){
+  try { await enter(pw); return true; }
+  catch(_){ if(silent){ try{ localStorage.removeItem('mk'); }catch(_){} } else $('err').textContent = 'كلمة السر غير صحيحة'; $('lock').hidden = false; return false; }
+}
+$('enter').onclick = () => tryKey($('pw').value.trim(), false);
+$('pw').addEventListener('keydown', e => { if(e.key === 'Enter') tryKey(e.target.value.trim(), false); });
+(async () => {
+  let pw = ''; try { pw = decodeURIComponent(location.hash.slice(1)); } catch(_){}
+  if(!pw){ try { pw = localStorage.getItem('mk') || ''; } catch(_){} }
+  if(pw && await tryKey(pw, true)) return;
+  $('lock').hidden = false;
+})();
+const BUILD = +document.querySelector('meta[name=build]').content; let lastCheck = 0;
+async function checkUpdate(){
+  if(Date.now() - lastCheck < 60000) return; lastCheck = Date.now();
+  try { const r = await fetch(location.pathname + '?v=' + Date.now(), {cache: 'no-store'});
+    const m = (await r.text()).match(/name="build" content="([0-9]+)"/);
+    if(m && +m[1] > BUILD) location.replace(location.pathname + '?v=' + m[1] + location.hash); } catch(_){}
+}
+document.addEventListener('visibilitychange', () => { if(!document.hidden) checkUpdate(); });
+checkUpdate();
+</script></body></html>

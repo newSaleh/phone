@@ -1,0 +1,1551 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))document.querySelector('meta[name=viewport]').content='width=device-width, initial-scale=1, maximum-scale=1';</script>
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="build" content="20261129000505">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="يومية"><meta name="application-name" content="يومية">
+<meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#ffffff">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="icon" type="image/png" href="../icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>يومية</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1f2937;--mut:#6b7280;--pri:#1e3a5f;--onpri:#fff;--line:#d7deea;--sred:#b94a4a;--grn:#2f7d5c;--ongrn:#fff;}
+:root[data-theme=dark]{--bg:#10151d;--card:#18202c;--ink:#e5e9f0;--mut:#9aa6b8;--pri:#7fb0ff;--onpri:#10151d;--line:#2a3547;--sred:#e08a8a;--grn:#52b58c;--ongrn:#0f1d17;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif;}
+.wrap{max-width:720px;margin:0 auto;padding:16px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;}
+h1{font-size:1.15rem;margin:0;color:var(--pri);}
+input,select{width:100%;font:inherit;font-size:1.05rem;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);}
+input{direction:ltr;text-align:center;}
+button{font:inherit;cursor:pointer;}
+.go{width:100%;margin-top:10px;padding:12px;border:0;border-radius:10px;background:var(--pri);color:var(--onpri);font-size:1.05rem;}
+.go:active{transform:scale(.98);filter:brightness(.85)}
+.go:disabled{cursor:default}
+.go.busy{background:var(--mut);color:var(--bg)}
+.go.wait{background:var(--line);color:var(--mut);box-shadow:none}
+#iask:not(.busy){background:var(--grn);color:var(--ongrn)}  /* زر البحث أخضر هادئ (طلب 2026-10-12)؛ أثناء البحث يعود رماديًا .busy */
+.go.busy::before{content:'';display:inline-block;width:.9em;height:.9em;margin-inline-end:.55em;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:sp 1s linear infinite;vertical-align:-.1em}
+@keyframes sp{to{transform:rotate(360deg)}}
+.iuse-warn{color:#b45309;font-weight:700}
+.prc{margin:4px 0 8px}.prc .pbtn{padding:6px 12px;border:1px solid var(--pri);border-radius:8px;background:var(--card);color:var(--pri);font:inherit;font-size:.88rem;cursor:pointer}
+.prc .pbtn:disabled{opacity:.6;cursor:default}.prc .pnote{font-size:.78rem;margin-top:3px}.prc .pv{font-weight:700;font-size:.95rem}
+.spd{margin:6px 0 8px;padding:7px 10px;border-radius:8px;font-weight:700;font-size:.95rem;border:1px solid var(--line,#ddd)}
+.spd.g{color:#15803d;background:rgba(22,163,74,.08)} .spd.y{color:#b45309;background:rgba(217,119,6,.08)} .spd.r{color:#b91c1c;background:rgba(220,38,38,.08)} .spd.n{color:var(--mut)}
+.hist{margin-top:12px}
+.hchip{display:inline-block;padding:6px 12px;margin:6px 0 0 6px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font-size:.9rem}
+.hchip small{color:var(--mut);margin-inline-start:6px}
+.hchip:active{background:var(--pri);color:var(--onpri)}
+.hhead{border:0;background:transparent;color:var(--mut);font-size:.92rem;padding:4px 0}
+.hclear{margin-top:6px;border:0;background:transparent;color:var(--mut);font-size:.85rem;text-decoration:underline}
+.rnum{padding:2px 10px;border:1px dashed var(--pri);border-radius:999px;background:transparent;color:var(--pri);font:inherit;font-weight:700}
+.rnum:active{background:var(--pri);color:var(--onpri)}
+.pop{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:10}
+.pop>div{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:16px 22px;min-width:240px;max-width:92vw;text-align:center}
+.pop .pt{font-weight:700;color:var(--pri);margin-bottom:8px}
+.pop .pl{direction:ltr;font-size:1.25rem;padding:3px 0}
+.pop .ptot{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;font-weight:700}
+.pop .pfirst{margin-top:6px;direction:rtl}
+.pop .px{margin-top:12px}
+.rankln{margin:0 0 10px;font-weight:500;color:var(--sred);text-align:center}
+.rankln b{font-weight:800}
+.infoln{margin:2px 0 8px;line-height:1.7}
+.iname{font-weight:700}
+.iprice{color:var(--mut)}
+.rbtn{padding:3px 10px;border:1px solid var(--pri);border-radius:8px;background:transparent;color:var(--pri);font-size:.85rem}
+.rbtn:disabled{opacity:.5}
+.rbtn:active{background:var(--pri);color:var(--onpri)}
+.dbtn{padding:3px 10px;border:1px solid var(--pri);border-radius:8px;background:transparent;color:var(--pri);font-size:.85rem}
+.dbtn:disabled{opacity:.5}
+.dbtn.on{background:var(--pri);color:var(--onpri);font-weight:700}
+.tbl tr.act td{background:var(--bg)}
+.tbl tr.tin td{background:rgba(60,170,100,.18)}
+.tbl tr.tout td{background:rgba(220,80,80,.16)}
+.tbl tr.tcnt td{background:rgba(235,190,40,.24)}  /* تلوين صفوف الكشف: تنزيل أخضر، رفع أحمر، جرد أصفر (طلب 2026-10-12) */
+.cand{display:block;width:100%;margin-top:8px;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-size:1rem}
+.cand:active{background:var(--pri);color:var(--onpri)}
+.err{color:#b91c1c;margin-top:8px;min-height:1.2em;font-size:.95rem;}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;}
+.theme{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-size:.9rem;white-space:nowrap;}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px;}
+.tab{flex:1 1 30%;padding:10px 6px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-size:1rem;}
+/* شاشة الكمبيوتر (2026-11-18): عرض أوسع وأزرار في صف واحد؛ الجوال كما هو تمامًا */
+@media (min-width:1100px){
+  .wrap{max-width:1240px;padding:20px 28px}
+  .card{padding:20px 24px}
+  .tabs{gap:6px}
+  .tab{flex:1 1 auto;padding:9px 14px;font-size:.92rem;white-space:nowrap;text-align:center}
+  pre{font-size:1.05rem;column-width:520px;column-gap:40px}
+}
+.tab[aria-pressed=true]{background:var(--pri);color:var(--onpri);border-color:var(--pri);}
+.subtabs{margin:-6px 0 12px;padding:8px;border:1px dashed var(--line);border-radius:12px}.subtabs .tab{flex:1 1 18%;padding:7px 4px;font-size:.9rem}
+.grow2{display:flex;gap:8px;margin-top:8px}.grow2 label{flex:1}.gchk{display:block;margin-top:10px}.gchk input{width:auto;margin-left:6px;vertical-align:middle}#gsup{margin-top:6px}
+.gttl{margin-top:12px}.gh{font-size:1rem;margin:16px 0 4px}.gtot td{font-weight:bold}details.gbr{margin-top:8px;border:1px solid var(--line);border-radius:10px;padding:6px 10px}details.gbr summary{cursor:pointer;font-weight:bold}
+.gv{text-align:center;font-weight:bold;font-size:.9rem;line-height:1.4}.gup{color:#1f8a4c;background:#eaf7ef}.gdn{color:#c0392b;background:#fdeeee}.gok{color:var(--mut);font-size:.82rem;font-weight:normal}.gam{white-space:nowrap;font-size:1rem}.gtgt{display:block;margin:6px 0}.gtgt input{margin-top:4px;font-size:1.05rem}.gv .gpc{font-weight:bold;color:inherit;opacity:.85;direction:ltr}
+:root[data-theme=dark] .gup{color:#6fd39b;background:#15301f}:root[data-theme=dark] .gdn{color:#f0908a;background:#3a1d1d}
+.dupm{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-4px 0 10px}.dupm .note{width:100%}
+.gsug{max-height:280px;overflow:auto;border:1px solid var(--line);border-radius:10px;margin-top:4px;background:var(--card)}.gsug button{display:block;width:100%;text-align:right;padding:10px 12px;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);font-size:.98rem}.gsug button:last-child{border-bottom:0}.gsug button:active{background:var(--pri);color:var(--onpri)}.gsug .note{padding:8px 12px}.gpc{font-size:.8rem;color:var(--mut);font-weight:normal}
+pre{white-space:pre-wrap;word-break:break-word;font:inherit;font-size:1.02rem;line-height:1.9;margin:0;direction:rtl;text-align:right;}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-size:.98rem}
+.tbl th,.tbl td{border:1px solid var(--line);padding:7px 5px;text-align:center}
+.tbl th{background:var(--bg);color:var(--mut);font-weight:600;position:sticky;top:0}
+.num{direction:ltr;unicode-bidi:plaintext}
+.neg{color:#b91c1c;font-weight:700}
+.scroll{max-height:55vh;overflow:auto;border:1px solid var(--line);border-radius:10px;margin:6px 0}
+.scroll .tbl{margin:0;font-size:.86rem}
+.scroll .tbl th,.scroll .tbl td{padding:6px 3px}
+.h2{font-size:1.02rem;margin:14px 0 4px;color:var(--pri);font-weight:600}
+.note{color:var(--mut);font-size:.9rem}
+#isup{direction:rtl;text-align:center}
+#modbox iframe,#watbox iframe,#wabox iframe,#invbox iframe{display:block;width:100%;min-height:460px;border:0;border-radius:10px;background:var(--bg)}
+.fbar{display:flex;align-items:center;gap:6px;margin:0 0 8px}.fbar input{flex:1;min-width:0;padding:9px 12px;font-size:1rem}
+.fbar .note{min-width:64px;text-align:center;white-space:nowrap}
+mark{background:#ffe08a;color:#1f2937;border-radius:3px;padding:0 1px}
+[hidden]{display:none!important}
+</style></head><body><style>.brand{display:block;margin:10px auto 2px;height:40px;width:auto}@media (display-mode:standalone){.brand{margin-top:calc(env(safe-area-inset-top) + 30px)}}</style><img class="brand" src="../logo-s.png?v=2" alt="الهرم" width="110" height="40" decoding="async" onerror="this.remove()"><script>if(window.parent!==window)document.querySelector(".brand").remove()</script><div class="wrap">
+<div id="lock" class="card"><div class="top"><h1>عرض محمي</h1><button class="theme" data-theme-btn></button></div>
+<input id="pw" type="password" placeholder="كلمة السر" autocomplete="current-password" autofocus>
+<button class="go" id="open">فتح</button><div class="err" id="err"></div></div>
+<div id="view" hidden><div class="card"><div class="top"><h1 id="title"></h1><div><button class="theme" data-theme-btn></button> <button class="theme" id="logout">خروج</button></div></div>
+<select id="day" aria-label="التاريخ"></select><div class="tabs" id="tabs"></div><div class="tabs subtabs" id="subtabs" hidden></div><div id="livebar" hidden><div id="livemeta" class="note"></div><button class="go" id="livego"></button><div class="err" id="liveerr"></div></div><div id="rank" class="rankln" hidden></div><div id="fbar" class="fbar" hidden><input id="fq" type="search" placeholder="بحث في اليومية: اسم أو رقم" autocomplete="off" enterkeyhint="search" aria-label="بحث في اليومية"><span id="fcnt" class="note"></span></div><pre id="text"></pre>
+<div id="pop" class="pop" hidden><div id="popbox"></div></div><div id="modbox" hidden></div><div id="watbox" hidden></div><div id="wabox" hidden></div><div id="invbox" hidden></div><div id="grpbox" hidden></div><div id="inq" hidden><button class="go" id="iback" type="button" hidden style="background:var(--card);color:var(--pri);border:1px solid var(--pri);margin-bottom:10px">↩ رجوع لمتابعة التنزيل</button><input id="isup" list="sups" placeholder="المورد (الرمز أو الاسم)" autocomplete="off"><datalist id="sups"></datalist>
+<input id="imod" placeholder="رقم الموديل" autocomplete="off" autocapitalize="characters" style="margin-top:8px">
+<button class="go" id="iask">بحث</button><div class="note" id="iuse"></div><div class="err" id="ierr"></div><div id="icand"></div><div id="ires"></div></div></div></div>
+</div>
+<script>
+const P = {"salt": "X30jJwHNimtwCvIrLPvWxA==", "iv": "+TTSzhDa+JCEkxMu", "ct": "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", "iter": 600000};
+const root = document.documentElement;
+function setTheme(t){ root.dataset.theme = t; try{localStorage.setItem('theme', t);}catch(_){}
+  try{ document.querySelectorAll('#modbox iframe,#watbox iframe,#wabox iframe,#invbox iframe').forEach(f => { if(f.contentWindow) f.contentWindow.postMessage({theme: t}, '*'); }); }catch(_){}  // التبويبان المضمَّنان (الموديلات، متابعة التنزيل) يتبعان الوضع
+  document.querySelectorAll('[data-theme-btn]').forEach(b => b.textContent = t === 'dark' ? '☀️ نهاري' : '🌙 ليلي'); }
+let saved = 'light'; try{ saved = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'; }catch(_){}
+setTheme(saved);
+document.querySelectorAll('[data-theme-btn]').forEach(b => b.onclick = () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+// ردود الوكيل قد تكون مضغوطة gzip قبل التشفير (توفير حصة ntfy، 2026-11-12): تُعرف من بايتَي بدايتها (1f 8b)، وغير المضغوط JSON يبدأ بـ«{»
+const unz = async pt => { const u = new Uint8Array(pt);
+  return JSON.parse(u[0] === 0x1f && u[1] === 0x8b ? await new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text() : new TextDecoder().decode(u)); };
+async function decrypt(pw){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(P.salt), iterations:P.iter, hash:'SHA-256'}, km,
+                                            {name:'AES-GCM', length:256}, false, ['decrypt']);
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(P.iv)}, key, b64(P.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+function show(d, pw){
+  document.getElementById('lock').hidden = true; document.getElementById('view').hidden = false;
+  document.getElementById('title').textContent = d.title;
+  const sel = document.getElementById('day'), tabs = document.getElementById('tabs'), text = document.getElementById('text');
+  let curDay = 0, curTab = d.inquiry ? d.names.length : 0;  // صفحة الاستعلام هي الافتراضية؛ اليومية تُفتح بالضغط على الفرع
+  d.days.forEach((x, i) => { const o = document.createElement('option'); o.value = i;
+    o.textContent = x.label; sel.appendChild(o); });
+  const inq = d.inquiry, inqBox = document.getElementById('inq'), rankEl = document.getElementById('rank');
+  const livebar = document.getElementById('livebar'), livemeta = document.getElementById('livemeta'),
+        livego = document.getElementById('livego'), liveerr = document.getElementById('liveerr');
+  // نسختان مشتركتان: L = يومية اليوم (مباشر)، Y = تحديث مبيعات الأمس عند الطلب قبل التحديث الليلي النهائي (طلب 2026-10-12)
+  const M = {L: {day: '', prefix: 'snap', snap: null, loading: false, auto: false, last: 0, busy: false},
+             Y: {day: 'y', prefix: 'ysnap', snap: null, loading: false, auto: false, last: 0, busy: false}};
+  if(inq){ const o = document.createElement('option'); o.value = 'L'; const t0 = new Date(), p2 = n => String(n).padStart(2, '0'); o.textContent = 'اليوم (مباشر) — ' + ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'][t0.getDay()] + ' ' + p2(t0.getDate()) + '/' + p2(t0.getMonth() + 1) + '/' + t0.getFullYear(); sel.insertBefore(o, sel.firstChild); sel.value = 'L'; curDay = -1; }  // "اليوم (مباشر)" هو الافتراضي (طلب صريح 2026-10-11)
+  const pad = n => String(n).padStart(2, '0');
+  const dstr = t => t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate());
+  const todayStr = () => dstr(new Date());
+  const yesterdayStr = () => { const t = new Date(); t.setDate(t.getDate() - 1); return dstr(t); };
+  const clock = ts => { const t = new Date(ts * 1000), h = t.getHours() % 12 || 12; return h + ':' + pad(t.getMinutes()) + ' ' + (t.getHours() < 12 ? 'ص' : 'م'); };
+  const modeNow = () => !inq ? null : sel.value === 'L' ? M.L : (d.days[curDay] && d.days[curDay].date === yesterdayStr() ? M.Y : null);
+  // هل نسخة الأمس عند الطلب أحدث من التحديث الليلي المحفوظ في الصفحة؟
+  const ySnapNewer = (st, s) => !!s && (!st.saved || s.taken > st.saved);
+  const updateLiveBar = () => {
+    const m = modeNow(); if(!m) return;
+    const s = m.snap, st = m === M.Y ? d.days[curDay] : null, final = !!(st && st.final);
+    if(m === M.L) livemeta.textContent = s ? 'آخر تحديث للبيانات: ' + s.at + ' — بيانات اليوم حتى هذه اللحظة' : '';
+    else {
+      const at = ySnapNewer(st, s) ? s.at : (st.saved ? clock(st.saved) : '');
+      livemeta.textContent = !at ? '' : final ? 'التحديث النهائي لمبيعات الأمس: ' + at
+        : 'آخر تحديث لمبيعات الأمس: ' + at + ' — قد تزيد المبيعات حتى التحديث النهائي نحو 3:30 ص';
+    }
+    const ready = !s || Date.now() / 1000 >= s.next;
+    livego.hidden = final;
+    livego.classList.toggle('busy', m.busy);
+    livego.classList.toggle('wait', !m.busy && !ready);  // رمادي فاتح = لا يمكن التحديث الآن (التحديث التالي بعد موعد)
+    livego.disabled = m.busy || !ready;
+    livego.textContent = m.busy ? 'جارٍ تحديث اليومية… قد يستغرق دقيقتين'
+      : !ready ? 'التحديث التالي متاح بعد ' + s.next_at
+      : (m === M.Y ? 'تحديث مبيعات الأمس الآن' : (s ? 'تحديث الآن' : 'جلب يومية اليوم'));
+  };
+  // آخر نسخة مكتملة للنوع m ولتاريخها من قناة الردود (أو null)؛ ترفع خطأً إن تعذّر الاتصال
+  const fetchSnap = async m => {
+    return fetchSnapOf(m.prefix, m === M.L ? todayStr() : yesterdayStr());
+  };
+  const fetchSnapOf = async (prefix, want) => {
+    const key = await liveCtx.getKey(), q = liveCtx.q;
+    const texts = await Promise.all([q.base].concat(q.base2 ? [q.base2] : []).map(b =>  // الأساسي والاحتياطي معًا (2026-11-15)
+      fetch(b + '/' + q.topic + 'r/json?poll=1&since=12h', {cache: 'no-store'}).then(r => r.text()).catch(() => '')));
+    const groups = {};
+    texts.join(String.fromCharCode(10)).split(String.fromCharCode(10)).forEach(line => {
+      if(!line.trim()) return; let o;
+      try { const j = JSON.parse(line); if(j.event !== 'message') return; o = JSON.parse(j.message); } catch(_){ return; }
+      if(typeof o.id !== 'string' || o.id.slice(0, prefix.length) !== prefix) return;
+      (groups[o.id] || (groups[o.id] = {t: o.t, parts: {}})).parts[o.n] = o.d; });
+    const ids = Object.keys(groups).filter(i => Object.keys(groups[i].parts).length === groups[i].t).sort();
+    for(let k = ids.length - 1; k >= 0; k--){
+      try { const s = await openSealed(key, ids[k], groups[ids[k]].parts, groups[ids[k]].t); if(s.date === want) return s; } catch(_){}
+    }
+    return null;
+  };
+  const loadSnapshot = async m => {
+    if(!liveCtx) return;
+    m.loading = true; draw();
+    try { m.snap = await fetchSnap(m); m.last = Date.now(); liveerr.textContent = ''; }
+    catch(_){ liveerr.textContent = 'تعذّر جلب آخر نسخة، تحقق من الاتصال'; }
+    m.loading = false; draw();
+  };
+  // التحديث: نرسل الطلب، ثم نتابع ظهور نسخة أحدث كل 6 ثوانٍ (وفور العودة للصفحة). النسخة هي النتيجة الحقيقية ومنشورة قبل الرد،
+  // فلا يضيع التحديث إن فاتت الصفحةَ رسالة الرد (الهاتف مقفل أو التطبيق في الخلفية أثناء دقيقتين الانتظار).
+  livego.onclick = async () => {
+    const m = modeNow(); if(!m || m.busy || !liveCtx) return; m.busy = true; liveerr.textContent = ''; updateLiveBar();
+    const before = m.snap ? m.snap.taken : 0; let finished = false, iv = 0, hard = 0;
+    const vis = () => { if(!document.hidden) check(); };
+    const finish = msg => { if(finished) return; finished = true; clearInterval(iv); clearTimeout(hard);
+      document.removeEventListener('visibilitychange', vis); if(msg) liveerr.textContent = msg; m.busy = false; draw(); };
+    const check = async () => {
+      if(finished) return;
+      try { const s = await fetchSnap(m); if(s && s.taken > before){ m.snap = s; m.last = Date.now(); finish(''); } } catch(_){}
+    };
+    iv = setInterval(check, 6000); hard = setTimeout(() => finish('لم يصل التحديث بعد؛ افتح هذه الصفحة بعد قليل'), 360000);
+    document.addEventListener('visibilitychange', vis);
+    try { const r = await liveRequest(liveCtx.q, await liveCtx.getKey(), m.day); liveCtx.setUsage(r.usage); await check(); }
+    catch(e){ if(!e.timeout) finish(e.message || 'تعذّر تحديث اليومية'); }  // انتهاء مهلة الرد لا يوقف المتابعة (قد تكون النسخة وصلت)
+  };
+  // ---- البحث داخل اليومية (طلب 2026-10-24، ثم 2026-10-24 تعديل): تُخفى كل الأسطر إلا المتطابقة مع الاسم أو الرقم، والمطابق يُلوَّن ----
+  const fbar = document.getElementById('fbar'), fq = document.getElementById('fq'), fcnt = document.getElementById('fcnt');
+  let curTxt = '';
+  const fnorm = t => { let o = ''; for(const ch of t){ const c = ch.charCodeAt(0);  // تطبيع بطول ثابت (حرف بحرف) كي تبقى المواضع صحيحة
+    o += (c === 0x623 || c === 0x625 || c === 0x622) ? 'ا' : c === 0x629 ? 'ه' : c === 0x649 ? 'ي' : (c >= 0x660 && c <= 0x669) ? String(c - 0x660) : (c >= 0x6F0 && c <= 0x6F9) ? String(c - 0x6F0) : ch.toLowerCase(); } return o; };
+  const applyFind = () => {
+    const q = fnorm(fq.value.trim()); text.textContent = '';
+    if(!q){ text.textContent = curTxt; fcnt.textContent = ''; return; }
+    const lines = curTxt.split(String.fromCharCode(10)); let shown = 0;
+    lines.forEach(line => { const hay = fnorm(line); let i = hay.indexOf(q); if(i < 0) return;
+      if(shown++) text.appendChild(document.createTextNode(String.fromCharCode(10)));
+      let pos = 0; while(i >= 0){ text.appendChild(document.createTextNode(line.slice(pos, i)));
+        const m = document.createElement('mark'); m.textContent = line.slice(i, i + q.length); text.appendChild(m); pos = i + q.length; i = hay.indexOf(q, pos); }
+      text.appendChild(document.createTextNode(line.slice(pos))); });
+    if(!shown) text.textContent = 'لا توجد نتائج';
+    fcnt.textContent = shown ? shown + ' نتيجة' : '0';
+  };
+  const showText = s => { curTxt = s; applyFind(); };
+  fq.addEventListener('input', applyFind);
+  fq.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); fq.blur(); } });  // Enter يُخفي لوحة المفاتيح لرؤية النتائج
+  // ---- تبويب "أقوى الموديلات": نفس صفحة الموديلات القوية مضمّنة (iframe بمسارها ومفتاحها من الملف المشفّر لهذا المسؤول) ----
+  const modBox = document.getElementById('modbox'), modelsIdx = d.names.length + (inq ? 1 : 0);
+  const watBox = document.getElementById('watbox'), watIdx = modelsIdx + (d.models ? 1 : 0);  // تبويب "متابعة التنزيل" (التحلية فقط، 2026-10-29): صفحة مشفّرة مضمَّنة مثل الموديلات
+  const waBox = document.getElementById('wabox'), waIdx = watIdx + (d.watch ? 1 : 0);  // "متابعة التنزيل (شاملة)" (2026-11-15)
+  let waFrame = null, waTimer = 0, waScroll = 0;
+  // «🧾 خصومات يدوية» (2026-11-20): الضغط على الموديل ← «استعلام»، وتنبيه الخصم في متابعة التنزيل ← بطاقة الموديل
+  const invBox = document.getElementById('invbox'), invIdx = waIdx + (d.watchall ? 1 : 0);
+  const grpBox = document.getElementById('grpbox'), grpIdx = invIdx + (d.inv ? 1 : 0); let grpOpen = false;  // «📊 صنف في الفروع» (2026-11-27)
+  const subtabs = document.getElementById('subtabs'), multi = d.names.length > 1; let lastDaily = 0;  // «📅 يوميات»: فروع المالك في تبويب واحد (2026-11-27)
+  let invFrame = null, invTimer = 0, invPend = null, backIdx = -1, backScroll = 0, invReset = false, invFS = null;
+  const openInv = () => {
+    if(!invFrame){ invFrame = document.createElement('iframe'); invFrame.title = 'خصومات يدوية'; invFrame.allow = 'web-share; camera';  // الكاميرا لمسح باركود الستيكر (2026-11-21)
+      invFrame.src = new URL('../' + d.inv.path + '/index.html', location.href).href + '#' + encodeURIComponent(d.inv.pw); invBox.appendChild(invFrame);
+      invFrame.onload = () => { try{ invFrame.contentWindow.postMessage({theme: root.dataset.theme, invRole: {role: d.inv.role || 'owner', branch: d.inv.branch || '', inq: !!inq}}, '*'); }catch(_){} if(invPend){ setTimeout(() => { try{ invFrame.contentWindow.postMessage(invPend, '*'); }catch(_){} invPend = null; }, 900); } }; }
+    else if(invPend){ try{ invFrame.contentWindow.postMessage(invPend, '*'); }catch(_){} invPend = null; }
+    else if(invReset){ try{ invFrame.contentWindow.postMessage({invReset: true}, '*'); }catch(_){} }  // العودة من تبويب آخر: بحث فارغ (2026-11-21)
+    invReset = false;
+    clearInterval(invTimer);
+    invTimer = setInterval(() => { if(invBox.hidden){ clearInterval(invTimer); return; } if(invFS) return;
+      try { const h = invFrame.contentDocument.documentElement.scrollHeight; if(h > 300) invFrame.style.height = (h + 4) + 'px'; } catch(_){} }, 500);
+  };
+  window.addEventListener('message', e => {
+    if(!e.data) return;
+    if('invFull' in e.data && invFrame && e.source === invFrame.contentWindow){  // مسح الكاميرا: الصفحة المضمّنة تملأ الشاشة ثم تعود (2026-11-21)
+      if(e.data.invFull && !invFS){ invFS = {css: invFrame.style.cssText, y: window.scrollY};
+        invFrame.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;z-index:9999;border:0;border-radius:0;background:#000'; }
+      else if(!e.data.invFull && invFS){ invFrame.style.cssText = invFS.css; const y = invFS.y; invFS = null; setTimeout(() => window.scrollTo(0, y), 30); }
+      return; }
+    if(e.data.invInq && invFrame && e.source === invFrame.contentWindow && inq){  // من بطاقة الخصم ← «استعلام» بالمورد والموديل جاهزين
+      const w = e.data.invInq; backIdx = invIdx; backScroll = window.scrollY;
+      curTab = d.names.length; draw(); window.scrollTo(0, 0);
+      const ib = document.getElementById('iback'); ib.hidden = false; ib.textContent = '↩ رجوع لخصومات يدوية';
+      document.getElementById('isup').value = String(w.sup || ''); document.getElementById('imod').value = String(w.model || '');
+      try { document.getElementById('imod').focus(); } catch(_){}
+      return; }
+    if(e.data.invOpen && d.inv && ((watFrame && e.source === watFrame.contentWindow) || (waFrame && e.source === waFrame.contentWindow))){  // تنبيه الخصم ← بطاقته
+      invPend = {invQuery: e.data.invOpen}; curTab = invIdx; draw(); window.scrollTo(0, 0); }
+  });
+  const openWatchAll = () => {
+    if(!waFrame){ waFrame = document.createElement('iframe'); waFrame.title = 'متابعة التنزيل (شاملة)'; waFrame.allow = 'web-share';
+      waFrame.src = new URL('../' + d.watchall.path + '/index.html', location.href).href + '#' + encodeURIComponent(d.watchall.pw); waBox.appendChild(waFrame);
+      waFrame.onload = () => { try{ waFrame.contentWindow.postMessage({theme: root.dataset.theme, mv: !!d.watchall.mv, spd: !!d.watchall.spd}, '*'); }catch(_){} }; }
+    clearInterval(waTimer);
+    waTimer = setInterval(() => { if(waBox.hidden){ clearInterval(waTimer); return; }
+      try { const h = waFrame.contentDocument.documentElement.scrollHeight; if(h > 300) waFrame.style.height = (h + 4) + 'px'; } catch(_){} }, 500);
+  };
+  // الضغط على موديل في الشاملة: استعلام عنه في تبويب «استعلام» ثم زر «رجوع» لنفس المكان
+  window.addEventListener('message', e => {
+    if(!waFrame || e.source !== waFrame.contentWindow || !e.data || !e.data.watchInq || !inq) return;
+    const w = e.data.watchInq; waScroll = window.scrollY;
+    curTab = d.names.length; draw(); window.scrollTo(0, 0);
+    document.getElementById('iback').hidden = false;
+    document.getElementById('isup').value = String(w.sup || ''); document.getElementById('imod').value = String(w.model || '');
+    window.__inqPrefer = String(w.branch || '');  // الكشف التلقائي لهذا الفرع (لمن كشفه تلقائي «*») — 2026-11-17
+    if(!(window.__inqRecent && window.__inqRecent(String(w.sup || ''), String(w.model || '')))) document.getElementById('iask').click(); else window.__inqPrefer = '';
+    // سطر الفرع الذي جاء منه الموديل: يُبرز فقط بلا فتح كشفه تلقائيًا (تخفيف رسائل ntfy، طلب 2026-11-15)؛ «عرض» يدويًا عند الحاجة
+    const want = String(w.branch || ''), t0 = Date.now();
+    if(want){ const tick = () => { if(Date.now() - t0 > 90000 || document.getElementById('inq').hidden) return;
+        const row = [...document.querySelectorAll('#ires tr')].find(tr => tr.firstChild && tr.firstChild.textContent.trim() === want), btn = row && row.querySelector('button.dbtn');
+        if(btn && !btn.disabled){ row.style.outline = '2px solid var(--pri)'; setTimeout(() => { row.style.outline = ''; }, 6000); setTimeout(() => row.scrollIntoView({block: 'center'}), 300); return; }
+        setTimeout(tick, 700); }; setTimeout(tick, 1500); }
+  });
+  window.addEventListener('message', async e => {  // «🔄 تحديث» فرع من الصفحة الشاملة (2026-11-15)
+    if(!waFrame || e.source !== waFrame.contentWindow || !e.data || !e.data.waRefresh) return;
+    const toWa = m => { try { waFrame.contentWindow.postMessage(m, '*'); } catch(_){} };
+    if(!liveCtx){ toWa({waDone: true, ok: false, msg: 'التحديث غير متاح لرابطك'}); return; }
+    try { const r = await liveRequest(liveCtx.q, await liveCtx.getKey(), '', 'watch', String(e.data.waRefresh)); toWa({waDone: true, ok: true, wa: r && r.wa}); }
+    catch(err){ toWa({waDone: true, ok: false, msg: err.message || 'تعذّر التحديث'}); }
+  });
+  // «🔄 تحديث المتابعة» و«📈 حركة الفرع» من الصفحة الشاملة (2026-11-17): طلب واحد صغير لكل ضغطة، والنتيجة تعود للصفحة نفسها
+  window.addEventListener('message', async e => {
+    if(!waFrame || e.source !== waFrame.contentWindow || !e.data || !(e.data.waFup || e.data.waDet || e.data.waSync)) return;
+    const toWa = m => { try { waFrame.contentWindow.postMessage(m, '*'); } catch(_){} };
+    if(e.data.waSync){  // تزامن أجهزة المالك (2026-11-18)
+      if(!liveCtx){ toWa({syncDone: true, ok: false, msg: 'غير متاح لرابطك'}); return; }
+      syPeerStart(toWa);
+      try { const r = await syncRequest(liveCtx.q, await liveCtx.getKey(), e.data.waSync); toWa({syncDone: true, ok: true, res: r}); }
+      catch(err){ toWa({syncDone: true, ok: false, msg: err.message || 'تعذّر التزامن'}); }
+      return; }
+    if(e.data.waFup){ const f = e.data.waFup;
+      if(!liveCtx){ toWa({fupDone: true, b: f.b, ok: false, msg: 'غير متاح لرابطك'}); return; }
+      try { const r = await liveRequest(liveCtx.q, await liveCtx.getKey(), String(f.day), 'fup', String(f.b)); toWa({fupDone: true, b: f.b, ok: true, res: r}); }
+      catch(err){ toWa({fupDone: true, b: f.b, ok: false, msg: err.message || 'تعذّر التحديث'}); }
+      return; }
+    const w = e.data.waDet;
+    if(!liveCtx){ toWa({detDone: true, k: w.k, ok: false, msg: 'غير متاح لرابطك'}); return; }
+    try { const r = await detRequest(liveCtx.q, await liveCtx.getKey(), String(w.sup), String(w.model), String(w.b)); toWa({detDone: true, k: w.k, ok: true, detail: r.detail}); }
+    catch(err){ toWa({detDone: true, k: w.k, ok: false, msg: err.message || 'تعذّر تحميل الحركة'}); }
+  });
+  document.getElementById('iback').onclick = () => { const ib = document.getElementById('iback'); ib.hidden = true;
+    if(backIdx >= 0){ curTab = backIdx; backIdx = -1; draw(); setTimeout(() => window.scrollTo(0, backScroll), 50); ib.textContent = '↩ رجوع لمتابعة التنزيل'; return; }
+    curTab = waIdx; draw(); setTimeout(() => window.scrollTo(0, waScroll), 50); };
+  let watFrame = null, watTimer = 0;
+  const openWatch = () => {
+    if(!watFrame){ watFrame = document.createElement('iframe'); watFrame.title = 'متابعة التنزيل';
+      watFrame.src = new URL('../' + d.watch.path + '/index.html', location.href).href + '#' + encodeURIComponent(d.watch.pw); watBox.appendChild(watFrame);
+      watFrame.onload = () => { try{ watFrame.contentWindow.postMessage({theme: root.dataset.theme, inv: !!d.inv}, '*'); }catch(_){} }; }
+    clearInterval(watTimer);
+    watTimer = setInterval(() => { if(watBox.hidden){ clearInterval(watTimer); return; }
+      try { const h = watFrame.contentDocument.documentElement.scrollHeight; if(h > 300) watFrame.style.height = (h + 4) + 'px'; } catch(_){} }, 500);
+  };
+  // زر "تحديث الآن" داخل متابعة التنزيل: الصفحة المضمَّنة لا تملك مفتاح الاستعلام، فتطلب من هذه الصفحة (watch: get | refresh) وتردّ عليها بالنسخة
+  let watBusy = false;
+  const toWat = msg => { try { watFrame.contentWindow.postMessage(msg, '*'); } catch(_){} };
+  window.addEventListener('message', async e => {
+    if(!watFrame || e.source !== watFrame.contentWindow || !e.data || !e.data.watch) return;
+    if(!liveCtx){ toWat({watch: 'err', msg: 'التحديث غير متاح لرابطك'}); return; }
+    if(e.data.watch === 'get'){
+      try { const snap = await fetchSnapOf('wsnap', todayStr()); toWat({watch: 'snap', snap, ysnap: snap && snap.prev ? null : await fetchSnapOf('wsnap', yesterdayStr())}); }
+      catch(_){ toWat({watch: 'err', msg: 'تعذّر جلب آخر نسخة، تحقق من الاتصال'}); }
+    } else if(e.data.watch === 'refresh' && !watBusy){
+      watBusy = true; const since = +e.data.since || 0;
+      try {
+        await liveRequest(liveCtx.q, await liveCtx.getKey(), '', 'watch');
+        let s = null;
+        for(let k = 0; k < 4; k++){ s = await fetchSnapOf('wsnap', todayStr()); if(s && s.taken > since) break; await new Promise(r => setTimeout(r, 1500)); }  // النسخة تُنشر قبل الرد؛ تأخر ntfy يُعاد له
+        toWat({watch: 'snap', snap: s, ysnap: s && s.prev ? null : await fetchSnapOf('wsnap', yesterdayStr())});
+      } catch(err){ toWat({watch: 'err', msg: err.message || 'تعذّر التحديث'}); }
+      finally { watBusy = false; }
+    }
+  });
+  let modFrame = null, modTimer = 0;
+  const openModels = () => {
+    if(!modFrame){ modFrame = document.createElement('iframe'); modFrame.title = 'أقوى الموديلات';
+      modFrame.src = new URL('../' + d.models.path + '/index.html', location.href).href + '#' + encodeURIComponent(d.models.pw); modBox.appendChild(modFrame);
+      modFrame.onload = () => { try{ modFrame.contentWindow.postMessage({theme: root.dataset.theme}, '*'); }catch(_){} }; }
+    clearInterval(modTimer);  // يتبع ارتفاع الصفحة المضمّنة (نفس النطاق) كي لا يظهر شريط تمرير داخلي؛ عند تعذّر القراءة يبقى الارتفاع الأدنى
+    modTimer = setInterval(() => { if(modBox.hidden){ clearInterval(modTimer); return; }
+      try { const h = modFrame.contentDocument.documentElement.scrollHeight; if(h > 300) modFrame.style.height = (h + 4) + 'px'; } catch(_){} }, 500);
+  };
+  const draw = () => { const inDaily = curTab < d.names.length; if(inDaily) lastDaily = curTab;
+    [...tabs.children].forEach(b => b.setAttribute('aria-pressed', b.dataset.i === 'D' ? inDaily : (b.dataset.i !== undefined && +b.dataset.i === curTab)));
+    subtabs.hidden = !(multi && inDaily); [...subtabs.children].forEach(b => b.setAttribute('aria-pressed', +b.dataset.i === curTab));
+    const isInq = !!inq && curTab === d.names.length, isMod = !!d.models && curTab === modelsIdx, isWat = !!d.watch && curTab === watIdx, isWa = !!d.watchall && curTab === waIdx, isInv = !!d.inv && curTab === invIdx, isGrp = !!d.grp && curTab === grpIdx, m = (isInq || isMod || isWat || isWa || isInv || isGrp) ? null : modeNow();
+    sel.hidden = text.hidden = fbar.hidden = isInq || isMod || isWat || isWa || isInv || isGrp; inqBox.hidden = !isInq; modBox.hidden = !isMod; watBox.hidden = !isWat; waBox.hidden = !isWa; invBox.hidden = !isInv; grpBox.hidden = !isGrp; livebar.hidden = !m;
+    if(isInv) openInv();
+    if(isGrp && !grpOpen){ grpOpen = true; setupGrp(grpBox, d.grp.groups, (d.inquiry && d.inquiry.suppliers) || [], d.grp); }
+    if(!isInq) document.getElementById('iback').hidden = true;
+    if(isMod) openModels();
+    if(isWat) openWatch();
+    if(isWa) openWatchAll();
+    let rk = null;
+    if(!isInq && !isMod && !isWat && !isWa && !isInv && !isGrp){
+      const nm = d.names[curTab];
+      if(m === M.L){  // يومية اليوم (مباشر): النسخة المشتركة الأخيرة؛ ترتيبها من النسخة نفسها
+        const s = m.snap;
+        showText(s ? (s.texts[nm] || (nm === 'كل الفروع' ? 'لم يُحسب مجموع كل الفروع في هذه النسخة. اضغط «تحديث الآن» بعد ' + s.next_at + '.' : s.missing && s.missing.includes(nm) ? 'تعذّر جلب بيانات هذا الفرع في آخر تحديث (انقطاع عابر في الاتصال بالنظام). يمكنك إعادة المحاولة بالضغط على «تحديث الآن» بعد ' + s.next_at + '.' : 'لا توجد بيانات لهذا الفرع في آخر تحديث.')) : (m.loading ? 'جارٍ تحميل آخر نسخة…' : 'لم تُجلب يومية اليوم بعد.'));
+        rk = s && s.ranks ? s.ranks[nm] : null;
+      } else {
+        const st = d.days[curDay]; let txts = st.texts, rks = st.ranks || {};
+        if(m === M.Y && ySnapNewer(st, m.snap)){ txts = m.snap.texts; rks = m.snap.ranks || {}; }  // تحديث الأمس عند الطلب أحدث من الليلي
+        showText(txts[nm] || ((txts !== st.texts && nm === 'كل الفروع') ? 'لم يُحسب مجموع كل الفروع في آخر تحديث؛ حاول التحديث لاحقًا.' : 'لا توجد بيانات لهذا الفرع في هذا اليوم.'));
+        // ترتيب الفرع بين الفروع في اليوم المختار (بحسب مجموع مبيعات الموردين في اليومية)
+        rk = rks[nm];
+      }
+      if(m){ updateLiveBar(); if(!m.snap && !m.loading && !m.auto){ m.auto = true; loadSnapshot(m); } }  // أول فتح: اقرأ آخر نسخة تلقائيًا (بلا استهلاك)
+    }
+    rankEl.hidden = !(rk && rk[1] >= 2);
+    if(!rankEl.hidden){  // "ترتيب فرعك الثاني لهذا اليوم" (صياغة المستخدم)؛ يُذكر عدد الفروع فقط إن لم يكن 5 (غياب بيانات فرع)
+      const ord = ['', 'الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس'][rk[0]] || ('رقم ' + rk[0]);
+      rankEl.textContent = (d.rankOwn ? 'فرعك' : 'هذا الفرع') + ' في المركز (';  // صياغة المستخدم: الترتيبي بين قوسين وتحته خط
+      const b = document.createElement('b'); b.textContent = ord; rankEl.appendChild(b);
+      rankEl.appendChild(document.createTextNode(')' + (rk[1] !== 5 ? ' من بين ' + rk[1] + ' فروع' : '') + ' لهذا اليوم')); } };
+  if(multi){ const t = document.createElement('button'); t.className = 'tab'; t.textContent = '📅 يوميات'; t.dataset.i = 'D';
+    t.onclick = () => { curTab = lastDaily; draw(); }; tabs.appendChild(t);
+    d.names.forEach((n, i) => { const s = document.createElement('button'); s.className = 'tab'; s.textContent = n; s.dataset.i = i;
+      s.onclick = () => { curTab = i; draw(); }; subtabs.appendChild(s); }); }
+  else d.names.forEach((n, i) => { const t = document.createElement('button'); t.className = 'tab'; t.textContent = n; t.dataset.i = i;
+    t.onclick = () => { curTab = i; draw(); }; tabs.appendChild(t); });
+  if(inq){ const t = document.createElement('button'); t.className = 'tab'; t.textContent = '🔎 استعلام'; t.dataset.i = d.names.length;
+    t.onclick = () => { curTab = d.names.length; draw(); }; tabs.appendChild(t); setupInquiry(inq, pw); }
+  if(d.models){ const t = document.createElement('button'); t.className = 'tab'; t.textContent = '🔥 الموديلات'; t.dataset.i = modelsIdx;
+    t.onclick = () => { curTab = modelsIdx; draw(); }; tabs.appendChild(t); }
+  if(d.watch){ const t = document.createElement('button'); t.className = 'tab'; t.textContent = '📋 متابعة التنزيل'; t.dataset.i = watIdx;
+    t.onclick = () => { curTab = watIdx; draw(); }; tabs.appendChild(t); }
+  if(d.watchall){ const t = document.createElement('button'); t.className = 'tab'; t.textContent = '📋 متابعة التنزيل (شاملة)'; t.dataset.i = waIdx;
+    t.onclick = () => { curTab = waIdx; draw(); }; tabs.appendChild(t); }
+  if(d.inv){ const t = document.createElement('button'); t.className = 'tab'; t.textContent = '🧾 خصومات يدوية'; t.dataset.i = invIdx;
+    t.onclick = () => { if(curTab !== invIdx) invReset = true; curTab = invIdx; draw(); }; tabs.appendChild(t); }
+  if(d.grp){ const t = document.createElement('button'); t.className = 'tab'; t.textContent = d.grp.br ? '📊 صنف في فرعك' : '📊 صنف في الفروع'; t.dataset.i = grpIdx;
+    t.onclick = () => { curTab = grpIdx; draw(); }; tabs.appendChild(t); }
+  if(d.dupall){ const t = document.createElement('button'); t.className = 'tab'; t.textContent = '🔁 موديلات بأكثر من رمز';  // المالك: اختيار الفرع (2026-11-28)
+    const m = document.createElement('div'); m.className = 'dupm'; m.hidden = true; m.appendChild(mk('div', 'اختر الفرع:', 'note'));
+    d.dupall.forEach(x => { const a = document.createElement('a'); a.className = 'tab'; a.href = x[2]; a.textContent = x[1]; m.appendChild(a); });
+    t.onclick = () => { m.hidden = !m.hidden; t.setAttribute('aria-pressed', m.hidden ? 'false' : 'true'); }; tabs.appendChild(t); tabs.after(m); }
+  if(d.dup){ const t = document.createElement('a'); t.className = 'tab'; t.href = d.dup.url; t.textContent = '🔁 موديلات بأكثر من رمز'; tabs.appendChild(t); }  // رابط عادي في نفس النافذة (طلب 2026-11-09)
+  if(d.sales){ const t = document.createElement('a'); t.className = 'tab'; t.href = d.sales.url; t.textContent = '📊 تقرير الموردين'; tabs.appendChild(t); }  // رابط عادي (طلب 2026-11-13)
+  if(d.saleslite){ const t = document.createElement('a'); t.className = 'tab'; t.href = d.saleslite.url; t.textContent = '🔎 بطاقة مورد'; tabs.appendChild(t); }  // أسماء جديدة 2026-11-15 لمنع اللبس  // رابط عادي (طلب 2026-11-14)
+  if(d.supstock){ const t = document.createElement('a'); t.className = 'tab'; t.href = d.supstock.url; t.textContent = '📦 مخزون الموردين'; tabs.appendChild(t); }  // رابط عادي (طلب 2026-11-14)
+  if(!d.names.length && !d.grp && !d.models && !d.watch && !d.watchall && !d.dup && !d.dupall && !d.sales && !d.supstock && !d.saleslite) tabs.hidden = true;  // رابط استعلام فقط: لا حاجة لشريط تبويب واحد
+  sel.onchange = () => { curDay = sel.value === 'L' ? -1 : +sel.value; const m = modeNow(); if(m && Date.now() - m.last > 60000) loadSnapshot(m); else draw(); };
+  // الكمبيوتر (طلب 2026-11-18): «متابعة التنزيل (شاملة)» هي الصفحة الأولى للمالك
+  if(d.watchall && d.watchall.mv && !/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) && !(navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform)) && window.innerWidth >= 1000) curTab = waIdx;
+  draw();
+}
+// ---- تبويب "استعلام": الطلب والرد مشفّران بمفتاح من كلمة السر ويمرّان عبر ntfy.sh إلى الجهاز الرئيسي الذي يستعلم من ERP ----
+const mk = (tag, txt, cls) => { const e = document.createElement(tag); if(txt !== undefined) e.textContent = txt; if(cls) e.className = cls; return e; };
+const numCell = (v, dash) => mk('td', dash && v === 0 ? '–' : String(v), 'num' + (v < 0 ? ' neg' : ''));
+function tableOf(heads){ const t = mk('table', undefined, 'tbl'), tr = mk('tr'); heads.forEach(h => tr.appendChild(mk('th', h)));
+  t.appendChild(mk('thead')).appendChild(tr); t.appendChild(mk('tbody')); return t; }
+// يرسل الطلب ويستقبل رسالتين مشفّرتين: الأرصدة فورًا (onBal) ثم كشف الحركة (onDet) إن كان مطلوبًا لهذا المستلم.
+let liveCtx = null;  // يضبطه setupInquiry: {q, getKey, setUsage}
+// رد بمرفق (2026-11-14، حصة ntfy): الرسالة تحمل {id,n,t,a:1} والنص المشفّر كاملًا في الملف المرفق بدل تقسيمه على عدة رسائل
+// إرسال الطلب (2026-11-18): ntfy.sh أولًا، فإن رفض (429 نفاد حصة شبكتك) أو تعذّر الاتصال فالخادم الاحتياطي — الوكيل ينصت للاثنين
+async function postReq(q, body){
+  try { const r = await fetch(q.base + '/' + q.topic + 'q', {method: 'POST', body}); if(r.ok || !q.base2) return r; } catch(e){ if(!q.base2) throw e; }
+  return fetch(q.base2 + '/' + q.topic + 'q', {method: 'POST', body});
+}
+async function ntfyMsg(m){
+  const o = JSON.parse(m.message);
+  if(o.a && m.attachment && m.attachment.url){ const r = await fetch(m.attachment.url, {cache: 'no-store'}); if(!r.ok) throw new Error('att'); o.d = (await r.text()).trim(); }
+  return o;
+}
+async function openSealed(key, mid, parts, total){
+  const all = b64(Array.from({length: total}, (_, i) => parts[i]).join(''));
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv: all.slice(0, 12), additionalData: new TextEncoder().encode(mid)}, key, all.slice(12));
+  return await unz(pt);
+}
+// طلب تحديث "يومية اليوم (مباشر)": يستغرق نحو دقيقتين (5 فروع)؛ الرد على معرّف الطلب + y
+// الاستماع للرد على الخادمين معًا (2026-11-15): الوكيل يحوّل ردود الروابط إلى الاحتياطي حين تقترب حصة ntfy.sh من النفاد
+function esMulti(q, path){
+  const o = {onmessage: null}, bs = [q.base].concat(q.base2 ? [q.base2] : []);
+  o.list = bs.map(b => { const e = new EventSource(b + '/' + path); e.onmessage = ev => { if(o.onmessage) o.onmessage(ev); }; return e; });
+  o.close = () => o.list.forEach(e => { try { e.close(); } catch(_){} }); return o;
+}
+function liveRequest(q, key, day, kind, branch){  // kind: 'live' (الافتراضي، الرد +y) أو 'watch' (متابعة التنزيل، الرد +w)
+  const sfx = kind === 'watch' ? 'w' : kind === 'fup' ? 'u' : 'y';
+  return new Promise(async (resolve, reject) => {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    const list = {}; let done = false;
+    const es = esMulti(q, q.topic + 'r/sse?since=2m');
+    const fin = (e, v) => { if(done) return; done = true; clearTimeout(timer); es.close(); e ? reject(e) : resolve(v); };
+    const timer = setTimeout(() => { const e = new Error('لم يصل رد، حاول لاحقًا'); e.timeout = true; fin(e); }, 300000);
+    es.onmessage = async ev => {
+      let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; o = await ntfyMsg(m); } catch(_){ return; }
+      if(o.id !== id + sfx) return; list[o.n] = o.d;
+      if(Object.keys(list).length < o.t) return;
+      try { const r = await openSealed(key, o.id, list, o.t); r.ok ? fin(null, r) : fin(new Error(r.error || 'تعذّر التحديث')); }
+      catch(_){ fin(new Error('رد غير صالح')); }
+    };
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12)), enc = u => btoa(String.fromCharCode(...u));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key,
+        new TextEncoder().encode(JSON.stringify(Object.assign({id, ts: Math.floor(Date.now() / 1000), k: kind || 'live'}, day ? {d: day} : {}, branch ? {b: branch} : {})))));
+      const r = await postReq(q, JSON.stringify({i: enc(iv), c: enc(ct)}));
+      if(!r.ok) fin(new Error('تعذّر إرسال الطلب'));
+    } catch(_){ fin(new Error('تعذّر إرسال الطلب، تحقق من الاتصال')); }
+  });
+}
+// تزامن أجهزة المالك (2026-11-18): التعديلات مضغوطة ومقسّمة أجزاء صغيرة (كل جزء رسالة مشفّرة)، والرد على المعرّف + z
+const SY_OWN = new Set(); let syPeer = null;
+// مستمع دائم لردود التزامن (2026-11-18): حين يتزامن جهازك الآخر يصل رده هنا أيضًا (نفس المفتاح)، فإن كانت مراجعته أحدث تتزامن هذه الصفحة فورًا
+// (الاستماع لا يُحتسب من حصة ntfy؛ ردود هذا الجهاز نفسه تُتجاهل)
+function syPeerStart(post){  // post: إرسال للإطار (متغيّر الإطار داخل نطاق آخر)
+  if(syPeer || !liveCtx) return;
+  const bufs = {};
+  syPeer = esMulti(liveCtx.q, liveCtx.q.topic + 'r/sse');
+  syPeer.onmessage = async ev => {
+    let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; const h = JSON.parse(m.message);
+      if(!h.id || h.id.slice(-1) !== 'z' || SY_OWN.has(h.id)) return; o = await ntfyMsg(m); } catch(_){ return; }
+    const L = bufs[o.id] || (bufs[o.id] = {}); L[o.n] = o.d; if(Object.keys(L).length < o.t) return; delete bufs[o.id];
+    try { const r = await openSealed(await liveCtx.getKey(), o.id, L, o.t);
+      if(r && r.ok) post({syncPeer: r.rev || 0}); } catch(_){}
+  };
+}
+function syncRequest(q, key, ops){
+  return new Promise(async (resolve, reject) => {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    SY_OWN.add(id + 'z');
+    const list = {}; let done = false;
+    const es = esMulti(q, q.topic + 'r/sse?since=2m');
+    const fin = (e, v) => { if(done) return; done = true; clearTimeout(timer); es.close(); e ? reject(e) : resolve(v); };
+    const timer = setTimeout(() => fin(new Error('لم يصل رد')), 60000);
+    es.onmessage = async ev => {
+      let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; o = await ntfyMsg(m); } catch(_){ return; }
+      if(o.id !== id + 'z') return; list[o.n] = o.d;
+      if(Object.keys(list).length < o.t) return;
+      try { const r = await openSealed(key, o.id, list, o.t); r.ok ? fin(null, r) : fin(new Error(r.error || 'تعذّر التزامن')); }
+      catch(_){ fin(new Error('رد غير صالح')); }
+    };
+    try {
+      const gz = new Uint8Array(await new Response(new Blob([JSON.stringify(ops)]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer());
+      let s = ''; for(let i = 0; i < gz.length; i += 8192) s += String.fromCharCode(...gz.subarray(i, i + 8192));
+      const all = btoa(s), CH = 2400, parts = []; for(let i = 0; i < all.length; i += CH) parts.push(all.slice(i, i + CH)); if(!parts.length) parts.push('');
+      if(parts.length > 40) return fin(new Error('التعديلات كبيرة جدًا'));
+      const enc = u => btoa(String.fromCharCode(...u));
+      for(let n = 0; n < parts.length; n++){
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key,
+          new TextEncoder().encode(JSON.stringify({id, ts: Math.floor(Date.now() / 1000), k: 'sync', n, t: parts.length, x: parts[n]}))));
+        const r = await postReq(q, JSON.stringify({i: enc(iv), c: enc(ct)}));
+        if(!r.ok) return fin(new Error('تعذّر إرسال التزامن'));
+      }
+    } catch(_){ fin(new Error('تعذّر إرسال التزامن، تحقق من الاتصال')); }
+  });
+}
+function roundTrip(q, key, code, model, onBal, onDet, onInfo, scan, onScan){
+  return new Promise(async (resolve, reject) => {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    const bufs = {}; let done = false, bal = null, shown = false, det = null, inf = null, detShown = false, infShown = false;
+    const es = esMulti(q, q.topic + 'r/sse?since=2m');
+    const fin = e => { if(done) return; done = true; clearTimeout(timer); es.close(); e ? reject(e) : resolve(); };
+    const timer = setTimeout(() => fin(new Error('لم يصل رد. تأكد أن الجهاز الرئيسي شغّال وحاول لاحقًا')), 90000);
+    const update = () => {
+      if(bal && !shown){ shown = true; onBal(bal); }
+      if(shown && det && !detShown){ detShown = true; onDet(det); }
+      if(shown && inf && !infShown){ infShown = true; onInfo(inf); }
+      if(shown && (!bal.pending || det) && (!bal.pend_info || inf)) fin();
+    };
+    const open = async (mid, list, total) => {
+      const all = b64(Array.from({length: total}, (_, i) => list[i]).join(''));
+      const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv: all.slice(0, 12), additionalData: new TextEncoder().encode(mid)}, key, all.slice(12));
+      return await unz(pt);
+    };
+    es.onmessage = async ev => {
+      let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; o = await ntfyMsg(m); } catch(_){ return; }
+      if(o.id !== id && o.id !== id + 'd' && o.id !== id + 'i' && o.id !== id + 's') return;
+      const list = bufs[o.id] || (bufs[o.id] = {}); list[o.n] = o.d;
+      if(Object.keys(list).length < o.t) return;
+      let r; try { r = await open(o.id, list, o.t); } catch(_){ return fin(new Error('رد غير صالح')); }
+      if(o.id === id + 's'){ if(onScan && r.ok) onScan(r); return; }  // مسح باركود: الوكيل يخبرنا بالمورد والموديل المستخرجين
+      if(o.id === id){ if(!r.ok) return fin(new Error(r.error || 'تعذّر الاستعلام')); bal = r; }
+      else if(o.id === id + 'd') det = r;
+      else inf = r;
+      update();
+    };
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12)), enc = u => btoa(String.fromCharCode(...u));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key,
+        new TextEncoder().encode(JSON.stringify(scan ? {id, ts: Math.floor(Date.now() / 1000), k: 'scan', m: scan}
+                                                     : Object.assign({id, ts: Math.floor(Date.now() / 1000), s: code, m: model}, window.__inqPrefer ? {p: window.__inqPrefer} : {})))));
+      window.__inqPrefer = '';
+      const r = await postReq(q, JSON.stringify({i: enc(iv), c: enc(ct)}));
+      if(!r.ok) fin(new Error('تعذّر إرسال الطلب'));
+    } catch(_){ fin(new Error('تعذّر إرسال الطلب، تحقق من الاتصال')); }
+  });
+}
+// طلب "احسب التكرار" لفرع واحد: رسالة مشفّرة واحدة ← رد واحد بمعرّف الطلب + r
+function repRequest(q, key, code, model, branch){
+  return new Promise(async (resolve, reject) => {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    const list = {}; let done = false;
+    const es = esMulti(q, q.topic + 'r/sse?since=2m');
+    const fin = (e, v) => { if(done) return; done = true; clearTimeout(timer); es.close(); e ? reject(e) : resolve(v); };
+    const timer = setTimeout(() => fin(new Error('لم يصل رد، حاول لاحقًا')), 90000);
+    es.onmessage = async ev => {
+      let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; o = await ntfyMsg(m); } catch(_){ return; }
+      if(o.id !== id + 'r') return; list[o.n] = o.d;
+      if(Object.keys(list).length < o.t) return;
+      try { const all = b64(Array.from({length: o.t}, (_, i) => list[i]).join(''));
+        const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv: all.slice(0, 12), additionalData: new TextEncoder().encode(o.id)}, key, all.slice(12));
+        const r = await unz(pt); r.ok ? fin(null, r) : fin(new Error(r.error || 'تعذّر الحساب')); }
+      catch(_){ fin(new Error('رد غير صالح')); }
+    };
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12)), enc = u => btoa(String.fromCharCode(...u));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key,
+        new TextEncoder().encode(JSON.stringify({id, ts: Math.floor(Date.now() / 1000), s: code, m: model, b: branch}))));
+      const r = await postReq(q, JSON.stringify({i: enc(iv), c: enc(ct)}));
+      if(!r.ok) fin(new Error('تعذّر إرسال الطلب'));
+    } catch(_){ fin(new Error('تعذّر إرسال الطلب، تحقق من الاتصال')); }
+  });
+}
+// طلب "عرض" كشف فرع واحد (عمود التفاصيل): رسالة مشفّرة واحدة ← رد بمعرّف الطلب + d (نفس صيغة كشف الفرع الأصلي)
+// «💲 السعر القديم والجديد» (2026-11-17): رسالة مشفّرة واحدة ← رد بمعرّف الطلب + p
+function priceRequest(q, key, code, branch){
+  return new Promise(async (resolve, reject) => {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    const list = {}; let done = false;
+    const es = esMulti(q, q.topic + 'r/sse?since=2m');
+    const fin = (e, v) => { if(done) return; done = true; clearTimeout(timer); es.close(); e ? reject(e) : resolve(v); };
+    const timer = setTimeout(() => fin(new Error('لم يصل رد، حاول لاحقًا')), 90000);
+    es.onmessage = async ev => {
+      let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; o = await ntfyMsg(m); } catch(_){ return; }
+      if(o.id !== id + 'p') return; list[o.n] = o.d;
+      if(Object.keys(list).length < o.t) return;
+      try { const all = b64(Array.from({length: o.t}, (_, i) => list[i]).join(''));
+        const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv: all.slice(0, 12), additionalData: new TextEncoder().encode(o.id)}, key, all.slice(12));
+        const r = await unz(pt); r.ok ? fin(null, r) : fin(new Error(r.error || 'تعذّر جلب السعر')); }
+      catch(_){ fin(new Error('رد غير صالح')); }
+    };
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12)), enc = u => btoa(String.fromCharCode(...u));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key,
+        new TextEncoder().encode(JSON.stringify({id, ts: Math.floor(Date.now() / 1000), k: 'price', c: code, b: branch || ''}))));
+      const r = await postReq(q, JSON.stringify({i: enc(iv), c: enc(ct)}));
+      if(!r.ok) fin(new Error('تعذّر إرسال الطلب'));
+    } catch(_){ fin(new Error('تعذّر إرسال الطلب، تحقق من الاتصال')); }
+  });
+}
+function priceBox(it, d){  // زر تحت عنوان كل صنف في الكشف؛ لا طلب إلا بالضغط
+  const box = mk('div', undefined, 'prc');
+  const show = r => { box.textContent = '';
+    const rows = r.rows || [], own = rows.find(x => x.location === d.branch), reg = rows.find(x => x.location === (d.branch === '803' ? '801' : '700'));
+    const x = own || reg;
+    if(!x){ box.appendChild(mk('div', 'لا يوجد سعر لهذا الصنف في تقرير الأسعار', 'note')); return; }
+    const when = (reg && reg.last_modified) || x.last_modified || '';
+    const same = !x.old_price || x.old_price === x.current_price || x.old_price === '0';
+    box.appendChild(mk('div', same ? '💲 السعر الحالي ' + x.current_price + ' ريال — لم يتغير السعر' : '💲 السعر القديم ' + x.old_price + ' ← الجديد ' + x.current_price + ' ريال' + (when ? ' (آخر تعديل ' + when + ')' : ''), 'pv'));
+  };
+  if(PRICES[it.code]){ show(PRICES[it.code]); return box; }
+  const b = mk('button', '💲 السعر القديم والجديد', 'pbtn'); b.type = 'button';
+  const nt = mk('div', '', 'note pnote'); b.title = 'يأخذ 15–20 ثانية — استعمله عند الحاجة';  // بلا نص ملاحظة ظاهر (طلب 2026-11-18)؛ nt للأخطاء فقط
+  b.onclick = async () => { if(!window.__priceAsk) return; b.disabled = true; b.textContent = '⏳ جارٍ جلب السعر…';
+    try { const r = await window.__priceAsk(it.code, d.branch); PRICES[it.code] = r; show(r); }
+    catch(e){ b.disabled = false; b.textContent = '💲 السعر القديم والجديد'; nt.textContent = '⚠️ ' + (e.message || 'تعذّر جلب السعر'); } };
+  box.appendChild(b); box.appendChild(nt); return box;
+}
+const PRICES = {};
+function detRequest(q, key, code, model, branch){
+  return new Promise(async (resolve, reject) => {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    const list = {}; let done = false;
+    const es = esMulti(q, q.topic + 'r/sse?since=2m');
+    const fin = (e, v) => { if(done) return; done = true; clearTimeout(timer); es.close(); e ? reject(e) : resolve(v); };
+    const timer = setTimeout(() => fin(new Error('لم يصل رد، حاول لاحقًا')), 90000);
+    es.onmessage = async ev => {
+      let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; o = await ntfyMsg(m); } catch(_){ return; }
+      if(o.id !== id + 'd') return; list[o.n] = o.d;
+      if(Object.keys(list).length < o.t) return;
+      try { const all = b64(Array.from({length: o.t}, (_, i) => list[i]).join(''));
+        const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv: all.slice(0, 12), additionalData: new TextEncoder().encode(o.id)}, key, all.slice(12));
+        const r = await unz(pt); r.ok ? fin(null, r) : fin(new Error(r.error || 'تعذّر تحميل الكشف')); }
+      catch(_){ fin(new Error('رد غير صالح')); }
+    };
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12)), enc = u => btoa(String.fromCharCode(...u));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key,
+        new TextEncoder().encode(JSON.stringify({id, ts: Math.floor(Date.now() / 1000), k: 'detail', s: code, m: model, b: branch}))));
+      const r = await postReq(q, JSON.stringify({i: enc(iv), c: enc(ct)}));
+      if(!r.ok) fin(new Error('تعذّر إرسال الطلب'));
+    } catch(_){ fin(new Error('تعذّر إرسال الطلب، تحقق من الاتصال')); }
+  });
+}
+// «📊 صنف في الفروع» (2026-11-27): طلب واحد ← ردود فرعًا فرعًا على المعرّف + g0..g4 (تقرير ERP لكل فرع بأولوية أقل من الفروع)
+function grpRequest(q, key, prm, onPart){
+  return new Promise(async (resolve, reject) => {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    const bufs = {}, got = {}; let done = false, timer = 0;
+    const es = esMulti(q, q.topic + 'r/sse?since=2m');
+    const fin = e => { if(done) return; done = true; clearTimeout(timer); es.close(); e ? reject(e) : resolve(); };
+    const arm = () => { clearTimeout(timer); timer = setTimeout(() => fin(new Error('لم يصل رد، حاول لاحقًا')), 300000); };
+    arm();
+    es.onmessage = async ev => {
+      let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; o = await ntfyMsg(m); } catch(_){ return; }
+      if(!o.id || o.id.slice(0, id.length + 1) !== id + 'g') return;
+      const L = bufs[o.id] || (bufs[o.id] = {}); L[o.n] = o.d; if(Object.keys(L).length < o.t || got[o.id]) return;
+      got[o.id] = 1;
+      try { const r = await openSealed(key, o.id, L, o.t);
+        if(!r.ok){ fin(new Error(r.error || 'تعذّر التقرير')); return; }
+        arm(); onPart(r); if(Object.keys(got).length >= (r.n || 5)) fin(null); }
+      catch(_){ fin(new Error('رد غير صالح')); }
+    };
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12)), enc = u => btoa(String.fromCharCode(...u));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key,
+        new TextEncoder().encode(JSON.stringify({id, ts: Math.floor(Date.now() / 1000), k: 'grp', g: prm.g, d: prm.d, e: prm.e, s: prm.s}))));
+      const r = await postReq(q, JSON.stringify({i: enc(iv), c: enc(ct)}));
+      if(!r.ok) fin(new Error('تعذّر إرسال الطلب'));
+    } catch(_){ fin(new Error('تعذّر إرسال الطلب، تحقق من الاتصال')); }
+  });
+}
+function setupGrp(box, G, SUPS, cfg){
+  cfg = cfg || {}; const one1 = !!cfg.br, LIM = cfg.lim || 10, MAXD = cfg.max || 183;  // 6 أشهر للجميع (2026-11-28)  // رابط فرع (2026-11-28): فرعه فقط
+  const BR = one1 ? [cfg.br] : ['701', '803', '707', '706', '711'], BN = {'701': 'الدائري', '803': 'التحلية', '707': 'البديعة', '706': 'الفيحاء', '711': 'القصيم'};
+  const fmtN = v => Math.round(v).toLocaleString('en');
+  const iso = x => x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
+  box.innerHTML = '<div class="note" style="margin-bottom:8px">' + (one1 ? 'مخزون ومبيعات اسم صنف في فرعك لكل مورد — تقرير من ERP (حتى دقيقة). المخزون = إقفال ليلة أمس. الفترة حتى 6 أشهر. لك ' + LIM + ' طلبات كل 6 ساعات: كل طلب يعود بعد 6 ساعات من استخدامه، والطلب الذي يفشل لا يُحسب.'
+      : 'مخزون ومبيعات اسم صنف في الفروع الخمسة — تقرير من ERP فرعًا فرعًا (1–3 دقائق). المخزون = إقفال ليلة أمس. الفترة حتى 6 أشهر.') + '</div>' +
+    '<input id="ggrp" placeholder="اسم الصنف (الرقم أو الاسم)" autocomplete="off"><div id="ggsug" class="gsug" hidden></div>' +
+    '<div class="grow2"><label class="note">من<input id="gfrom" type="date"></label><label class="note">إلى<input id="gto" type="date"></label></div>' +
+    '<label class="note gchk"><input id="gone" type="checkbox">مورد بعينه (الافتراضي: كل الموردين)</label>' +
+    '<input id="gsup" placeholder="المورد (الرمز أو الاسم)" autocomplete="off" hidden><div id="gssug" class="gsug" hidden></div>' +
+    '<button class="go" id="gask">عرض</button><div class="note" id="guse"></div><div class="err" id="gerr"></div><div id="gres"></div>';
+  const $ = s => box.querySelector(s), gIn = $('#ggrp'), fIn = $('#gfrom'), tIn = $('#gto'), one = $('#gone'), sIn = $('#gsup'), ask = $('#gask'), use = $('#guse'), er = $('#gerr'), res = $('#gres');
+  // الموردون المتشابهون (نفس الاسم المختصر، مثل جومانا 0181 و0203) يُدمجون في الاختيار والنتيجة (2026-11-27)
+  const SN = {}; SUPS.forEach(([c, n]) => SN[c] = n);
+  const SG = []; { const by = {}; SUPS.forEach(([c, n]) => { if(by[n]) by[n][2].push(c); else { by[n] = [c, n, [c]]; SG.push(by[n]); } }); }
+  const sKey = c => SN[c] ? 'n:' + SN[c] : 'c:' + c;
+  const merge = rows => { const m = {}, out = []; rows.forEach(r => { const k = sKey(r[0]); let x = m[k];
+      if(!x){ x = m[k] = [[], SN[r[0]] || r[1], 0, 0]; out.push(x); } if(!x[0].includes(r[0])) x[0].push(r[0]); x[2] += r[2]; x[3] += r[3]; });
+    return out.sort((a, b) => (b[3] - a[3]) || (b[2] - a[2])); };  // بالمبيعات (2026-11-27)
+  const pc = (v, t) => t ? (v / t * 100).toFixed(1) + '%' : '–';
+  const cellNP = (v, t) => { const c = mk('td', fmtN(v), 'num'); c.appendChild(mk('div', pc(v, t), 'gpc')); return c; };
+  // عمود «النتيجة» (2026-11-28، مثل تقرير داخلي نسائي): المخزون المناسب = إجمالي المخزون × نسبة المورد من المبيعات؛
+  // الفرق بالريال ونسبته من مخزونه الحالي — أحمر خفّض / أخضر زِد. المورد الصغير (<1% بيعًا ومخزونًا) بلا حكم.
+  const BAL = !!cfg.bal;
+  // T = المخزون المستهدف للصنف (الافتراضي: الحالي). المناسب للمورد = T × نسبته من المبيعات (2026-11-28: خانة «المخزون الذي تريده»)
+  // exact (مبلغ مستهدف مكتوب): يظهر المبلغ لكل مورد ليصل المجموع للمستهدف (إلا الفرق الضئيل <0.5%)
+  const balCell = (r, T, ss, exact) => { const inv = r[2], ssh = ss ? r[3] / ss : 0, tg = T * ssh, d = inv - tg, big = Math.abs(d) >= 0.03 * T, q = tg ? inv / tg : 9;
+    if(ssh < 0.01 && (T ? inv / T : 0) < 0.01 && !big) return mk('td', 'صغير — بلا حكم', 'gv gok');
+    const dn = exact ? d >= 0.005 * T : q > 1.15 || (big && d > 0), up = !dn && (exact ? -d >= 0.005 * T : q < 0.85 || (big && d < 0));
+    if(!dn && !up) return mk('td', '✓ متوازن', 'gv gok');
+    const c = mk('td', dn ? '▼ خفّض' : '▲ زِد', 'gv ' + (dn ? 'gdn' : 'gup')); c.appendChild(mk('div', fmtN(Math.abs(d)), 'gam'));
+    return c; };  // مبلغ فقط بلا نسبة (طلب المالك 2026-11-28)
+  const supTable = rows => { const t = tableOf(['المورد', 'المبيعات ونسبتها', 'المخزون ونسبته'].concat(BAL ? ['النتيجة'] : [])), si = rows.reduce((x, r) => x + r[2], 0), ss = rows.reduce((x, r) => x + r[3], 0);
+    const cells = [];
+    rows.forEach(r => { const tr = mk('tr'); tr.appendChild(mk('td', supLbl(r))); tr.appendChild(cellNP(r[3], ss)); tr.appendChild(cellNP(r[2], si)); if(BAL){ const c = balCell(r, si, ss); cells.push([r, c]); tr.appendChild(c); } t.tBodies[0].appendChild(tr); });
+    const tr = mk('tr', undefined, 'gtot'); tr.appendChild(mk('td', 'الإجمالي')); tr.appendChild(mk('td', fmtN(ss), 'num')); tr.appendChild(mk('td', fmtN(si), 'num'));
+    const totC = mk('td', '', 'gv gok'), totTxt = T => { totC.textContent = T === si ? (si && ss ? 'المخزون ' + (si / ss).toFixed(1) + ' ضعف المبيعات' : '') : (T > si ? 'زيادة ' : 'تخفيض ') + fmtN(Math.abs(T - si)); };
+    if(BAL){ totTxt(si); tr.appendChild(totC); } t.tBodies[0].appendChild(tr);
+    if(!BAL || !si || !ss) return t;
+    const w = mk('div'), lb = mk('label', 'المخزون الذي تريده لهذا الصنف (اتركه كما هو = نفس مبلغ المخزون الحالي):', 'note gtgt'), inp = document.createElement('input');
+    inp.inputMode = 'numeric'; inp.value = fmtN(si); lb.appendChild(inp); w.appendChild(lb); w.appendChild(t);
+    inp.oninput = () => { const v = parseFloat(inp.value.replace(/[^0-9.]/g, '')), T = v > 0 ? v : si;
+      cells.forEach(o => { const n = balCell(o[0], T, ss, T !== si); o[1].replaceWith(n); o[1] = n; }); totTxt(T); };
+    inp.onblur = () => { const v = parseFloat(inp.value.replace(/[^0-9.]/g, '')); inp.value = fmtN(v > 0 ? v : si); };
+    return w; };
+  const supLbl = x => x[1] + ' (' + x[0].join(' + ') + ')';
+  // قائمة اختيار ظاهرة تحت الحقل (بدل اقتراحات لوحة المفاتيح فقط): تتصفّى مع الكتابة، والضغط يختار
+  const suggest = (inp, sug, list, label, onPick) => {
+    const fill = () => { const v = inp.value.trim(), lv = v.toLowerCase(); sug.textContent = '';
+      const hits = list.filter(x => !v || label(x).toLowerCase().includes(lv)).slice(0, 250);
+      if(!hits.length){ sug.appendChild(mk('div', 'لا يوجد مطابق', 'note')); }
+      hits.forEach(x => { const b = mk('button', label(x)); b.type = 'button';
+        b.onmousedown = e => e.preventDefault(); b.onclick = () => { inp.value = label(x); sug.hidden = true; onPick(x); }; sug.appendChild(b); });
+      sug.hidden = false; };
+    inp.addEventListener('focus', fill); inp.addEventListener('input', () => { onPick(null); fill(); });
+    inp.addEventListener('click', () => { if(sug.hidden) fill(); });
+    document.addEventListener('pointerdown', e => { if(e.target !== inp && !sug.contains(e.target)) sug.hidden = true; }); };
+  let gSel = null, sSel = null;
+  suggest(gIn, $('#ggsug'), G, x => x[1] + ' (' + x[0] + ')', x => { gSel = x; });
+  suggest(sIn, $('#gssug'), SG, x => x[1] + ' (' + x[2].join(' + ') + ')', x => { sSel = x; });
+  const now = new Date(); tIn.value = iso(now); fIn.value = iso(new Date(now.getTime() - 29 * 864e5)); tIn.max = fIn.max = iso(now);
+  one.onchange = () => { sIn.hidden = !one.checked; if(one.checked) sIn.focus(); else $('#gssug').hidden = true; };
+  const pick = (list, v, pad) => { v = (v || '').trim(); if(!v) return null; const tok = v.split(' ')[0], code = pad && /^[0-9]+$/.test(tok) ? tok.padStart(4, '0') : tok;
+    let h = list.find(x => x[0] === code); if(h) return h;
+    h = list.filter(x => x[1] === v); if(h.length === 1) return h[0];
+    h = list.filter(x => x[1].includes(v)); return h.length === 1 ? h[0] : null; };
+  let clampMsg = '';
+  const render = (g, s, a, b, parts) => {
+    res.textContent = '';
+    res.appendChild(mk('div', g[1] + ' (' + g[0] + ') — ' + (s ? s[1] + ' (' + SUPS.filter(x => x[1] === s[1]).map(x => x[0]).join(' + ') + ')' : 'كل الموردين') + ' — المبيعات من ' + a + ' إلى ' + b, 'note gttl'));
+    if(clampMsg) res.appendChild(mk('div', clampMsg, 'err'));
+    const codes = s ? new Set(SUPS.filter(x => x[1] === s[1]).map(x => x[0]).concat([s[0]])) : null, agg = [];
+    const t = tableOf(['الفرع', 'المخزون', 'المبيعات'].concat(s ? ['حصته من الصنف'] : [])), span = s ? 3 : 2;
+    let ti = 0, ts = 0, ta = 0, nOk = 0;
+    BR.forEach((loc, i) => { const p = parts[i], tr = mk('tr'); tr.appendChild(mk('td', BN[loc]));
+      if(!p || p.err){ const c = mk('td', p ? p.err : '⏳ جارٍ…', p ? 'err' : 'note'); c.colSpan = span; tr.appendChild(c); }
+      else { const rows = p.rows || [], mine = codes ? rows.filter(r => codes.has(r[0])) : rows;
+        const inv = mine.reduce((x, r) => x + r[2], 0), sl = mine.reduce((x, r) => x + r[3], 0), all = rows.reduce((x, r) => x + r[2], 0);
+        ti += inv; ts += sl; ta += all; nOk++;
+        tr.appendChild(mk('td', fmtN(inv), 'num')); tr.appendChild(mk('td', fmtN(sl), 'num'));
+        if(s) tr.appendChild(mk('td', all ? Math.round(inv / all * 100) + '%' : '–', 'num'));
+        agg.push(...mine); }
+      t.tBodies[0].appendChild(tr); });
+    if(nOk > 1){ const tr = mk('tr', undefined, 'gtot'); tr.appendChild(mk('td', 'الإجمالي')); tr.appendChild(mk('td', fmtN(ti), 'num')); tr.appendChild(mk('td', fmtN(ts), 'num'));
+      if(s) tr.appendChild(mk('td', ta ? Math.round(ti / ta * 100) + '%' : '–', 'num')); t.tBodies[0].appendChild(tr); }
+    if(!one1 || s) res.appendChild(t);
+    if(s) return;
+    if(BAL && agg.length) res.appendChild(mk('div', 'النتيجة: نقارن نسبة المورد من المبيعات بنسبته من المخزون. 🟢 زِد = مخزونه أقل من نسبة مبيعاته، 🔴 خفّض = أكثر منها. المبلغ بالريال.', 'note'));
+    const list = merge(agg);
+    if(list.length && !one1){ res.appendChild(mk('h3', 'الموردون (مجموع الفروع)', 'gh'));
+      res.appendChild(supTable(list)); }
+    BR.forEach((loc, i) => { const p = parts[i]; if(!p || p.err || !(p.rows || []).length) return;
+      const mr = merge(p.rows), dt = mk('details', undefined, 'gbr'); dt.appendChild(mk('summary', BN[loc] + ' — ' + mr.length + ' مورد')); if(one1) dt.open = true;
+      dt.appendChild(supTable(mr)); res.appendChild(dt); });
+  };
+  ask.onclick = async () => {
+    er.textContent = '';
+    const g = gSel || pick(G, gIn.value, false); if(!g){ er.textContent = 'اختر اسم الصنف من القائمة'; return; }
+    let s = null; if(one.checked){ s = sSel ? [sSel[0], sSel[1]] : pick(SUPS, sIn.value, true); if(!s){ er.textContent = 'اختر المورد من القائمة'; return; } }
+    let a = fIn.value; const b = tIn.value;
+    if(!a || !b){ er.textContent = 'اختر التاريخين'; return; }
+    if(a > b){ er.textContent = 'تاريخ «من» بعد تاريخ «إلى»'; return; }
+    clampMsg = '';  // أطول من 6 أشهر: آخر 6 أشهر حتى تاريخ النهاية، مع تنبيه (2026-11-28)
+    if((new Date(b) - new Date(a)) / 864e5 > MAXD - 1){ const a0 = a; a = iso(new Date(new Date(b + 'T12:00:00').getTime() - (MAXD - 1) * 864e5));
+      clampMsg = '⚠️ الحد الأقصى 6 أشهر: حُسب التقرير من ' + a + ' إلى ' + b + '، وليس الفترة التي اخترتها (' + a0 + ' إلى ' + b + ').'; }
+    if(!liveCtx){ er.textContent = 'غير متاح لرابطك'; return; }
+    ask.disabled = true; ask.textContent = one1 ? '⏳ جارٍ التقرير…' : '⏳ جارٍ التقرير فرعًا فرعًا…'; const parts = {}; render(g, s, a, b, parts);
+    try { await grpRequest(liveCtx.q, await liveCtx.getKey(), {g: g[0], d: a, e: b, s: s ? s[0] : ''}, p => {
+        parts[p.i] = p; if(p.left != null) use.textContent = (p.cached ? 'النتيجة من ذاكرة اليوم (لم تُحتسب). ' : '') + 'المتبقي لك ' + (one1 ? 'الآن: ' : 'اليوم: ') + p.left + ' من ' + LIM
+          + (one1 && p.back > 0 && p.left < LIM ? ' — يعود طلب بعد ' + (p.back >= 3600 ? Math.floor(p.back / 3600) + ' س ' : '') + Math.ceil((p.back % 3600) / 60) + ' د' : ''); render(g, s, a, b, parts); }); }
+    catch(e){ er.textContent = e.message || 'تعذّر التقرير'; }
+    ask.disabled = false; ask.textContent = 'عرض'; };
+}
+// طلب "استعلم" لرصيد فرع واحد في الوضع البديل (خطأ 500 من ERP): رسالة مشفّرة واحدة ← رد بمعرّف الطلب + b
+function balRequest(q, key, code, model, branch){
+  return new Promise(async (resolve, reject) => {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    const list = {}; let done = false;
+    const es = esMulti(q, q.topic + 'r/sse?since=2m');
+    const fin = (e, v) => { if(done) return; done = true; clearTimeout(timer); es.close(); e ? reject(e) : resolve(v); };
+    const timer = setTimeout(() => fin(new Error('لم يصل رد، حاول لاحقًا')), 90000);
+    es.onmessage = async ev => {
+      let o; try { const m = JSON.parse(ev.data); if(m.event !== 'message') return; o = await ntfyMsg(m); } catch(_){ return; }
+      if(o.id !== id + 'b') return; list[o.n] = o.d;
+      if(Object.keys(list).length < o.t) return;
+      try { const all = b64(Array.from({length: o.t}, (_, i) => list[i]).join(''));
+        const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv: all.slice(0, 12), additionalData: new TextEncoder().encode(o.id)}, key, all.slice(12));
+        const r = await unz(pt); r.ok ? fin(null, r) : fin(new Error(r.error || 'تعذّر الاستعلام')); }
+      catch(_){ fin(new Error('رد غير صالح')); }
+    };
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12)), enc = u => btoa(String.fromCharCode(...u));
+      const ct = new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM', iv}, key,
+        new TextEncoder().encode(JSON.stringify({id, ts: Math.floor(Date.now() / 1000), k: 'bal', s: code, m: model, b: branch}))));
+      const r = await postReq(q, JSON.stringify({i: enc(iv), c: enc(ct)}));
+      if(!r.ok) fin(new Error('تعذّر إرسال الطلب'));
+    } catch(_){ fin(new Error('تعذّر إرسال الطلب، تحقق من الاتصال')); }
+  });
+}
+// نافذة تفصيل التكرار: "2x 24" لكل حجم تنزيل ثم الإجمالي بالحبات (تُفتح بالضغط على رقم التكرار)
+function showSizes(title, v){
+  const pop = document.getElementById('pop'), box = document.getElementById('popbox'), sizes = v[3] || [];
+  box.textContent = ''; box.appendChild(mk('div', 'تنزيلات ' + title, 'pt'));
+  sizes.forEach(([qty, n]) => box.appendChild(mk('div', n + 'x ' + qty, 'pl')));
+  box.appendChild(mk('div', 'الإجمالي = ' + sizes.reduce((t, [qty, n]) => t + qty * n, 0) + ' حبة', 'ptot'));
+  if(v[4]){ const d = String(v[4]); box.appendChild(mk('div', 'أول تنزيل: ' + d.slice(6) + '/' + d.slice(4, 6) + '/' + d.slice(0, 4), 'pfirst')); }
+  const x = mk('button', 'إغلاق', 'theme px'); x.onclick = () => { pop.hidden = true; }; box.appendChild(x);
+  pop.hidden = false;
+}
+document.getElementById('pop').onclick = e => { if(e.target.id === 'pop') e.target.hidden = true; };
+function setRepCell(cell, v){
+  cell.textContent = ''; cell.className = 'num';
+  if(!v){ cell.textContent = '–'; return; }
+  if(!v[0] && !(v[3] || []).length){ cell.textContent = String(v[0]); return; }
+  const b = mk('button', String(v[0]), 'rnum');  // الإطار المنقّط يدلّ أن الرقم يُضغط (بلا أيقونة بطلب المستخدم)
+  b.onclick = () => showSizes(cell.parentElement.children[0].textContent, v); cell.appendChild(b);
+}
+function renderBalances(box, r, q, onRep, onDet, onBalQ){
+  box.textContent = '';
+  const sup = (q.suppliers.find(s => s[0] === r.supplier) || [])[1] || '';
+  box.appendChild(mk('div', 'الموديل ' + r.model + ' — ' + sup + ' (' + r.group.join(' + ') + ')', 'h2'));
+  if(r.fb) box.appendChild(mk('div', r.fb, 'note'));
+  if(r.empty){ box.appendChild(mk('div', 'لم يُعثر على هذا الموديل لهذا المورد', 'err')); return {slot: null, cells: {}, infoEl: null, bals: {}, dbtns: {}, rows: {}}; }
+  const infoEl = mk('div', r.pend_info ? 'البيان والسعر: …' : '', 'infoln'); box.appendChild(infoEl);
+  const multi = r.sups.length > 1, t = tableOf(['الفرع', 'الرصيد', 'التكرار', 'التفاصيل'].concat(multi ? r.sups : [])), cells = {}, bals = {}, dbtns = {}, rows = {};
+  const cell = v => v === null ? mk('td', 'لم ينزل', 'note') : numCell(v);
+  r.branches.forEach(b => { const tr = mk('tr'); tr.appendChild(mk('td', b.n)); const bc = b.x ? mk('td', 'تعذّر الاتصال', 'err') : b.q ? mk('td') : cell(b.t); tr.appendChild(bc); bals[b.c] = {el: bc, t: b.t, subs: []};
+    if(b.q && onBalQ){ const qb = mk('button', 'استعلم', 'rbtn'); qb.type = 'button'; qb.onclick = () => onBalQ(b.c, bc, qb, bals[b.c].subs, r.sups); bc.appendChild(qb); }
+    const own = b.c === (r.auto || q.detail) && r.pending;  // فرع صاحب الرابط (أو الفرع الذي اختاره الوكيل تلقائيًا): يُحسب مع كشف الحركة
+    const live = b.t !== null && !r.fb;  // الوضع البديل (r.fb): لا تكرار ولا كشف
+    const rc = mk('td', !live ? '–' : (own ? '…' : ''), live && own ? 'num note' : 'num'); cells[b.c] = rc; tr.appendChild(rc);
+    if(live && !own){ const bt = mk('button', 'احسب', 'rbtn'); bt.onclick = () => onRep(b.c, rc, bt); rc.appendChild(bt); }
+    const dc = mk('td', !live ? '–' : '', 'num'); tr.appendChild(dc); rows[b.c] = tr;  // عمود التفاصيل: "عرض" كشف هذا الفرع في الأسفل
+    if(live && onDet){ const db = mk('button', 'عرض', 'dbtn'); db.disabled = !!r.pending; db.onclick = () => onDet(b.c, db); dc.appendChild(db); dbtns[b.c] = db; }
+    if(multi) b.by.forEach(v => { const sc = (b.x || b.q) ? mk('td', '–', 'note') : cell(v); bals[b.c].subs.push([sc, v]); tr.appendChild(sc); }); t.tBodies[0].appendChild(tr); });
+  box.appendChild(t);
+  const slot = mk('div'); if(r.pending) slot.appendChild(mk('div', 'جارٍ تحميل كشف الحركة…', 'note')); box.appendChild(slot);
+  return {slot, cells, infoEl, bals, dbtns, rows};
+}
+// رصيد صفر مع عدم وجود أي تنزيل في كل تاريخ الصنف = لم ينزل أصلًا (سجل ERP بصفر لا يعني أنه نزل). يُحسم من الكشف الذي حُمّل
+// أصلًا لحساب التكرار (فرع صاحب الرابط تلقائيًا، وغيره عند ضغط "احسب") بلا أي طلب إضافي على ERP.
+function markNotDelivered(bals, cells, branch, v){
+  const b = bals[branch]; if(!b || !v || b.t !== 0 || v[1] !== 0) return;
+  const note = el => { el.textContent = 'لم ينزل'; el.className = 'note'; };
+  note(b.el); b.subs.forEach(([el, val]) => { if(val === 0) note(el); });
+  const rc = cells[branch]; if(rc){ rc.textContent = '–'; rc.className = 'num'; }
+}
+function fillInfo(el, r){
+  if(!el) return;
+  if(!r.ok || !r.info.length){ el.remove(); return; }
+  el.textContent = '';
+  const one = r.info.length === 1 || r.info.every(x => x.n === r.info[0].n && x.p === r.info[0].p);
+  (one ? [r.info[0]] : r.info).forEach(x => { const ln = mk('div');
+    ln.appendChild(mk('span', (one ? '' : x.s + ': ') + x.n, 'iname')); ln.appendChild(mk('span', ' — السعر ' + x.p + ' ريال', 'iprice')); el.appendChild(ln); });
+}
+function fillRep(cells, rep, bals){
+  Object.keys(rep || {}).forEach(c => { const el = cells[c], v = rep[c]; if(!el) return;
+    setRepCell(el, v); markNotDelivered(bals || {}, cells, c, v); });
+}
+// «جيد/وسط/بطيء» (طلب 2026-11-17، مسؤول المشتريات): مبيعات الفرع في آخر 30 يومًا من الكشف نفسه (بيع − مرتجع زبون)، بلا أي طلب
+function speedOf(d){
+  const now = new Date(), ymd = t => t.getFullYear() * 10000 + (t.getMonth() + 1) * 100 + t.getDate();
+  const from = ymd(new Date(now.getTime() - 29 * 864e5)), si = d.types.indexOf('بيع'), ci = d.types.findIndex(x => x.indexOf('مرتجع زبون') >= 0 || x.indexOf('مرتجع زبائن') >= 0);
+  let sold = 0, bal = 0, first = 99999999, trunc = false;
+  d.items.forEach(it => { if(it.trunc) trunc = true; if(it.rows.length){ bal += it.rows[it.rows.length - 1][3]; first = Math.min(first, it.rows[0][0]); }
+    it.rows.forEach(x => { if(x[0] >= from){ if(x[1] === si) sold -= x[2]; else if(x[1] === ci) sold -= x[2]; } }); });
+  if(first === 99999999) return null;
+  const fs = String(first), fd = new Date(+fs.slice(0, 4), +fs.slice(4, 6) - 1, +fs.slice(6)), age = Math.floor((now - fd) / 864e5) + 1;
+  const n = v => (Math.round(v * 10) / 10).toLocaleString('en-US'), tail = ' (الرصيد ' + n(bal) + ')';
+  sold = Math.max(0, sold);
+  const days = !trunc && age < 30 ? age : 30, per30 = sold * 30 / days;
+  const lbl = per30 >= 30 ? ['g', '🟢 جيد'] : per30 >= 10 ? ['y', '🟡 وسط'] : ['r', '🔴 بطيء'];
+  return {c: lbl[0], t: lbl[1] + ' في ' + d.name + ' — بيع ' + n(sold) + ' حبة في آخر ' + days + ' يومًا' + (days < 30 ? ' (≈ ' + n(per30) + ' في 30 يومًا)' : '') + tail};
+}
+function renderDetail(slot, r){
+  slot.textContent = '';
+  if(!r.ok){ slot.appendChild(mk('div', r.error || 'تعذّر تحميل كشف الحركة', 'err')); return; }
+  const d = r.detail, TYPE_CLS = {'تنزيل من المستودع': 'tin', 'رفع للمستودع': 'tout', 'جرد': 'tcnt', 'تحديث كمية': 'tcnt'};
+  if(!d.items.length) slot.appendChild(mk('div', 'لا توجد حركة لهذا الموديل في فرع ' + d.name, 'note'));
+  if(window.__speed && d.items.length){ const v = speedOf(d); if(v){ const e = mk('div', v.t, 'spd ' + v.c); slot.appendChild(e); } }
+  d.items.forEach(it => {
+    slot.appendChild(mk('div', 'حركة الصنف — ' + d.name + ' — ' + it.code, 'h2'));
+    if(window.__priceAsk && d.branch) slot.appendChild(priceBox(it, d));
+    if(it.trunc) slot.appendChild(mk('div', 'المعروض أحدث الحركات فقط', 'note'));
+    if(!it.rows.length){ slot.appendChild(mk('div', 'لا توجد حركة لهذا الصنف في الفرع', 'note')); return; }
+    const w = mk('div', undefined, 'scroll'), dt = tableOf(['التاريخ', 'النوع', 'الكمية', 'الرصيد']);
+    it.rows.forEach(x => { const tr = mk('tr'), s = String(x[0]); if(TYPE_CLS[d.types[x[1]]]) tr.className = TYPE_CLS[d.types[x[1]]];
+      tr.appendChild(mk('td', s.slice(6) + '/' + s.slice(4, 6) + '/' + s.slice(0, 4), 'num')); tr.appendChild(mk('td', d.types[x[1]]));
+      tr.appendChild(mk('td', (x[2] > 0 ? '+' : '') + x[2], 'num')); tr.appendChild(numCell(x[3])); dt.tBodies[0].appendChild(tr); });
+    w.appendChild(dt); slot.appendChild(w); requestAnimationFrame(() => { w.scrollTop = w.scrollHeight; });
+  });
+}
+function setupInquiry(q, pw){
+  const sup = document.getElementById('isup'), mod = document.getElementById('imod'), btn = document.getElementById('iask'),
+        err = document.getElementById('ierr'), res = document.getElementById('ires'), dl = document.getElementById('sups');
+  q.suppliers.forEach(([c, n]) => { const o = document.createElement('option'); o.value = c + ' ' + n; dl.appendChild(o); });
+  let keyP = null, lastAt = 0, repBusy = false; window.__speed = !!q.speed;
+  const useEl = document.getElementById('iuse');
+  const setUsage = u => { if(!u) return; useEl.textContent = 'استعلاماتك في الساعة الأخيرة: ' + u[0] + ' من ' + u[1];
+    useEl.className = u[0] >= u[1] * 0.8 ? 'note iuse-warn' : 'note'; };
+  const getKey = () => keyP || (keyP = crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey'])
+    .then(km => crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(q.salt), iterations:q.iter, hash:'SHA-256'}, km,
+                                        {name:'AES-GCM', length:256}, false, ['encrypt', 'decrypt'])));
+  window.__priceAsk = async (code, branch) => priceRequest(q, await getKey(), code, branch);  // «💲 السعر القديم والجديد» (2026-11-17)
+  // البحث الذكي عن المورد (بلا backslash داخل القالب): رمز كامل أو جزئي أو اسم أو جزء من اسم؛ أسماء متشابهة = عرض أرقامها للاختيار
+  const norm = t => { let o = ''; for(const ch of (t || '').trim().toLowerCase()){ const c = ch.charCodeAt(0);
+    if((c >= 0x64B && c <= 0x65F) || c === 0x670 || c === 0x640) continue;
+    o += (c === 0x623 || c === 0x625 || c === 0x622) ? 'ا' : c === 0x629 ? 'ه' : c === 0x649 ? 'ي' : ch; } return o; };
+  const byName = {}; q.suppliers.forEach(([c, n]) => { (byName[n] || (byName[n] = {name: n, codes: []})).codes.push(c); });
+  const GROUPS = Object.values(byName);
+  const resolve = raw => {
+    const t = raw.trim(); if(!t) return {error: 'اكتب اسم المورد أو رقمه'};
+    const lead = t.match(/^([0-9]{1,4})( |$)/);
+    if(lead){ const code = lead[1].padStart(4, '0');
+      if(q.suppliers.some(s => s[0] === code) || lead[1].length === 4) return {code};
+      const hits = GROUPS.filter(g => g.codes.some(c => c.replace(/^0+/, '').startsWith(lead[1])));
+      if(!hits.length) return {error: 'لا يوجد مورد بهذا الرقم'};
+      return hits.length === 1 ? {code: hits[0].codes[0]} : {cands: hits}; }
+    const words = norm(t).split(' ').filter(Boolean);
+    const hits = GROUPS.filter(g => { const n = norm(g.name); return words.every(w => n.includes(w)); });
+    if(!hits.length) return {error: 'لا يوجد مورد بهذا الاسم'};
+    const exact = hits.filter(g => norm(g.name) === norm(t));
+    if(exact.length === 1) return {code: exact[0].codes[0]};
+    return hits.length === 1 ? {code: hits[0].codes[0]} : {cands: hits};
+  };
+  const candBox = document.getElementById('icand');
+  const setBusy = on => { btn.disabled = on; btn.classList.toggle('busy', on); btn.textContent = on ? 'جارٍ البحث…' : 'بحث'; };
+  sup.addEventListener('input', () => { candBox.textContent = ''; });
+  async function ask(){
+    err.textContent = ''; candBox.textContent = ''; const model = mod.value.trim();
+    if(!/^[A-Za-z0-9][A-Za-z0-9._ /-]{0,29}$/.test(model)){ err.textContent = 'اكتب رقم الموديل'; return; }
+    const r0 = resolve(sup.value);
+    if(r0.error){ err.textContent = r0.error; return; }
+    if(r0.cands){ err.textContent = 'أكثر من مورد يطابق ما كتبت، اختر من الأرقام:';
+      r0.cands.slice(0, 8).forEach(g => { const b = mk('button', g.name + ' (' + g.codes.join(' + ') + ')', 'cand');
+        b.onclick = () => { sup.value = g.codes[0] + ' ' + g.name; ask(); }; candBox.appendChild(b); });
+      if(r0.cands.length > 8) candBox.appendChild(mk('div', 'اكتب أكثر من الاسم لتضييق القائمة', 'note'));
+      return; }
+    return run(r0.code, model, null);
+  }
+  // ---- سجل البحث لآخر 24 ساعة داخل جهاز المستخدم فقط (localStorage؛ لا يصل لأي خادم) — طلب 2026-10-12 ----
+  // يحفظ نتيجة كل استعلام ناجح (أرصدة + بيان + كشوف الفروع المعروضة + أرقام "احسب") لاستعراضها لاحقًا بلا أي استعلام ولا استهلاك من الحصة.
+  const HKEY = 'h_' + q.topic, DAY_MS = 86400000, MAX_ENTRIES = 12, MAX_ENTRY = 80000, MAX_TOTAL = 250000;
+  const hload = () => { try { const a = JSON.parse(localStorage.getItem(HKEY) || '[]'); return a.filter(e => e && e.bal && Date.now() - e.t < DAY_MS); } catch(_){ return []; } };
+  const hsave = list => { try { let t = JSON.stringify(list); while(t.length > MAX_TOTAL && list.length > 1){ list.pop(); t = JSON.stringify(list); }
+    localStorage.setItem(HKEY, t); } catch(_){} };
+  // الكشف المحفوظ يُقصّ إلى أحدث 80 حركة لكل صنف توفيرًا للمساحة (الكشف الكامل يبقى في الصفحة المفتوحة)
+  const slim = d => { if(!d || !d.ok) return d; const c = JSON.parse(JSON.stringify(d));
+    c.detail.items.forEach(it => { if(it.rows.length > 80){ it.rows = it.rows.slice(-80); it.trunc = true; } }); return c; };
+  const hput = e => {
+    const x = Object.assign({}, e); delete x.det;
+    if(e.dets){ x.dets = {}; Object.keys(e.dets).forEach(c => { x.dets[c] = slim(e.dets[c]); }); }
+    if(JSON.stringify(x).length > MAX_ENTRY) delete x.dets;  // كشوف طويلة جدًا: نحتفظ بالأرصدة فقط
+    const list = hload().filter(y => !(y.s === x.s && y.m === x.m)); list.unshift(x); hsave(list.slice(0, MAX_ENTRIES)); drawHist(); };
+  const clk = ms => { const t = new Date(ms), h = t.getHours() % 12 || 12; return h + ':' + String(t.getMinutes()).padStart(2, '0') + ' ' + (t.getHours() < 12 ? 'ص' : 'م'); };
+  const ago = ms => { const m = Math.floor((Date.now() - ms) / 60000); return m < 1 ? 'الآن' : m < 60 ? 'قبل ' + m + ' د' : 'قبل ' + Math.floor(m / 60) + ' س'; };
+  const hbox = mk('div', undefined, 'hist'); res.parentNode.insertBefore(hbox, res);
+  let hOpen = false; try{ hOpen = localStorage.getItem(HKEY + 'o') === '1'; }catch(_){}  // مطويّ افتراضيًا (يوفّر مساحة الشاشة)؛ يتذكّر آخر اختيار
+  function drawHist(){
+    const list = hload(); hbox.textContent = ''; hbox.hidden = !list.length; if(!list.length) return;
+    const head = mk('button', (hOpen ? '▼ ' : '◀ ') + 'آخر العمليات (' + list.length + ')', 'hhead'); head.type = 'button';
+    head.onclick = () => { hOpen = !hOpen; try{ localStorage.setItem(HKEY + 'o', hOpen ? '1' : '0'); }catch(_){} drawHist(); };
+    hbox.appendChild(head);
+    if(!hOpen) return;
+    list.forEach(e => { const nm = (q.suppliers.find(x => x[0] === e.s) || [])[1] || e.s;
+      const c = mk('button', nm + ' · ' + e.m, 'hchip'); c.type = 'button'; c.appendChild(mk('small', ago(e.t))); c.onclick = () => { showHist(e); hOpen = false; drawHist(); }; hbox.appendChild(c); });  // اختيار بحث يطوي القائمة
+    const x = mk('button', 'مسح السجل', 'hclear'); x.type = 'button';
+    x.onclick = () => { try{ localStorage.removeItem(HKEY); }catch(_){} drawHist(); }; hbox.appendChild(x);
+  }
+  // حالة نتيجة معروضة: st = {cc, cm, cells, bals, dbtns, rows, slot, dets: {فرع: رد الكشف}, active, pending, entry}
+  const lock = (st, on) => res.querySelectorAll('.rbtn,.dbtn').forEach(x => { x.disabled = on || (!!st.pending && x.classList.contains('dbtn')); });
+  const markActive = st => Object.keys(st.dbtns).forEach(c => { const on = c === st.active, bt = st.dbtns[c];
+    bt.classList.toggle('on', on); bt.textContent = on ? '✓ معروض' : 'عرض'; if(st.rows[c]) st.rows[c].classList.toggle('act', on); });
+  const showDet = (st, c) => { st.active = c; if(st.entry) st.entry.active = c; renderDetail(st.slot, st.dets[c]); markActive(st); };
+  // معالج "احسب" المشترك بين النتيجة الحيّة والمحفوظة
+  const repHandler = st => async (branch, cell, b) => {
+    if(repBusy) return; repBusy = true; lock(st, true); b.textContent = '…';
+    try { const v = await repRequest(q, await getKey(), st.cc, st.cm, branch);
+      setRepCell(cell, v.rep[branch]); markNotDelivered(st.bals, st.cells, branch, v.rep[branch]); setUsage(v.usage);
+      if(st.entry && st.entry.bal){ (st.entry.rep || (st.entry.rep = {}))[branch] = v.rep[branch]; hput(st.entry); } }
+    catch(e){ err.textContent = e.message || 'تعذّر الحساب'; b.textContent = 'احسب'; }
+    repBusy = false; lock(st, false); };
+  // معالج "استعلم" (الوضع البديل): رصيد فرع واحد عند الطلب
+  const balHandler = st => async (branch, cell, b, subs, sups) => {
+    if(repBusy) return; repBusy = true; lock(st, true); b.textContent = '…'; err.textContent = '';
+    try { const v = await balRequest(q, await getKey(), st.cc, st.cm, branch), x = v.bal; setUsage(v.usage);
+      if(x.x){ cell.textContent = 'تعذّر الاتصال'; cell.className = 'err'; }
+      else { cell.textContent = String(x.t); cell.className = 'num' + (x.t < 0 ? ' neg' : '');
+        subs.forEach((pair, i) => { const n = x.d[sups[i]] || 0; pair[0].textContent = String(n); pair[0].className = 'num'; }); } }
+    catch(e){ err.textContent = e.message || 'تعذّر الاستعلام'; b.textContent = 'استعلم'; }
+    repBusy = false; lock(st, false); };
+  // معالج "عرض" (عمود التفاصيل): كشف الفرع تحت الجدول بدل السابق. المحمَّل سابقًا يُعرض فورًا بلا طلب؛ الجديد طلب واحد يُحسب من الحصة.
+  const detHandler = st => async (branch, b) => {
+    if(st.dets[branch]){ showDet(st, branch); return; }
+    if(repBusy || st.pending) return; repBusy = true; lock(st, true); err.textContent = '';
+    const prev = st.slot.textContent; st.slot.textContent = ''; st.slot.appendChild(mk('div', 'جارٍ تحميل كشف ' + (st.rows[branch] ? st.rows[branch].children[0].textContent : branch) + '…', 'note'));
+    try { const v = await detRequest(q, await getKey(), st.cc, st.cm, branch);
+      st.dets[branch] = v; setUsage(v.usage); showDet(st, branch);
+      if(v.detail.rep){ fillRep(st.cells, {[branch]: v.detail.rep}, st.bals); if(st.entry){ (st.entry.rep || (st.entry.rep = {}))[branch] = v.detail.rep; } }
+      if(st.entry && st.entry.bal){ st.entry.dets = st.dets; hput(st.entry); } }
+    catch(e){ err.textContent = e.message || 'تعذّر تحميل الكشف'; if(st.active && st.dets[st.active]) renderDetail(st.slot, st.dets[st.active]); else st.slot.textContent = ''; }
+    repBusy = false; lock(st, false); };
+  function showHist(e){
+    if(btn.disabled) return;  // استعلام جارٍ
+    err.textContent = ''; candBox.textContent = ''; res.textContent = '';
+    sup.value = (e.s + ' ' + ((q.suppliers.find(x => x[0] === e.s) || [])[1] || '')).trim(); mod.value = e.m;
+    res.appendChild(mk('div', 'نتيجة محفوظة من ' + clk(e.t) + ' (' + ago(e.t) + ') — اضغط "بحث" لتحديثها', 'note'));
+    const box = mk('div'); res.appendChild(box);
+    const st = {cc: e.s, cm: e.m, cells: {}, bals: {}, dbtns: {}, rows: {}, slot: null, active: '', pending: false, entry: e,
+                dets: Object.assign({}, e.dets || (e.det && e.det.ok ? {[e.det.detail.branch]: e.det} : {}))};
+    const o = renderBalances(box, Object.assign({}, e.bal, {pending: false, pend_info: false}), q, repHandler(st), detHandler(st), balHandler(st));
+    st.cells = o.cells; st.bals = o.bals; st.dbtns = o.dbtns; st.rows = o.rows; st.slot = o.slot;
+    if(e.inf) fillInfo(o.infoEl, e.inf); else if(o.infoEl) o.infoEl.remove();
+    Object.keys(st.dets).forEach(c => { const d = st.dets[c]; if(d && d.ok && d.detail.rep) fillRep(o.cells, {[c]: d.detail.rep}, o.bals); });
+    fillRep(o.cells, e.rep || {}, o.bals);
+    const first = e.active && st.dets[e.active] ? e.active : Object.keys(st.dets)[0];
+    if(first && o.slot) showDet(st, first);
+  }
+  // من «متابعة التنزيل (شاملة)»: نفس الموديل خلال 10 دقائق يُعرض من السجل المحفوظ بلا طلب جديد (تخفيف 2026-11-15)
+  window.__inqRecent = (s, m) => { const e = hload().find(x => x.s === s && String(x.m).toUpperCase() === String(m).toUpperCase() && Date.now() - x.t < 600000);
+    if(!e || btn.disabled) return false; showHist(e); return true; };
+  // تنفيذ الاستعلام؛ scan = رمز صنف ممسوح بالكاميرا (الوكيل يحوّله إلى مورد وموديل ويرسلهما فتُملأ الخانتان)
+  async function run(cc, cm, scan){
+    if(Date.now() - lastAt < 8000){ err.textContent = 'انتظر ثوانٍ قبل استعلام جديد'; return; }
+    err.textContent = ''; candBox.textContent = '';
+    lastAt = Date.now(); setBusy(true); res.textContent = ''; res.appendChild(mk('div', scan ? 'جارٍ تحديد الصنف… قد يستغرق حتى دقيقة' : 'جارٍ البحث… قد يستغرق حتى دقيقة', 'note'));
+    const st = {cc, cm, cells: {}, bals: {}, dbtns: {}, rows: {}, slot: null, dets: {}, active: '', pending: false,
+                entry: {t: Date.now(), s: cc, m: cm, bal: null, dets: null, inf: null, rep: {}, active: ''}};
+    st.entry.dets = st.dets;
+    let infoEl = null;
+    try { await roundTrip(q, await getKey(), cc, cm,
+            r => { setUsage(r.usage); st.pending = !!r.pending; const o = renderBalances(res, r, q, repHandler(st), detHandler(st), balHandler(st));
+              st.slot = o.slot; infoEl = o.infoEl; st.cells = o.cells; st.bals = o.bals; st.dbtns = o.dbtns; st.rows = o.rows;
+              const bal = Object.assign({}, r); delete bal.usage; st.entry.bal = bal; st.entry.s = r.supplier; st.entry.m = r.model; },
+            r => { st.pending = false;
+              if(st.slot){ if(r.ok){ st.dets[r.detail.branch] = r; showDet(st, r.detail.branch); if(r.detail.rep) fillRep(st.cells, {[r.detail.branch]: r.detail.rep}, st.bals);
+                  if(r.detail.skipped) fillRep(st.cells, r.detail.skipped, st.bals); }  // فروع تخطّاها الكشف التلقائي لأن الصنف لم ينزل فيها
+                else renderDetail(st.slot, r); }
+              lock(st, repBusy); },
+            r => { fillInfo(infoEl, r); if(r.ok) st.entry.inf = r; },
+            scan, s => { st.cc = s.supplier; st.cm = s.model; sup.value = (s.supplier + ' ' + ((q.suppliers.find(x => x[0] === s.supplier) || [])[1] || '')).trim(); if(s.model) mod.value = s.model; }); }
+    catch(e){ st.pending = false; if(infoEl && infoEl.textContent.endsWith('…')) infoEl.remove(); Object.values(st.cells).forEach(el => { if(el.textContent === '…'){ el.className = 'num'; el.textContent = '–'; } });
+      if(st.slot){ st.slot.textContent = ''; st.slot.appendChild(mk('div', e.message || 'تعذّر تحميل كشف الحركة', 'err')); lock(st, repBusy); }
+      else { res.textContent = ''; err.textContent = e.message || 'تعذّر الاستعلام'; } }
+    finally { Object.values(st.cells).forEach(el => { if(el.textContent === '…'){ el.className = 'num'; el.textContent = '–'; } }); setBusy(false);
+      if(st.entry.bal && !st.entry.bal.empty) hput(st.entry); }
+  }
+  drawHist();
+  liveCtx = {q, getKey, setUsage};
+  getKey();  // اشتقاق المفتاح مسبقًا (نحو نصف ثانية) كي لا يُحسب وقت الاستعلام
+  btn.onclick = ask; mod.addEventListener('keydown', e => { if(e.key === 'Enter') ask(); });
+  if(window.setupScan) window.setupScan({run, known: c4 => q.suppliers.some(x => x[0] === c4)});  // أزرار الكاميرا والصورة (تُحقن لمن فُعّل له فقط)؛ known: قراءة الصور غير الواضحة لا تُقبل إلا لمورد معروف
+}
+// كلمة السر تُحفظ لكل صفحة على حدة (مفتاحها مسار الصفحة): كل الصفحات على نطاق واحد، وكان مفتاح واحد مشترك 'k' يُستبدل أو يُحذف عند فتح صفحة أخرى (2026-11-13).
+// المفتاح القديم 'k' يُجرَّب مرة واحدة للترحيل، وفشله لا يحذف شيئًا.
+const SK = 'k:' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
+async function tryOpen(pw, silent, legacy){
+  try { const d = await decrypt(pw); try{localStorage.setItem(SK, pw); if(legacy) localStorage.removeItem('k');}catch(_){} show(d, pw); }
+  catch(_){ if(silent){ if(!legacy){ try{localStorage.removeItem(SK);}catch(_){} } } else document.getElementById('err').textContent = 'كلمة السر غير صحيحة'; }
+}
+document.getElementById('open').onclick = () => tryOpen(document.getElementById('pw').value.trim(), false);
+document.getElementById('pw').addEventListener('keydown', e => { if(e.key==='Enter') tryOpen(e.target.value.trim(), false); });
+document.getElementById('logout').onclick = () => { try{localStorage.removeItem(SK);}catch(_){} location.reload(); };
+try { const k = localStorage.getItem(SK); if(k) tryOpen(k, true); else { const k0 = localStorage.getItem('k'); if(k0) tryOpen(k0, true, true); } } catch(_){}
+// تحديث ذاتي للتطبيق المثبَّت: عند كل فتح وعند العودة إليه يقارن رقم النسخة بالمنشورة، ويعيد التحميل وحده إن وُجدت أحدث
+// (لا حاجة لحذف التطبيق وتثبيته). المقارنة رقمية "أحدث فقط" فلا تدور الصفحة في حلقة إن أعاد CDN نسخة أقدم.
+const BUILD = +document.querySelector('meta[name=build]').content; let lastCheck = 0;
+async function checkUpdate(){
+  if(Date.now() - lastCheck < 60000) return; lastCheck = Date.now();
+  try { const r = await fetch(location.pathname + '?v=' + Date.now(), {cache:'no-store'});
+    const m = (await r.text()).match(/name="build" content="([0-9]+)"/);
+    if(m && +m[1] > BUILD) location.replace(location.pathname + '?v=' + m[1]); } catch(_){}
+}
+document.addEventListener('visibilitychange', () => { if(!document.hidden) checkUpdate(); });
+checkUpdate();
+</script><script>/* مسح باركود الصنف بالكاميرا (طلب صريح 2026-10-11): الباركود على بطاقات القطع من نوع CODE93 ويحمل رمز الصنف (15 رقمًا).
+   فكّ الباركود يتم هنا داخل هاتف المستخدم بلا أي مكتبة خارجية ولا طلب شبكة؛ لا يصل الوكيل إلا رمز الصنف نفسه مشفّرًا.
+   Safari على الآيفون بلا BarcodeDetector فنفكّه بأنفسنا: خطوط مسح على عدة زوايا ← أطوال الأشرطة ← مطابقة الأنماط ← فحص C وK. */
+(function(){
+'use strict';
+const SYMS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%abcd';  // a-d = رموز التحويل (لا ندعمها)
+const BITS = ['100010100','101001000','101000100','101000010','100101000','100100100','100100010','101010000','100010010','100001010',
+  '110101000','110100100','110100010','110010100','110010010','110001010','101101000','101100100','101100010','100110100',
+  '100011010','101011000','101001100','101000110','100101100','100010110','110110100','110110010','110101100','110100110',
+  '110010110','110011010','101101100','101100110','100110110','100111010','100101110','111010100','111010010','111001010',
+  '101101110','101110110','110101110','100100110','111011010','111010110','100110010'];
+const START = BITS.length;  // الفهرس 47 = نمط البداية/النهاية (*)
+BITS.push('101011110');
+const PATS = BITS.map(b => { const r = []; let c = b[0], n = 0; for(const x of b){ if(x === c) n++; else { r.push(n); c = x; n = 1; } } r.push(n); return r; });
+
+function match(lens, pos){
+  let t = 0; for(let k = 0; k < 6; k++) t += lens[pos + k];
+  if(t < 9) return -1;
+  const u = 9 / t; let best = 1e9, second = 1e9, bi = -1;
+  for(let p = 0; p <= START; p++){
+    const P = PATS[p]; let e = 0;
+    for(let k = 0; k < 6; k++) e += Math.abs(lens[pos + k] * u - P[k]);
+    if(e < best){ second = best; best = e; bi = p; } else if(e < second) second = e;
+  }
+  return (best / 6 <= 0.34 && second - best >= 0.45) ? bi : -1;
+}
+function checked(vals){
+  if(vals.length < 3) return null;
+  const data = vals.slice(0, -2), c = vals[vals.length - 2], k = vals[vals.length - 1];
+  let s = 0; for(let j = 0; j < data.length; j++) s += data[data.length - 1 - j] * ((j % 20) + 1);
+  if(s % 47 !== c) return null;
+  const withC = data.concat([c]); s = 0; for(let j = 0; j < withC.length; j++) s += withC[withC.length - 1 - j] * ((j % 15) + 1);
+  if(s % 47 !== k) return null;
+  let out = ''; for(const v of data){ if(v >= 43) return null; out += SYMS[v]; }
+  return out;
+}
+function decodeLens(lens, firstBar){
+  for(let i = firstBar ? 0 : 1; i + 6 <= lens.length; i += 2){
+    // معايرة الانحياز من حرف البداية (أشرطته 6 وحدات وفراغاته 3): الضبابية/العتبة تُسمِّن الأشرطة وتُنحِّف الفراغات بمقدار b
+    let T = 0, B = 0; for(let k = 0; k < 6; k++){ T += lens[i + k]; if(k % 2 === 0) B += lens[i + k]; }
+    const m = T / 9; if(m < 1) continue;
+    const b = (B - 6 * m) / 3; if(Math.abs(b) > 0.45 * m) continue;
+    let e = 0; for(let k = 0; k < 6; k++) e += Math.abs((lens[i + k] - (k % 2 === 0 ? b : -b)) / m - PATS[START][k]);
+    if(e / 6 > 0.3) continue;
+    const cl = lens.map((x, k) => k < i ? x : Math.max(0.1, x - ((k - i) % 2 === 0 ? b : -b)));
+    const vals = []; let pos = i + 6, ok = false;
+    while(pos + 6 <= cl.length && vals.length < 48){
+      const mt = match(cl, pos); if(mt < 0) break;
+      if(mt === START){ ok = pos + 6 < cl.length; break; }  // بعد النهاية شريط إنهاء بعرض وحدة
+      vals.push(mt); pos += 6;
+    }
+    if(!ok) continue;
+    const r = checked(vals); if(r !== null) return r;
+  }
+  return null;
+}
+// خط بكسلات رمادية ← أطوال أشرطة/فراغات بدقة أقل من بكسل (حدود الانتقال تُحسب بالاستيفاء الخطي حول متوسط محلي متحرك،
+// مع تخلّف ±5 لمنع وميض الضجيج). lens[k] = الفرق بين حدّين متتاليين؛ firstBar = لون أول مجرى كامل.
+function lensOf(v){
+  const n = v.length, pre = new Float64Array(n + 1);
+  for(let i = 0; i < n; i++) pre[i + 1] = pre[i] + v[i];
+  const half = Math.max(20, n >> 3), edges = []; let state = -1, firstBar = false, prevD = 0, lastDown = 0, lastUp = 0;
+  for(let i = 0; i < n; i++){
+    const a = Math.max(0, i - half), b = Math.min(n, i + half), d = v[i] - (pre[b] - pre[a]) / (b - a);
+    if(i > 0){
+      if(prevD >= 0 && d < 0) lastDown = (i - 1) + prevD / (prevD - d);
+      else if(prevD < 0 && d >= 0) lastUp = (i - 1) + (-prevD) / (d - prevD);
+    }
+    prevD = d;
+    let s = state; if(d < -5) s = 1; else if(d > 5) s = 0;
+    if(s < 0 || s === state) continue;
+    if(state >= 0){
+      let e = s === 1 ? lastDown : lastUp;
+      if(edges.length && e <= edges[edges.length - 1]) e = edges[edges.length - 1] + 0.01;
+      edges.push(e);
+      if(edges.length === 1) firstBar = s === 1;
+    }
+    state = s;
+  }
+  const lens = []; for(let k = 0; k + 1 < edges.length; k++) lens.push(edges[k + 1] - edges[k]);
+  return {lens, firstBar};
+}
+// ---------- فكّ "ناعم" للصور المأخوذة من الاستوديو (طلب 2026-10-16): الصورة قد لا تكون واضحة 100% ----------
+// الفكّ الصارم يرفض أي حرف غامض. هنا نحتفظ لكل حرف بأفضل 3 أنماط (وأفضل 3 أرقام) مع خطأ المطابقة، نجمع أصوات خطوط كثيرة من الصورة،
+// ثم نبحث عن أرقام تُحقِّق فحصَي C وK المقروءين (أرقام فقط، ومورد معروف) — فحصان = حماية قوية من القراءة الخاطئة.
+function rankAt(lens, pos){
+  let t = 0; for(let k = 0; k < 6; k++) t += lens[pos + k];
+  if(t < 9) return null;
+  const u = 9 / t, all = [], dig = [];
+  for(let p = 0; p <= START; p++){
+    const P = PATS[p]; let e = 0;
+    for(let k = 0; k < 6; k++) e += Math.abs(lens[pos + k] * u - P[k]);
+    all.push([p, e]);
+  }
+  all.sort((a, b) => a[1] - b[1]);
+  // الرقم لا يُرشَّح إلا إن كان بين أفضل 4 أنماط من الـ47 (لا نفرض رقمًا على حرف يشبه رمزًا آخر): هذا ما يُبقي القراءات الخاطئة نادرة جدًا
+  return {all: all.slice(0, 3), dig: all.slice(0, 4).filter(x => x[0] < 10)};
+}
+function softParse(lens, firstBar){
+  for(let i = firstBar ? 0 : 1; i + 6 <= lens.length; i += 2){
+    let T = 0, B = 0; for(let k = 0; k < 6; k++){ T += lens[i + k]; if(k % 2 === 0) B += lens[i + k]; }
+    const m = T / 9; if(m < 1) continue;
+    const b = (B - 6 * m) / 3; if(Math.abs(b) > 0.5 * m) continue;
+    let e = 0; for(let k = 0; k < 6; k++) e += Math.abs((lens[i + k] - (k % 2 === 0 ? b : -b)) / m - PATS[START][k]);
+    if(e / 6 > 0.4) continue;
+    const cl = lens.map((x, k) => k < i ? x : Math.max(0.1, x - ((k - i) % 2 === 0 ? b : -b)));
+    const cols = []; let pos = i + 6, ok = false;
+    while(pos + 6 <= cl.length && cols.length < 20){
+      const r = rankAt(cl, pos); if(!r || r.all[0][1] / 6 > 0.55) break;
+      if(r.all[0][0] === START){ ok = pos + 6 < cl.length; break; }
+      cols.push(r); pos += 6;
+    }
+    if(ok && cols.length >= 14 && cols.length <= 18) return cols;
+  }
+  return null;
+}
+function ckOf(d){  // d = قيم الأرقام (0-9) ← [C, K]
+  let s = 0; for(let j = 0; j < d.length; j++) s += d[d.length - 1 - j] * ((j % 20) + 1);
+  const c = s % 47, w = d.concat([c]); s = 0; for(let j = 0; j < w.length; j++) s += w[w.length - 1 - j] * ((j % 15) + 1);
+  return [c, s % 47];
+}
+// parts = قراءات ناعمة (أعمدة لكل خط)؛ known(كود4أرقام) اختياري: يقبل أول 4 أرقام (المورد) إن كانت لمورد موجود
+function softResolve(parts, known){
+  const groups = {}; parts.forEach(c => { (groups[c.length] || (groups[c.length] = [])).push(c); });
+  let best = null;
+  Object.keys(groups).forEach(len => {
+    const L = +len, n = L - 2, grp = groups[len]; if(grp.length < 2 && n < 12) return;
+    const sd = [], sa = [];
+    for(let j = 0; j < L; j++){ sd.push(new Float64Array(10)); sa.push(new Float64Array(48)); }
+    grp.forEach(cols => cols.forEach((r, j) => {
+      r.dig.forEach(([p, e]) => { sd[j][p] += Math.exp(-2.5 * e); });
+      r.all.forEach(([p, e]) => { sa[j][p] += Math.exp(-2.5 * e); }); }));
+    const order = (arr, k) => Array.from(arr, (v, i) => [i, v]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, k);
+    const dc = [], unc = [];
+    for(let j = 0; j < n; j++){
+      const o = order(sd[j], 3); if(!o.length) return;
+      dc.push(o); const margin = o.length > 1 ? (o[0][1] - o[1][1]) / o[0][1] : 1;
+      if(margin < 0.6) unc.push([margin, j]);
+    }
+    const cc = order(sa[n].subarray(0, 47), 2), kc = order(sa[n + 1].subarray(0, 47), 2);
+    if(!cc.length || !kc.length) return;
+    unc.sort((a, b) => a[0] - b[0]);
+    const U = unc.slice(0, 3).map(x => x[1]), base = dc.map(o => o[0][0]);
+    for(let mask = 0; mask < (1 << U.length); mask++){
+      const d = base.slice(); let score = 0, bad = false;
+      for(let j = 0; j < n; j++) score += Math.log(dc[j][0][1] + 1e-9);
+      U.forEach((j, bit) => { if(mask >> bit & 1){ if(dc[j].length < 2){ bad = true; return; } d[j] = dc[j][1][0]; score += Math.log((dc[j][1][1] + 1e-9) / (dc[j][0][1] + 1e-9)); } });
+      if(bad) continue;
+      const [c, k] = ckOf(d);
+      const ci = cc.findIndex(x => x[0] === c), ki = kc.findIndex(x => x[0] === k);
+      if(ci < 0 || ki < 0) continue;
+      if(ci > 0 && (cc[0][1] - cc[1][1]) / cc[0][1] > 0.35) continue;  // الفحص الثاني خيار حقيقي فقط إن كان الأول غير واثق
+      if(ki > 0 && (kc[0][1] - kc[1][1]) / kc[0][1] > 0.35) continue;
+      const code = d.join('');
+      if(known && !known(code.slice(0, 4))) continue;
+      score -= 2 * (ci + ki) + 1.5 * mask.toString(2).replace(/0/g, '').length;
+      if(!best || score > best.score) best = {code, score};
+    }
+  });
+  return best ? best.code : null;
+}
+function decodeLine(v, soft, minRange){
+  const {lens, firstBar} = lensOf(v);
+  if(lens.length < 20) return null;
+  const r = decodeLens(lens, firstBar); if(r !== null) return r;
+  const lastBar = (lens.length % 2 === 1) ? firstBar : !firstBar;  // لون آخر مجرى = أول مجرى في القائمة المعكوسة
+  const rev = lens.slice().reverse(), r2 = decodeLens(rev, lastBar); if(r2 !== null) return r2;
+  if(soft && soft.length < 600){
+    const s = softParse(lens, firstBar) || softParse(rev, lastBar); if(s) soft.push(s);
+  }
+  return null;
+}
+const ANGLES = [0, -6, 6, -12, 12, -20, 20, -30, 30, 90, 84, 96, 78, 102, 70, 110];
+function scanFrame(g, w, h, opt){
+  opt = opt || {};
+  const band = opt.band == null ? 0.7 : opt.band, step = opt.step || 8, angles = opt.angles || ANGLES, want = opt.want, minRange = opt.minRange || 35;
+  const cx = Math.floor(w / 2), cy = Math.floor(h / 2), R = Math.hypot(w, h) / 2, buf = new Float32Array(Math.ceil(R * 2) + 2);
+  for(const deg of angles){
+    const a = deg * Math.PI / 180, dx = Math.cos(a), dy = Math.sin(a), px = -dy, py = dx;
+    const half = Math.abs(dx) > Math.abs(dy) ? h * band / 2 : w * band / 2;  // نطاق الخطوط المتعامدة حول المركز
+    for(let t = -half; t <= half; t += step){
+      let n = 0;
+      for(let s = -R; s <= R; s++){
+        const fx = cx + px * t + dx * s, fy = cy + py * t + dy * s, x0 = Math.floor(fx), y0 = Math.floor(fy);
+        if(x0 < 0 || y0 < 0 || x0 >= w - 1 || y0 >= h - 1) continue;
+        const ax = fx - x0, ay = fy - y0, i0 = y0 * w + x0;
+        buf[n++] = g[i0] * (1 - ax) * (1 - ay) + g[i0 + 1] * ax * (1 - ay) + g[i0 + w] * (1 - ax) * ay + g[i0 + w + 1] * ax * ay;
+      }
+      if(n < 80) continue;
+      let lo = 255, hi = 0; for(let i = 0; i < n; i += 3){ const q = buf[i]; if(q < lo) lo = q; if(q > hi) hi = q; }
+      if(hi - lo < minRange) continue;
+      const r = decodeLine(buf.subarray(0, n), opt.soft);
+      if(r !== null && (!want || want.test(r))) return r;
+    }
+  }
+  return null;
+}
+function toGray(rgba, n){
+  const g = new Uint8Array(n);
+  for(let i = 0, j = 0; i < n; i++, j += 4) g[i] = (rgba[j] * 77 + rgba[j + 1] * 150 + rgba[j + 2] * 29) >> 8;
+  return g;
+}
+// ---------- قراءة صورة ثابتة (التقاط أو استوديو): تحديد موضع الباركود ثم تقويمه ثم الفك ----------
+// 1) خريطة طاقة التدرّج على نسخة مصغّرة: الباركود = تدرّج قوي باتجاه واحد (عبر الأشرطة) وشبه معدوم عمودًا عليه، بخلاف النص والقماش.
+// 2) لأقوى المواضع نقصّ مستطيلًا مدوَّرًا (الأشرطة عمودية) بدقة الصورة الأصلية، ونمسحه بخطوط كثيرة (مع نسخ مشحوذة)، ثم نجمع أصوات الخطوط.
+function findBarcodes(g, w, h){
+  const f = Math.max(1, Math.max(w, h) / 640), dw = Math.floor(w / f), dh = Math.floor(h / f), d = new Float32Array(dw * dh);
+  for(let y = 0; y < dh; y++) for(let x = 0; x < dw; x++){  // متوسط صندوقي عند التصغير (لا نأخذ عيّنة وحيدة)
+    let s = 0, n = 0; const x0 = Math.floor(x * f), y0 = Math.floor(y * f), x1 = Math.min(w, Math.floor((x + 1) * f) + 1), y1 = Math.min(h, Math.floor((y + 1) * f) + 1);
+    for(let yy = y0; yy < y1; yy++) for(let xx = x0; xx < x1; xx++){ s += g[yy * w + xx]; n++; }
+    d[y * dw + x] = s / n; }
+  const C = 8, cw = Math.ceil(dw / C), chh = Math.ceil(dh / C), NA = 24, maps = [];
+  const gx = new Float32Array(dw * dh), gy = new Float32Array(dw * dh);
+  for(let y = 1; y < dh - 1; y++) for(let x = 1; x < dw - 1; x++){ const i = y * dw + x; gx[i] = d[i + 1] - d[i - 1]; gy[i] = d[i + dw] - d[i - dw]; }
+  for(let a = 0; a < NA; a++){
+    const th = a * Math.PI / NA, c = Math.cos(th), s = Math.sin(th), E = new Float32Array(cw * chh), P = new Float32Array(cw * chh);
+    for(let y = 1; y < dh - 1; y++) for(let x = 1; x < dw - 1; x++){ const i = y * dw + x, k = ((y / C) | 0) * cw + ((x / C) | 0);
+      E[k] += Math.abs(gx[i] * c + gy[i] * s); P[k] += Math.abs(-gx[i] * s + gy[i] * c); }
+    const S = new Float32Array(cw * chh);
+    for(let y = 0; y < chh; y++) for(let x = 0; x < cw; x++){ let e = 0, p = 0;
+      for(let yy = Math.max(0, y - 1); yy <= Math.min(chh - 1, y + 1); yy++) for(let xx = Math.max(0, x - 1); xx <= Math.min(cw - 1, x + 1); xx++){ e += E[yy * cw + xx]; p += P[yy * cw + xx]; }
+      S[y * cw + x] = e / (9 * C * C) < 10 ? 0 : Math.max(0, e - 1.4 * p); }
+    maps.push(S);
+  }
+  const cand = [];
+  for(let a = 0; a < NA; a++){ const S = maps[a];
+    for(let y = 0; y < chh; y++) for(let x = 0; x < cw; x++){ const v = S[y * cw + x]; if(v <= 0) continue;
+      let top = true; for(let yy = Math.max(0, y - 2); yy <= Math.min(chh - 1, y + 2) && top; yy++) for(let xx = Math.max(0, x - 2); xx <= Math.min(cw - 1, x + 2); xx++) if(S[yy * cw + xx] > v){ top = false; break; }
+      if(top) cand.push({v, a, x, y}); } }
+  cand.sort((p, q) => q.v - p.v);
+  const picked = [];
+  for(const c of cand){ if(picked.length >= 8) break;
+    if(picked.some(p => Math.hypot(p.x - c.x, p.y - c.y) < 6 && Math.min(Math.abs(p.a - c.a), NA - Math.abs(p.a - c.a)) <= 2)) continue;
+    // امتداد الباركود: تعبئة الخلايا المجاورة القوية على نفس خريطة الاتجاه، ثم حدود المستطيل في إحداثيات (u عبر الأشرطة، v على طولها)
+    const S = maps[c.a], seen = new Set([c.y * cw + c.x]), q = [[c.x, c.y]], cl = [];
+    while(q.length && seen.size < 2500){ const [x, y] = q.pop(); cl.push([x, y]);
+      for(let dy = -1; dy <= 1; dy++) for(let dx = -1; dx <= 1; dx++){ const nx = x + dx, ny = y + dy, k = ny * cw + nx;
+        if(nx >= 0 && ny >= 0 && nx < cw && ny < chh && !seen.has(k) && S[k] > 0.35 * c.v){ seen.add(k); q.push([nx, ny]); } } }
+    const th = c.a * Math.PI / NA, ux = Math.cos(th), uy = Math.sin(th);  // دقة الاتجاه ±3.75°؛ يُدقَّق لاحقًا من ميل الأشرطة (leanOf)
+    let umin = 1e9, umax = -1e9, vmin = 1e9, vmax = -1e9;
+    for(const [x, y] of cl){ const px = (x + 0.5) * C, py = (y + 0.5) * C, u = px * ux + py * uy, v = -px * uy + py * ux;
+      umin = Math.min(umin, u); umax = Math.max(umax, u); vmin = Math.min(vmin, v); vmax = Math.max(vmax, v); }
+    const um = (umin + umax) / 2, vm = (vmin + vmax) / 2;
+    picked.push({v: c.v, a: c.a, x: c.x, y: c.y, ux, uy, cx: (um * ux - vm * uy) * f, cy: (um * uy + vm * ux) * f,
+                 halfU: ((umax - umin) / 2 + C) * f, halfV: ((vmax - vmin) / 2 + C) * f});
+  }
+  return picked;
+}
+function cropGray(g, w, h, p, scale, padU, padV){
+  const hu = p.halfU * padU, hv = p.halfV * padV, cw = Math.min(2600, Math.max(60, Math.round(2 * hu * scale))), ch = Math.min(1400, Math.max(30, Math.round(2 * hv * scale)));
+  const a = new Uint8Array(cw * ch);
+  for(let y = 0; y < ch; y++){ const vv = (y - ch / 2) / scale;
+    for(let x = 0; x < cw; x++){ const uu = (x - cw / 2) / scale;
+      let fx = p.cx + p.ux * uu - p.uy * vv, fy = p.cy + p.uy * uu + p.ux * vv;
+      fx = Math.min(w - 1.001, Math.max(0, fx)); fy = Math.min(h - 1.001, Math.max(0, fy));
+      const x0 = fx | 0, y0 = fy | 0, ax = fx - x0, ay = fy - y0, i0 = y0 * w + x0;
+      a[y * cw + x] = g[i0] * (1 - ax) * (1 - ay) + g[i0 + 1] * ax * (1 - ay) + g[i0 + w] * (1 - ax) * ay + g[i0 + w + 1] * ax * ay; } }
+  return {a, cw, ch};
+}
+function sharpenX(a, cw, ch, r){  // شحذ أفقي (اتجاه المسح): g + 1.3·(g − متوسط 2r+1)
+  const o = new Uint8Array(a.length);
+  for(let y = 0; y < ch; y++){ const row = y * cw; let s = 0, n = 0;
+    for(let x = 0; x < Math.min(cw, r); x++){ s += a[row + x]; n++; }
+    for(let x = 0; x < cw; x++){ if(x + r < cw){ s += a[row + x + r]; n++; } if(x - r - 1 >= 0){ s -= a[row + x - r - 1]; n--; }
+      const v = a[row + x] + 1.3 * (a[row + x] - s / n); o[row + x] = v < 0 ? 0 : v > 255 ? 255 : v; } }
+  return o;
+}
+function profileOf(a, cw, y0, y1, phi){
+  const yc = (y0 + y1) / 2, p = new Float32Array(cw), n = Math.max(1, y1 - y0);
+  for(let y = y0; y < y1; y++){ const sh = (y - yc) * phi, base = y * cw;
+    for(let x = 0; x < cw; x++){ const fx = x + sh;
+      if(fx < 0 || fx >= cw - 1){ p[x] += a[base + x]; continue; }
+      const i = fx | 0, f = fx - i; p[x] += a[base + i] * (1 - f) + a[base + i + 1] * f; } }
+  for(let x = 0; x < cw; x++) p[x] /= n;
+  return p;
+}
+// ميل الأشرطة داخل القصّ (s: انحراف x لكل صف): نبحث عن الميل الذي يجعل متوسط الصفوف أحدّ ما يكون. يُستعمل لتدقيق زاوية القصّ.
+function leanOf(a, cw, ch){
+  const E = new Float32Array(ch);
+  for(let y = 0; y < ch; y++){ let s = 0; const r = y * cw; for(let x = 1; x < cw - 1; x++) s += Math.abs(a[r + x + 1] - a[r + x - 1]); E[y] = s; }
+  let mx = 0; for(const e of E) if(e > mx) mx = e; if(mx <= 0) return 0;
+  const rows = []; for(let y = 0; y < ch; y++) if(E[y] > 0.45 * mx) rows.push(y);
+  if(rows.length < 12) return 0;
+  const y0 = rows[Math.floor(rows.length * 0.15)], y1 = rows[Math.floor(rows.length * 0.85)] + 1; let best = 0, bs = -1;
+  for(let k = -24; k <= 24; k++){ const p = profileOf(a, cw, y0, y1, k * 0.02); let s = 0; for(let x = 0; x + 2 < cw; x++){ const d = p[x + 2] - p[x]; s += d * d; } if(s > bs){ bs = s; best = k * 0.02; } }
+  return best;
+}
+// known(كود4أرقام) إلزامي عمليًا: القراءات غير الصارمة لا تُقبل إلا لمورد موجود (وبتأكيد مصدرين مستقلين في الفكّ بالشبكة)؛ opt.info.method يسجّل الطريقة
+function scanPhotoGray(g, w, h, opt){
+  opt = opt || {};
+  const want = opt.want, known = opt.known, soft = [], regions = findBarcodes(g, w, h), info = opt.info || {}, t0 = Date.now(), budget = opt.budgetMs || 7000;
+  if(opt.debug){ opt.debug.regions = regions; opt.debug.soft = soft; }
+  const run = (a, cw, ch, fine) => scanFrame(a, cw, ch, {band: 1, step: Math.max(fine ? 2 : 3, Math.round(ch / (fine ? 70 : 45))), angles: [0, -2, 2, -4, 4, -7, 7, -11, 11], want, soft, minRange: 22});
+  const strict = r => { if(r !== null) info.method = 'strict'; return r; };
+  const softly = () => { if(!known) return null; const r = softResolve(soft, known); if(r !== null && (!want || want.test(r))){ info.method = 'soft'; return r; } return null; };
+  for(const p of regions){
+    if(Date.now() - t0 > budget) break;
+    for(let it = 0; it < 2; it++){  // تدقيق زاوية القصّ من ميل الأشرطة (الزاوية الخشنة ±3.75°، والباركود المائل قد يحتاج أكثر)
+      const sc0 = Math.min(3, Math.max(1, 1400 / (2 * p.halfU * 1.15))), c0 = cropGray(g, w, h, p, sc0, 1.15, 1.6), s = leanOf(c0.a, c0.cw, c0.ch);
+      if(Math.abs(s) < 0.03) break;
+      const nx = p.ux + s * p.uy, ny = p.uy - s * p.ux, nn = Math.hypot(nx, ny); p.ux = nx / nn; p.uy = ny / nn;
+    }
+    for(const [padU, padV] of [[1.15, 1.6], [1.4, 2.4]]){
+      if(Date.now() - t0 > budget) break;
+      const len = 2 * p.halfU * padU, scale = Math.min(3, Math.max(1, 1400 / len));
+      const {a, cw, ch} = cropGray(g, w, h, p, scale, padU, padV);
+      let r = strict(run(a, cw, ch, false)); if(r !== null) return r;
+      for(const rad of [Math.round(scale * 1.5) + 1, Math.round(scale * 3) + 2]){ r = strict(run(sharpenX(a, cw, ch, rad), cw, ch, true)); if(r !== null) return r; }
+      r = strict(run(a, cw, ch, true)); if(r !== null) return r;
+    }
+    const r2 = softly(); if(r2 !== null) return r2;
+  }
+  return softly();
+}
+window.Code93 = {PATS, SYMS, scanFrame, decodeLine, decodeLens, lensOf, toGray, checked, scanPhotoGray, findBarcodes, softResolve, softParse, cropGray, sharpenX, profileOf, leanOf};
+
+// ---------- واجهة الكاميرا ----------
+const STOCK_RE = /^[0-9]{12,16}$/;
+// ---------- قراءة ملف صورة (التقاط أو استوديو) ----------
+async function readPhoto(file, known){
+  let bmp = null;
+  try{ bmp = await createImageBitmap(file); } catch(_){}
+  if(!bmp){  // Safari قديم: عبر عنصر صورة (يطبّق اتجاه EXIF وحده)
+    const url = URL.createObjectURL(file), im = new Image(); im.src = url;
+    try{ await im.decode(); } catch(_){ URL.revokeObjectURL(url); throw new Error('تعذّر فتح الصورة (صيغة غير مدعومة)'); }
+    bmp = im; setTimeout(() => URL.revokeObjectURL(url), 5000);
+  }
+  const W = bmp.width || bmp.naturalWidth, H = bmp.height || bmp.naturalHeight, k = Math.min(1, 3000 / Math.max(W, H)), w = Math.round(W * k), h = Math.round(H * k);
+  if(!w || !h) throw new Error('تعذّر فتح الصورة');
+  try{  // المتصفحات التي تدعم BarcodeDetector (أندرويد) أسرع وأدقّ أحيانًا
+    if(window.BarcodeDetector && (await BarcodeDetector.getSupportedFormats()).includes('code_93')){
+      const det = new BarcodeDetector({formats: ['code_93']}), hit = (await det.detect(bmp)).find(x => STOCK_RE.test(x.rawValue));
+      if(hit) return {code: hit.rawValue, method: 'native'};
+    }
+  } catch(_){}
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const g = cv.getContext('2d', {willReadFrequently: true}); g.imageSmoothingQuality = 'high'; g.drawImage(bmp, 0, 0, w, h);
+  if(bmp.close) bmp.close();
+  const info = {}, code = scanPhotoGray(toGray(g.getImageData(0, 0, w, h).data, w * h), w, h, {want: STOCK_RE, known, info});
+  return {code, method: info.method || ''};
+}
+window.setupScan = function(ctx){
+  const imod = document.getElementById('imod'), err = document.getElementById('ierr');
+  const st = document.createElement('style');
+  st.textContent = '.scanrow{display:flex;gap:8px;margin-top:8px}.scanrow .scanbtn{flex:1}'
+    + '.scanbtn{margin-top:0;padding:11px 4px;font-size:.95rem;white-space:nowrap;border:1px solid var(--pri);border-radius:10px;background:transparent;color:var(--pri)}'
+    + '.scanbtn:active{background:var(--pri);color:var(--onpri)}'
+    + '#scanov{position:fixed;inset:0;background:#000;z-index:30;display:flex;flex-direction:column}'
+    + '#scanov video{flex:1;min-height:0;width:100%;object-fit:cover}'
+    + '#scanov .aim{position:absolute;left:8%;right:8%;top:45%;height:22%;border:2px solid rgba(255,255,255,.85);border-radius:10px;box-shadow:0 0 0 100vmax rgba(0,0,0,.35)}'
+    + '#scanov .aim::after{content:"";position:absolute;left:4%;right:4%;top:50%;border-top:2px solid #ef4444}'
+    + '#scanov .bar{position:absolute;left:0;right:0;bottom:0;padding:14px 16px calc(14px + env(safe-area-inset-bottom));background:rgba(0,0,0,.6);color:#fff;text-align:center}'
+    + '#scanov .bar button{margin-top:10px;padding:10px 22px;border:1px solid #fff;border-radius:10px;background:transparent;color:#fff;font-size:1rem}';
+  document.head.appendChild(st);
+  // زرّان (طلب 2026-10-16): "مسح بالكاميرا" = المسح المباشر بالمستطيل (يتعرّف وحده بلا التقاط)، و"صورة من الاستديو" = ملف صورة:
+  // الضغط عليه يفتح قائمة النظام مباشرة (مكتبة الصور / التقاط صورة / اختيار ملف) وتُقرأ الصورة بتحليل يتحمّل عدم الوضوح (readPhoto).
+  const btn = document.createElement('button');
+  btn.type = 'button'; btn.className = 'scanbtn'; btn.textContent = '📷 مسح بالكاميرا';
+  const pbtn = document.createElement('button');
+  pbtn.type = 'button'; pbtn.className = 'scanbtn'; pbtn.textContent = '🖼 صورة من الاستديو';
+  const finp = document.createElement('input'); finp.type = 'file'; finp.accept = 'image/*'; finp.hidden = true;
+  const pnote = document.createElement('div'); pnote.className = 'note'; pnote.style.marginTop = '6px';
+  const row = document.createElement('div'); row.className = 'scanrow'; row.append(btn, pbtn, finp);
+  imod.insertAdjacentElement('afterend', row); row.insertAdjacentElement('afterend', pnote);
+  let busy = false;
+  btn.onclick = async () => {
+    if(busy || document.getElementById('iask').disabled) return; busy = true; err.textContent = ''; pnote.textContent = '';
+    try{ const code = await scan(); if(code) ctx.run(null, null, code); }
+    catch(e){ err.textContent = e.message || 'تعذّر تشغيل الكاميرا'; }
+    busy = false;
+  };
+  ctx.setScanBusy = on => { btn.disabled = on; pbtn.disabled = on; };
+  pbtn.onclick = () => { if(busy || document.getElementById('iask').disabled) return; finp.value = ''; finp.click(); };
+  finp.onchange = async () => {
+    const f = finp.files && finp.files[0]; if(!f || busy) return;
+    busy = true; err.textContent = ''; pnote.textContent = ''; pbtn.disabled = true; btn.disabled = true; pbtn.textContent = '⏳ جارٍ قراءة الصورة…';
+    try{
+      await new Promise(r => setTimeout(r, 60));  // لتظهر الرسالة قبل بدء التحليل الثقيل
+      const r = await readPhoto(f, ctx.known);
+      if(r.code){
+        if(r.method === 'soft') pnote.textContent = 'قُرئ الباركود من صورة غير واضحة تمامًا: ' + r.code + ' — تأكد أنه يطابق الرقم المطبوع تحت الباركود';
+        ctx.run(null, null, r.code);
+      } else err.textContent = 'لم يُقرأ الباركود من الصورة. التقط الباركود كاملًا وأقرب وأوضح (بلا لمعان أو اهتزاز)، أو اكتب المورد والموديل يدويًا';
+    } catch(e){ err.textContent = (e && e.message) || 'تعذّر فتح الصورة'; }
+    pbtn.disabled = false; btn.disabled = false; pbtn.textContent = '🖼 صورة من الاستديو'; busy = false;
+  };
+  async function scan(){
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('الكاميرا غير متاحة في هذا المتصفح');
+    const ov = document.createElement('div'); ov.id = 'scanov';
+    const video = document.createElement('video'); video.setAttribute('playsinline', ''); video.muted = true;
+    const aim = document.createElement('div'); aim.className = 'aim';
+    const bar = document.createElement('div'); bar.className = 'bar';
+    const hint = document.createElement('div'); hint.textContent = 'ضع الباركود الطويل داخل الإطار، أفقيًا، وقرّب الهاتف حتى يظهر واضحًا';
+    const cancel = document.createElement('button'); cancel.type = 'button'; cancel.textContent = 'إلغاء';
+    bar.append(hint, cancel); ov.append(video, aim, bar); document.body.appendChild(ov);
+    let stream = null, closed = false, result = null, timer = 0, resolveFn;
+    const finish = v => { if(closed) return; closed = true; clearTimeout(timer); clearTimeout(limit);
+      if(stream) stream.getTracks().forEach(t => t.stop()); ov.remove(); resolveFn(v); };
+    const done = new Promise(r => { resolveFn = r; });
+    cancel.onclick = () => finish(null);
+    const limit = setTimeout(() => { if(!closed){ err.textContent = 'لم يُقرأ الباركود. قرّب الهاتف وحسّن الإضاءة، أو اكتب المورد والموديل يدويًا'; finish(null); } }, 45000);
+    try{
+      stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: {ideal: 'environment'}, width: {ideal: 1920}, height: {ideal: 1080}}, audio: false});
+    } catch(e){
+      finish(null);
+      throw new Error(e && e.name === 'NotAllowedError' ? 'اسمح باستخدام الكاميرا لهذا الموقع من إعدادات الهاتف' : 'تعذّر تشغيل الكاميرا');
+    }
+    if(closed){ stream.getTracks().forEach(t => t.stop()); return done; }
+    video.srcObject = stream;
+    try{ await video.play(); } catch(_){}
+    try{ await stream.getVideoTracks()[0].applyConstraints({advanced: [{focusMode: 'continuous'}]}); } catch(_){}
+    let native = null;
+    try{ if(window.BarcodeDetector && (await BarcodeDetector.getSupportedFormats()).includes('code_93')) native = new BarcodeDetector({formats: ['code_93']}); } catch(_){}
+    const canvas = document.createElement('canvas'), c2 = canvas.getContext('2d', {willReadFrequently: true});
+    const tick = async () => {
+      if(closed) return;
+      const w = video.videoWidth, h = video.videoHeight;
+      if(w && h && video.readyState >= 2){
+        canvas.width = w; canvas.height = h; c2.drawImage(video, 0, 0, w, h);
+        let code = null;
+        try{
+          if(native){ const r = await native.detect(canvas); const hit = r.find(x => STOCK_RE.test(x.rawValue)); code = hit ? hit.rawValue : null; }
+          else code = scanFrame(toGray(c2.getImageData(0, 0, w, h).data, w * h), w, h, {want: STOCK_RE});
+        } catch(_){}
+        if(code){ try{ navigator.vibrate && navigator.vibrate(60); } catch(_){} return finish(code); }
+      }
+      if(!closed) timer = setTimeout(tick, 120);
+    };
+    tick();
+    return done;
+  }
+};
+})();
+</script></body></html>
