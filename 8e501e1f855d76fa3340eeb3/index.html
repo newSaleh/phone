@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="build" content="20261115010828">
+<meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="icon" type="image/png" href="../icon-192.png">
+<title>مخزون الفروع</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1f2937;--mut:#6b7280;--pri:#1e3a5f;--line:#e2e8f2;--bar:#cfe0f7;--up:#2f7d5c;--dn:#b91c1c;--sel:#e8f0fc}
+:root[data-theme=dark]{--bg:#10151d;--card:#18202c;--ink:#e5e9f0;--mut:#9aa6b8;--pri:#7fb0ff;--line:#2a3547;--bar:#22405f;--up:#52b58c;--dn:#f08585;--sel:#1c2b40}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:12px 16px 40px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+h1{font-size:1.2rem;margin:0;color:var(--pri)}
+.theme{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer}
+input,select{width:100%;font:inherit;font-size:1rem;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.ctl{display:flex;gap:8px;margin-bottom:8px}.ctl select{flex:1 1 50%}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+.tot small{color:var(--mut)}.tot b{display:block;font-size:1.7rem;color:var(--pri);margin:2px 0}
+.locs h2,.sups h2{font-size:.95rem;margin:0 0 8px;color:var(--mut);font-weight:600}
+.lc{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;cursor:pointer;position:relative;overflow:hidden}
+.lc.on{background:var(--sel);outline:1px solid var(--pri)}
+.lc .bar{position:absolute;inset:0 auto 0 0;background:var(--bar);opacity:.45;z-index:0}
+.lc>*{position:relative;z-index:1}
+.lc .n{flex:1;font-weight:600}.lc .v{font-weight:700;white-space:nowrap}.lc .p{color:var(--mut);font-size:.78rem;min-width:3.2em;text-align:end}
+.lc.sumrow{cursor:default;border-top:1px solid var(--line);border-radius:0;margin-top:4px;padding-top:10px}
+.list{display:flex;flex-direction:column;gap:6px}
+.it{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.r1{display:flex;align-items:center;gap:10px}
+.rk{color:var(--mut);font-size:.8rem;min-width:1.9em;text-align:center}
+.nm{flex:1;font-weight:600;line-height:1.35}.nm small{display:block;color:var(--mut);font-weight:400;font-size:.78rem}
+.vl{text-align:end;font-weight:700;white-space:nowrap}.vl small{display:block;font-weight:400;font-size:.76rem}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.det{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:.9rem}
+.it.open .det{display:block}.det div{display:flex;justify-content:space-between;padding:2px 0}.det span{color:var(--mut)}
+.note,.err{color:var(--mut);text-align:center;padding:14px;font-size:.92rem}.err{color:var(--dn)}
+[hidden]{display:none!important}
+</style></head><body><div class="wrap">
+<div class="top"><h1>مخزون الفروع والمستودعات</h1><button class="theme" id="theme" type="button"></button></div>
+<div id="lock" hidden><input id="pw" type="password" placeholder="كلمة السر" autocomplete="off"><button class="theme" id="enter" style="width:100%;margin-top:10px;padding:12px">فتح</button></div>
+<div id="view" hidden>
+<div class="ctl"><select id="day" aria-label="اليوم"></select><select id="loc" aria-label="الفرع"></select></div>
+<div class="card tot"><small id="dl"></small><b id="tot"></b><small id="sub"></small></div>
+<div class="card locs" id="locs"><h2>مخزون كل موقع (اضغط لاختياره)</h2><div id="lcl"></div></div>
+<div class="ctl"><input id="q" type="search" placeholder="🔍 اسم أو رقم المورد"></div>
+<div class="sups"><h2 id="sh"></h2><div class="list" id="list"></div></div>
+</div>
+<div class="err" id="err"></div></div>
+<script>
+const P = {"salt": "Ko8dUz/qie786+QnJEnh1w==", "iter": 600000, "index": "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"};
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const $ = id => document.getElementById(id), pad = n => String(n).padStart(2, '0');
+const WEEK = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const SK = 'bs:' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
+let key = null, idx = null, rows = [], prev = null, cache = {}, curDay = 0, sel = 'all';
+const unseal = async data => crypto.subtle.decrypt({name: 'AES-GCM', iv: data.slice(0, 12)}, key, data.slice(12));
+const dayLabel = iso => { const [y, m, d] = iso.split('-').map(Number); return WEEK[new Date(y, m - 1, d).getDay()] + ' ' + pad(d) + '/' + pad(m) + '/' + y; };
+function setTheme(m){ document.documentElement.dataset.theme = m; try{ localStorage.setItem('theme', m); }catch(_){} $('theme').textContent = m === 'dark' ? '☀️ نهاري' : '🌙 ليلي'; }
+let th = 'light'; try { if(localStorage.getItem('theme') === 'dark') th = 'dark'; } catch(_){}
+setTheme(th); $('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+const norm = s => s.replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[ً-ْ]/g, '').toLowerCase();
+async function loadDay(i){
+  const d = idx.days[i]; if(!d) return null; if(cache[d.date]) return cache[d.date];
+  const r = await fetch('f/' + d.f + '?v=' + d.v); if(!r.ok) throw new Error('http');
+  return cache[d.date] = JSON.parse(new TextDecoder().decode(await unseal(new Uint8Array(await r.arrayBuffer()))));
+}
+const NL = () => idx.locs.length;
+const selIdx = () => sel === 'all' ? idx.locs.map((_, k) => k) : sel === 'br' ? [0, 1, 2, 3, 4] : sel === 'wh' ? [5, 6] : [+sel.slice(1)];
+const selName = () => sel === 'all' ? 'كل المواقع (الفروع والمستودعان)' : sel === 'br' ? 'الفروع الخمسة (بدون المستودعين)' : sel === 'wh' ? 'المستودعان (السلي والخمرة)' : idx.locs[+sel.slice(1)];
+const sumOf = (r, S) => S.reduce((s, k) => s + (r[3][k] || 0), 0);
+function draw(){
+  const S = selIdx(), q = norm($('q').value.trim());
+  const locTot = idx.locs.map((_, k) => rows.reduce((s, r) => s + (r[3][k] || 0), 0)), allTot = locTot.reduce((a, b) => a + b, 0) || 1;
+  const selTot = S.reduce((s, k) => s + locTot[k], 0);
+  $('dl').textContent = 'إجمالي المخزون — ' + selName() + ' — ' + dayLabel(idx.days[curDay].label || idx.days[curDay].date);
+  $('tot').textContent = fmt(selTot) + ' ريال'; $('sub').textContent = 'بسعر البيع كما يظهر في النظام';
+  const box = $('lcl'); box.textContent = '';
+  const order = locTot.map((v, k) => [k, v]).sort((a, b) => b[1] - a[1]), mx = Math.max(...locTot, 1);
+  order.forEach(([k, v]) => {
+    const d = document.createElement('div'); d.className = 'lc' + (sel === 'l' + k ? ' on' : '');
+    d.innerHTML = '<span class="bar"></span><span class="n"></span><span class="v"></span><span class="p"></span>';
+    d.children[0].style.width = Math.max(0, v / mx * 100) + '%'; d.children[1].textContent = idx.locs[k]; d.children[2].textContent = fmt(v); d.children[3].textContent = (v / allTot * 100).toFixed(1) + '%';
+    d.onclick = () => { sel = 'l' + k; $('loc').value = sel; draw(); window.scrollTo({top: $('sh').offsetTop - 60, behavior: 'smooth'}); }; box.appendChild(d);
+  });
+  const s = document.createElement('div'); s.className = 'lc sumrow'; s.innerHTML = '<span class="n">المجموع (كل المواقع)</span><span class="v"></span>'; s.children[1].textContent = fmt(locTot.reduce((a, b) => a + b, 0)); box.appendChild(s);
+  const pm = {}; if(prev) prev.forEach(r => { pm[r[1].join(',')] = sumOf(r, S); });
+  const all = rows.map(r => ({r, v: sumOf(r, S)})).filter(x => x.v !== 0).sort((a, b) => b.v - a.v).map((x, i) => Object.assign(x, {rank: i + 1}));
+  const hit = q ? all.filter(x => norm(x.r[0]).includes(q) || x.r[1].some(c => c.includes(q) || c.replace(/^0+/, '') === q.replace(/^0+/, ''))) : all;
+  $('sh').textContent = 'مخزون كل تاجر — ' + selName() + ' (' + (q ? hit.length + ' من ' + all.length : all.length) + ' تاجر، الأكثر أولًا)';
+  const list = $('list'); list.textContent = '';
+  hit.forEach(({r, v, rank}) => {
+    const it = document.createElement('div'); it.className = 'it';
+    const r1 = document.createElement('div'); r1.className = 'r1'; r1.innerHTML = '<span class="rk"></span><span class="nm"></span><span class="vl"></span>';
+    r1.children[0].textContent = rank; r1.children[1].textContent = r[0];
+    const sm = document.createElement('small'); sm.textContent = (r[1].length > 1 ? 'أرقام التاجر: ' : 'رقم التاجر: ') + r[1].join(' · '); r1.children[1].appendChild(sm);
+    const dv = prev ? v - (pm[r[1].join(',')] || 0) : null;
+    r1.children[2].textContent = fmt(v);
+    if(dv){ const sd = document.createElement('small'); sd.className = dv > 0 ? 'up' : 'dn'; sd.textContent = (dv > 0 ? '▲ ' : '▼ ') + fmt(Math.abs(dv)); r1.children[2].appendChild(sd); }
+    const det = document.createElement('div'); det.className = 'det';
+    r[3].forEach((x, k) => { if(!x) return; const e = document.createElement('div'); e.innerHTML = '<span></span><b></b>'; e.children[0].textContent = idx.locs[k]; e.children[1].textContent = fmt(x); det.appendChild(e); });
+    it.appendChild(r1); it.appendChild(det); it.onclick = () => it.classList.toggle('open'); list.appendChild(it);
+  });
+  if(!hit.length) list.innerHTML = '<div class="note">لا نتائج</div>';
+}
+async function show(i){
+  $('err').textContent = '';
+  try { [rows, prev] = await Promise.all([loadDay(i), loadDay(i + 1).catch(() => null)]); curDay = i; } catch(_){ $('err').textContent = 'تعذّر تحميل اليوم، تحقق من الاتصال'; return; }
+  draw();
+}
+async function enter(pw){
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const k = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(P.salt), iterations: P.iter, hash: 'SHA-256'}, km, {name: 'AES-GCM', length: 256}, false, ['decrypt']);
+  const prevKey = key; key = k;
+  try { idx = JSON.parse(new TextDecoder().decode(await unseal(b64(P.index)))); } catch(e){ key = prevKey; throw e; }
+  try { localStorage.setItem(SK, pw); } catch(_){}
+  $('lock').hidden = true; $('view').hidden = false; $('err').textContent = '';
+  const ds = $('day'); idx.days.forEach((d, i) => { const o = document.createElement('option'); o.value = i; o.textContent = dayLabel(d.label || d.date); ds.appendChild(o); });
+  const ls = $('loc'); [['all', 'كل المواقع (المجموع)'], ['br', 'الفروع الخمسة فقط'], ['wh', 'المستودعان فقط']].concat(idx.locs.map((n, k) => ['l' + k, n])).forEach(([v, t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; ls.appendChild(o); });
+  ds.onchange = () => show(+ds.value); ls.onchange = () => { sel = ls.value; draw(); }; $('q').oninput = draw; show(0);
+}
+async function tryKey(pw, silent){
+  try { await enter(pw); return true; }
+  catch(_){ if(silent){ try{ localStorage.removeItem(SK); }catch(_){} } else $('err').textContent = 'كلمة السر غير صحيحة'; $('lock').hidden = false; return false; }
+}
+$('enter').onclick = () => tryKey($('pw').value.trim(), false);
+$('pw').addEventListener('keydown', e => { if(e.key === 'Enter') tryKey(e.target.value.trim(), false); });
+(async () => {
+  let pw = ''; try { pw = decodeURIComponent(location.hash.slice(1)); } catch(_){}
+  if(!pw){ try { pw = localStorage.getItem(SK) || ''; } catch(_){} }
+  if(pw && await tryKey(pw, true)) return;
+  $('lock').hidden = false;
+})();
+const BUILD = +document.querySelector('meta[name=build]').content; let lastCheck = 0;
+async function checkUpdate(){
+  if(Date.now() - lastCheck < 60000) return; lastCheck = Date.now();
+  try { const r = await fetch(location.pathname + '?v=' + Date.now(), {cache: 'no-store'});
+    const m = (await r.text()).match(/name="build" content="([0-9]+)"/);
+    if(m && +m[1] > BUILD) location.replace(location.pathname + '?v=' + m[1] + location.hash); } catch(_){}
+}
+document.addEventListener('visibilitychange', () => { if(!document.hidden) checkUpdate(); });
+checkUpdate();
+</script></body></html>

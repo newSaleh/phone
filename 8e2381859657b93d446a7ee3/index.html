@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="build" content="20261115010828">
+<meta name="theme-color" content="#ffffff"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="icon" type="image/png" href="../icon-192.png">
+<title>موديلات بأكثر من رمز</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#1f2937;--mut:#6b7280;--pri:#1e3a5f;--line:#e2e8f2;--dn:#b91c1c;--up:#2f7d5c;--dnbg:#fdecec;--upbg:#e8f5ee}
+:root[data-theme=dark]{--bg:#10151d;--card:#18202c;--ink:#e5e9f0;--mut:#9aa6b8;--pri:#7fb0ff;--line:#2a3547;--dn:#f08585;--up:#52b58c;--dnbg:#3a1c1c;--upbg:#173326}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:12px 16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+h1{font-size:1.15rem;margin:0;color:var(--pri)}
+.theme{padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer}
+.note{color:var(--mut);font-size:.88rem;margin:4px 0 10px;line-height:1.6}
+input{width:100%;font:inherit;font-size:1rem;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);margin-bottom:10px}
+.it{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.hd{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.hd b{font-size:1.15rem;direction:ltr;unicode-bidi:isolate}
+.hd span{color:var(--mut);font-size:.9rem}
+.ds{color:var(--mut);font-size:.85rem;margin:2px 0 8px}
+.cd{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 10px;border-radius:9px;margin-top:5px}
+.cd.n{background:var(--dnbg)}.cd.p{background:var(--upbg)}
+.cd code{font-size:.98rem;direction:ltr;unicode-bidi:isolate}
+.cd small{display:block;color:var(--mut);font-size:.75rem}
+.cd code mark{background:#ffe14d;color:#111;border-radius:3px;padding:0 1px}
+.pr{color:var(--ink);font-weight:600}
+.qty{text-align:center;min-width:52px}.qty small{display:block;color:var(--mut);font-size:.72rem;margin-bottom:1px}
+.cd b{font-size:1.15rem;direction:ltr;unicode-bidi:isolate}.cd.n b{color:var(--dn)}.cd.p b{color:var(--up)}
+.cnt{color:var(--mut);font-size:.9rem;margin-bottom:8px}
+.it.dn{opacity:.8;border-style:dashed}
+.sec{font-size:1rem;color:var(--up);margin:22px 0 4px;padding-top:12px;border-top:2px solid var(--line)}
+.ft{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}
+.ft small{color:var(--mut);font-size:.78rem}
+.chk{padding:8px 16px;border:1px solid var(--pri);border-radius:9px;background:var(--card);color:var(--pri);font:inherit;font-size:.92rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.chk:disabled{opacity:.6;cursor:default}
+.res{margin-top:8px;padding:8px 10px;border-radius:9px;font-size:.85rem;line-height:1.6;background:var(--bg);color:var(--mut)}
+.res b{color:var(--ink)}
+.demo{background:#fff6d6;color:#6b5200;border:1px solid #f0d77a;border-radius:10px;padding:8px 10px;font-size:.84rem;margin-bottom:10px;line-height:1.6}
+:root[data-theme=dark] .demo{background:#3a3214;color:#f0d77a;border-color:#6b5a1e}
+#gate{max-width:360px;margin:60px auto;text-align:center}#gate input{text-align:center}
+#err{color:var(--dn)}
+</style></head><body><div class="wrap">
+<div class="top"><h1>موديلات بأكثر من رمز</h1><span><button class="theme" id="back" hidden>→ رجوع</button> <button class="theme" id="theme"></button></span></div>
+<div id="gate" hidden><p>أدخل كلمة السر</p><input id="pw" type="password" autocomplete="off"><div id="err"></div></div>
+<div id="view" hidden>
+<div class="note" id="info"></div>
+<input id="q" type="search" placeholder="بحث: موديل أو مورد أو رمز">
+<div class="cnt" id="cnt"></div>
+<div id="list"></div>
+<h2 class="sec">✓ تم تعديله</h2>
+<div class="note">بعد «تحقق» ينزل الموديل المعدَّل هنا ويبقى أسبوعًا ثم يُزال، ويعود إلى أعلى القائمة إن تحرّك رمزه القديم مجددًا.</div>
+<div id="done"></div>
+</div></div>
+<script>
+const P = {"salt": "lTEBbaqlOeLFHZkasb3b5A==", "iter": 600000, "index": "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"};
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const $ = id => document.getElementById(id);
+const fmt = n => (n < 0 ? '−' : '') + Math.abs(Math.round(n)).toLocaleString('en-US');
+function setTheme(m){ document.documentElement.dataset.theme = m; try{ localStorage.setItem('theme', m); }catch(_){} $('theme').textContent = m === 'dark' ? '☀️ نهاري' : '🌙 ليلي'; }
+let th = 'light'; try { if(localStorage.getItem('theme') === 'dark') th = 'dark'; } catch(_){}
+// زر «رجوع» حين تُفتح الصفحة من تبويب صفحة المسؤول (مهم في تطبيق الشاشة الرئيسية بلا زر رجوع)
+if(history.length > 1 && document.referrer){ $('back').hidden = false; $('back').onclick = () => history.back(); }
+setTheme(th); $('theme').onclick = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+const norm = s => String(s).replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').toLowerCase();
+let D = null;
+const dd = iso => { const [y, m, d] = iso.split('-'); return d + '/' + m + '/' + y; };
+function draw(){
+  const q = norm($('q').value.trim()), box = $('list'); box.textContent = '';
+  const match = g => !q || norm(g.model + ' ' + g.sup + ' ' + g.sup_name + ' ' + (g.short || '') + ' ' + g.codes.map(c => c.code).join(' ')).includes(q);
+  const hit = D.items.filter(match);
+  $('cnt').textContent = hit.length + ' موديل' + (D.chk ? ' · التحققات المتبقية اليوم: ' + D.chk.left : '');
+  hit.forEach(g => box.appendChild(card(g, false)));
+  if(!hit.length) box.innerHTML = '<div class="note">لا نتائج</div>';
+  const dn = $('done'); dn.textContent = '';
+  (D.done || []).filter(match).forEach(g => dn.appendChild(card(g, true)));
+  if(!dn.children.length) dn.innerHTML = '<div class="note">لا يوجد بعد.</div>';
+}
+function card(g, isDone){
+    const it = document.createElement('div'); it.className = 'it' + (isDone ? ' dn' : '');
+    const hd = document.createElement('div'); hd.className = 'hd';
+    const b = document.createElement('b'); b.textContent = g.model; const s = document.createElement('span'); s.textContent = (g.short || g.sup_name) + ' (' + g.sup + ')';
+    hd.append(b, s); it.appendChild(hd);
+    const ds = document.createElement('div'); ds.className = 'ds'; ds.textContent = g.desc || ''; it.appendChild(ds);
+    g.codes.forEach(c => {
+      const r = document.createElement('div'); r.className = 'cd ' + (c.bal < 0 ? 'n' : 'p');
+      const l = document.createElement('div'); const code = document.createElement('code');
+      // الخانات التي تختلف عن الرمز الآخر (ذي الإشارة المعاكسة) تُظلَّل بالأصفر
+      const other = (g.codes.find(o => o.code !== c.code && (o.bal < 0) !== (c.bal < 0)) || g.codes.find(o => o.code !== c.code) || {code: c.code}).code;
+      [...c.code].forEach((ch, i) => { if(ch === other[i]) code.append(ch); else { const m = document.createElement('mark'); m.textContent = ch; code.append(m); } });
+      const sm = document.createElement('small');
+      // مختصر (طلب 2026-11-09): مصدر الكمية فقط؛ «sold» في تقرير المبيعات صافٍ (بيع − مرتجع زبون) فالبيع الفعلي = الصافي + المرتجع
+      const parts = [];
+      if(c.src === 'dl') parts.push('تنزيل ' + dd(c.date).slice(0, 5));
+      // حُذف «بيع/مرتجع» من العبارة (طلب 2026-11-09)؛ الكميات (sold/cr/rq) باقية في البيانات
+      sm.textContent = parts.join(' · ');
+      if(c.price){ const pr = document.createElement('span'); pr.className = 'pr'; pr.textContent = (parts.length ? ' · ' : '') + 'السعر ' + (+(+c.price).toFixed(2)); sm.append(pr); }
+      l.append(code, sm);
+      const q = document.createElement('div'); q.className = 'qty';
+      const ql = document.createElement('small'); ql.textContent = 'الكمية';
+      const v = document.createElement('b'); v.textContent = fmt(c.bal); q.append(ql, v); r.append(l, q); it.appendChild(r);
+    });
+    const ft = document.createElement('div'); ft.className = 'ft';
+    const since = document.createElement('small');
+    since.textContent = isDone ? '✓ عُدّل ' + dd(g.fixed_at) : (g.reopened ? '↩ عاد بعد تعديله ' + dd(g.reopened) : '');
+    ft.appendChild(since);
+    if(!isDone && D.chk){
+      const btn = document.createElement('button'); btn.className = 'chk'; btn.textContent = 'تحقق';
+      btn.title = 'اضغط بعد تعديل الرموز في الفرع';
+      btn.onclick = () => check(g, btn, it);
+      ft.appendChild(btn);
+    }
+    it.appendChild(ft);
+    if(g._msg){ const res = document.createElement('div'); res.className = 'res'; res.textContent = g._msg; it.appendChild(res); }
+    return it;
+}
+// ---- «تحقق»: طلب مشفّر عبر ntfy إلى الجهاز الرئيسي ← استعلام واحد خفيف لأرصدة رموز هذا الموديل في الفرع ----
+let PW = '', CK = null;
+async function chKey(){
+  if(CK) return CK;
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(PW), 'PBKDF2', false, ['deriveKey']);
+  CK = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(D.chk.salt), iterations: D.chk.iter, hash: 'SHA-256'}, km, {name: 'AES-GCM', length: 256}, false, ['encrypt', 'decrypt']);
+  return CK;
+}
+const b64e = u => { let s = ''; u.forEach(x => s += String.fromCharCode(x)); return btoa(s); };
+async function check(g, btn, it){
+  let res = it.querySelector('.res');
+  if(!res){ res = document.createElement('div'); res.className = 'res'; it.appendChild(res); }
+  btn.disabled = true; btn.textContent = '⏳ جارٍ الإرسال…'; res.textContent = 'جارٍ إرسال الطلب…';
+  const fail = m => { btn.disabled = false; btn.textContent = 'تحقق'; res.textContent = m; };
+  try {
+    const key = await chKey(), C = D.chk;
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(x => x.toString(16).padStart(2, '0')).join('');
+    let done = false;
+    const es = new EventSource(C.base + '/' + C.topic + 'r/sse?since=' + (Math.floor(Date.now() / 1000) - 10));
+    const timer = setTimeout(() => { if(done) return; done = true; es.close(); fail('لم يصل رد. الجهاز الرئيسي قد يكون مغلقًا، حاول لاحقًا.'); }, 600000);
+    es.onmessage = async ev => {
+      let m, o; try { m = JSON.parse(ev.data); o = JSON.parse(m.message || '{}'); } catch(_){ return; }
+      if(done || o.id !== id) return;
+      let r; try { r = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name: 'AES-GCM', iv: b64(o.i), additionalData: new TextEncoder().encode(id)}, key, b64(o.c)))); } catch(_){ return; }
+      if(r.ok && 'wait' in r){ btn.textContent = '⏳ جارٍ التحقق…'; res.textContent = r.wait > 0 ? 'في الطابور: قبلك ' + r.wait + '.' : 'جارٍ قراءة أرصدة رموز هذا الموديل في الفرع…'; return; }
+      done = true; clearTimeout(timer); es.close();
+      if(!r.ok){ fail('تعذّر: ' + (r.error || 'خطأ')); return; }
+      if(typeof r.left === 'number') D.chk.left = r.left;
+      if(r.status === 'fixed'){
+        g.codes = r.codes; g.fixed_at = new Date().toISOString().slice(0, 10); g._msg = '✓ تم التعديل (تحقق ' + r.at + '). بقي رمز واحد برصيد.';
+        D.items = D.items.filter(x => x !== g); (D.done = D.done || []).unshift(g);
+      } else {
+        g.codes = r.codes.filter(c => c.bal !== 0).map(c => Object.assign({}, g.codes.find(x => x.code === c.code) || {}, c));
+        g._msg = '✗ لم يُعدَّل بعد (تحقق ' + r.at + '): الأرصدة أعلاه هي الحالية الآن.';
+      }
+      draw();
+    };
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const body = new TextEncoder().encode(JSON.stringify({id, ts: Math.floor(Date.now() / 1000), k: 'chk', m: g.key}));
+    const ct = new Uint8Array(await crypto.subtle.encrypt({name: 'AES-GCM', iv}, key, body));
+    await new Promise(r => setTimeout(r, 700));  // ليتصل الاستماع قبل الإرسال
+    const resp = await fetch(C.base + '/' + C.topic + 'q', {method: 'POST', body: JSON.stringify({i: b64e(iv), c: b64e(ct)})});
+    if(!resp.ok) throw new Error('send');
+    btn.textContent = '⏳ أُرسل…'; res.textContent = 'أُرسل الطلب، بانتظار الرد…';
+  } catch(_){ fail('تعذّر الإرسال، تأكد من الاتصال وحاول مرة أخرى.'); }
+}
+async function enter(pw){
+  PW = pw;
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name: 'PBKDF2', salt: b64(P.salt), iterations: P.iter, hash: 'SHA-256'}, km, {name: 'AES-GCM', length: 256}, false, ['decrypt']);
+  const data = b64(P.index);
+  D = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name: 'AES-GCM', iv: data.slice(0, 12)}, key, data.slice(12))));
+  $('gate').hidden = true; $('view').hidden = false;
+  $('info').textContent = 'فرع ' + D.branch + ': موديل له أكثر من رمز برصيد (سالبًا أو موجبًا؛ الرمز برصيد صفر لا يُحسب). الخانات المختلفة بين الرمزين بالأصفر. المتابعة من ' + dd(D.from) + ' إلى ' + dd(D.to) + '، آخر تحديث ' + D.at + '. بعد تعديل الرموز في الفرع اضغط «تحقق».';
+  draw();
+}
+$('q').oninput = draw;
+(async () => {
+  let pw = ''; try { pw = decodeURIComponent(location.hash.slice(1)); } catch(_){}
+  if(pw){ try { await enter(pw); return; } catch(_){} }
+  $('gate').hidden = false;
+  $('pw').onkeydown = async e => { if(e.key !== 'Enter') return; try { await enter($('pw').value); } catch(_){ $('err').textContent = 'كلمة السر غير صحيحة'; } };
+})();
+</script></body></html>
